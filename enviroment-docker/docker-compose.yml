@@ -1,0 +1,101 @@
+version: "3.7"
+
+services:
+  mongo:
+    image: mongo:4.2.1
+    container_name: mongodb
+    restart: always
+    ports:
+      - 2863:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo/MONGO_INITDB_ROOT_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo/MONGO_INITDB_ROOT_PASSWORD
+      MONGO_INITDB_PASSWORD_FILE: /run/secrets/mongo/MONGO_INITDB_PASSWORD
+      MONGO_INITDB_USERNAME_FILE: /run/secrets/mongo/MONGO_INITDB_USERNAME
+      MONGO_INITDB_DATABASE_FILE: /run/secrets/mongo/MONGO_INITDB_DATABASE
+    volumes:
+      - ./mongo/data:/data/db
+      - ./mongo/secrets:/run/secrets/mongo
+      - ./mongo/entry-scripts:/docker-entrypoint-initdb.d
+      - ./mongo/mongod.conf:/etc/mongod.conf
+      - ./mongo/lib:/var/lib/mongodb
+      - ./mongo/logs:/var/log/mongodb
+  rabbitmq-node-1:
+    image: rabbitmq:3.8.2-management-alpine
+    container_name: rabbitmq-node-1
+    hostname: rabbitmq-node-1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=cluster_cookie
+    volumes:
+      - ./rabbitmq-cluster/rabbit-1/rabbitmq-isolated.conf:/etc/rabbitmq/rabbitmq.config
+      - ./rabbitmq-cluster/rabbit-1/rabbitmq_management.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq-cluster/rabbit-1/data:/var/lib/rabbitmq
+    ports:
+      - 15572:15672
+    networks:
+      - cluster-network
+  rabbitmq-node-2:
+    image: rabbitmq:3.8.2-management-alpine
+    container_name: rabbitmq-node-2
+    hostname: rabbitmq-node-2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=cluster_cookie
+    volumes:
+      - ./rabbitmq-cluster/rabbit-2/rabbitmq-isolated.conf:/etc/rabbitmq/rabbitmq.config
+      - ./rabbitmq-cluster/rabbit-2/rabbitmq_management.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq-cluster/rabbit-2/data:/var/lib/rabbitmq
+    ports:
+      - 15573:15672
+    networks:
+      - cluster-network
+  rabbitmq-node-3:
+    image: rabbitmq:3.8.2-management-alpine
+    container_name: rabbitmq-node-3
+    hostname: rabbitmq-node-3
+    volumes:
+      - ./rabbitmq-cluster/rabbit-3/rabbitmq-isolated.conf:/etc/rabbitmq/rabbitmq.config
+      - ./rabbitmq-cluster/rabbit-3/rabbitmq_management.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq-cluster/rabbit-3/data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=cluster_cookie
+    ports:
+      - 15574:15672
+    networks:
+      - cluster-network
+  haproxy:
+    image: eeacms/haproxy
+    container_name: haproxy
+    ports:
+      - 5672:5672
+      - 1936:1936
+    networks:
+      - cluster-network
+  redis:
+    image: redis:5.0.7-alpine
+    container_name: redis-server
+    restart: always
+    ports:
+      - 6279:6379
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.0
+    container_name: elasticsearch
+    restart: always
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch/log:/usr/share/log
+      - ./elasticsearch/lib:/usr/share/lib
+    environment:
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - node.name=elasticsearch
+      - cluster.name=datasearch
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 8200:9200
+      - 8300:9300
+networks:
+  cluster-network: {}

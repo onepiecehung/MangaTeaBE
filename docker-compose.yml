@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  app:
+    build: ./
+    container_name: demo-backend
+    volumes:
+      - .:/app
+    tty: true
+    environment:
+      NODE_ENV: production
+      SERVER_PORT: 3001
+      MONGO_HOST: mongodb
+      MONGO_PORT: 27017
+    command: bash ./start.sh
+    ports:
+      - 3001:3001
+    links:
+      - mongo
