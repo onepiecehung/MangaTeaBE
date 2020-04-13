@@ -1,0 +1,32 @@
+{
+    "apps": [
+        {
+            "name": "TRUYENTRANH-BE",
+            "script": "./server/bin/www.js",
+            "max_memory_restart": "600M",
+            "ignore_watch": [
+                "node_modules",
+                "public/images"
+            ],
+            "watch_options": {
+                "followSymlinks": false
+            },
+            "instances": "1",
+            "exec_mode": "cluster"
+        },
+        {
+            "name": "Rabbitmq",
+            "script": "./server/workers/start.worker.js",
+            "max_memory_restart": "600M",
+            "ignore_watch": [
+                "node_modules",
+                "public/images"
+            ],
+            "watch_options": {
+                "followSymlinks": false
+            },
+            "instances": "1",
+            "exec_mode": "cluster"
+        }
+    ]
+}
