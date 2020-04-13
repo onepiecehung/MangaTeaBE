@@ -38,7 +38,7 @@ export async function findByUserIdCreate(id) {
 
 
 export async function findAll(){
-    return GenreModel.findAll();
+    return GenreModel.find();
 }
 /**
  * 

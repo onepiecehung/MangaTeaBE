@@ -5,18 +5,18 @@ router.route("/all")
     .post(
         GenreController.autoCreateAllGenre
     )
+router.route('/')
+    .get(
+        GenreController.getAllGenre
+    );
+router.route('/:id')
+    .get(
+        GenreController.getGenreById
+    );
 // router.route('/')
-//   .get(
-//     GenreController.getAllGenre
-//   );
-// router.route('/:id')
-//   .get(
-//     GenreController.getGenReById
-//   );
-// router.route('/')
-//   .post(
-//     GenreController.createNewGenre
-//   );
+//     .post(
+//         GenreController.createNewGenre
+//     );
 // router.route('/:id')
 //   .put(
 //     GenreController.updateGenreById
