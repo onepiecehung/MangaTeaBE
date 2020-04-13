@@ -1,7 +1,7 @@
 {
     "apps": [
         {
-            "name": "TRUYENTRANH-BE",
+            "name": "Manga-BE",
             "script": "./server/bin/www.js",
             "max_memory_restart": "600M",
             "ignore_watch": [
