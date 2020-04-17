@@ -15,8 +15,16 @@
 127.0.0.1 api.manga.net
 ````
 
+## Database diagram
+
+<p align="center">
+  <img src="https://github.com/onepiecehung/MBE/blob/develop/database/mongo/design/manga.png">
+</p>
+
+
 ## Introduction: 
 - Test api in swagger [API docs](http://api.manga.net:3002/doccuments)
+
 ### How it works.
 
 <p align="center">
@@ -33,6 +41,13 @@
 
 <p align="center">
   <img src="https://github.com/onepiecehung/MBE/blob/develop/logic/Image/Register.png">
+</p>
+
+
+### How the Translation team works.
+
+<p align="center">
+  <img src="https://github.com/onepiecehung/MBE/blob/develop/logic/Image/TeamLeader.png">
 </p>
 
 ### 1. Setup Environment:
