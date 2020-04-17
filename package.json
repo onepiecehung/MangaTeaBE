@@ -5,7 +5,8 @@
   "scripts": {
     "start": "concurrently \"nodemon ./server/bin/www.js\" \"node ./server/workers/start.worker.js\"",
     "start-pm2": "pm2 startOrReload process.deploy.json",
-    "worker-rabbitmq": "node ./server/workers/start.worker.js"
+    "worker-rabbitmq": "node ./server/workers/start.worker.js",
+    "worker-crawl-mangadex": "node ./server/workers/crawlManga.worker.js"
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",
@@ -53,6 +54,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "log": "^6.0.0",
+    "mangadex-api": "^2.0.5",
+    "node-myanimelist": "^2.0.0",
     "nodemon": "^1.19.1",
     "rimraf": "^2.6.3"
   },

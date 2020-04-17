@@ -16,11 +16,11 @@ const MangaSchema = new Schema({
         required: true
     },
     author: [{
-        type: mongoose.Schema.Types.Number,
+        type: mongoose.Schema.Types.String,
         ref: "Author_Artist"
     }],
     artist: [{
-        type: mongoose.Schema.Types.Number,
+        type: mongoose.Schema.Types.String,
         ref: "Author_Artist"
     }],
     groupTranslationID: [{
