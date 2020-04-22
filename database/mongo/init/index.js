@@ -1,28 +1,23 @@
-import mongoose from 'mongoose';
-import logger from "../../../server/api/logger";
-mongoose.Promise = Promise;
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+const {
+    DATABASE
+} = require("../../../server/config/constants")
 
-async function MongoConnect(dbUrl) {
-  try {
-    if (!dbUrl) throw new Error('No database info provided');
 
-    await mongoose.connect(dbUrl, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-    });
-    logger.info('Mongodb connected');
-  } catch (err) {
-    logger.error('Please make sure Mongodb is installed and running!');
-    throw err;
-  }
-}
+const connection = mongoose.createConnection(DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
-function MongoDisconnect (db) {
-  db.disconnect();
-}
+connection.on('connected', () => {
+    console.log(`[ Database =>] Connection to the database successful. ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.yellow)
+})
 
-module.exports = {
-  MongoConnect,
-  MongoDisconnect
-};
+connection.on("error", function (err) {
+    console.log(`[ Database =>] The connection to the database failed: ${err}. = ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.red)
+});
+
+
+module.exports = connection;
