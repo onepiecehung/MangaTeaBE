@@ -21,7 +21,6 @@ const {
     testAMQP
 } = require('./connector/rabbitmq/__test__/__test__.worker');
 
-
 createQueue().then(() => {
     setTimeout(() => {
         testAMQP();
@@ -30,11 +29,18 @@ createQueue().then(() => {
     console.log('Error init rabbit : ', error);
 });
 const app = express();
+//TODO: Sentry
+const Sentry = require('@sentry/node');
 
+Sentry.init({
+    dsn: 'https://f8d024586a034c8fbcbeda728a6819eb@o381083.ingest.sentry.io/5207860'
+});
+// The request handler must be the first middleware on the app
+app.use(Sentry.Handlers.requestHandler());
+// The error handler must be before any other error middleware
+app.use(Sentry.Handlers.errorHandler());
 
 app.use(cors(CORS))
-
-
 
 
 app.use(logger("dev"));
@@ -63,12 +69,7 @@ mongoose
     );
 
 
-
-
-
-
 // TODO setup subdomain, router
-
 app.use(subdomain('api', api));
 app.use("/", router)
 
