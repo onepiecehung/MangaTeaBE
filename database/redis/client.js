@@ -10,9 +10,18 @@ function init() {
             console.log(`Connect to Redis fail, you need install redis or start service redis`.red.bold);
             console.error(err);
         });
+        client.on("connect", () => {
+            console.log(`Connect to Redis success: ${client.options.localhost}:${client.options.port}`.cyan.bold);
+        })
+        client.on("ready", () => {
+            console.log(`Redis is ready`.red.bold);
+            console.log(`========== STATUS REDIS SERVER ==========`.red.bold);
+            console.log(client);
+            
+        })
         return client;
     } else {
-        console.log(`Connect to Redis success`.bgYellow.bold);
+        console.log(`Connect to Redis success`.cyan.bold);
         return client;
     }
 }
