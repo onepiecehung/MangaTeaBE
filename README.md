@@ -1,28 +1,67 @@
 # Project structure
-![](https://i.imgur.com/QBDrq5w.png)
+
+
+<p align="center">
+  <img src="https://i.imgur.com/QBDrq5w.png">
+</p>
+
+
+# Setup local
+### Step 1: Install NodeJS > v12.x and development tools
+### Step 2: Install MongoDB, Erlang 20.x, RabbitMQ 3.8.x, Redis 5.x
+### Step 3: Editing file host
+````
+127.0.0.1 manga.net
+127.0.0.1 api.manga.net
+````
+
+## Database diagram
+
+<p align="center">
+  <img src="https://github.com/onepiecehung/MBE/blob/develop/database/mongo/design/manga.png">
+</p>
 
 
 ## Introduction: 
-- This template backend write by nodejs
-- Demo: Admin Manage User. (Add, Edit, Delete, Get) User 
-- Test api in swagger [API docs](http://localhost:3001/api-docs)
+- Test api in swagger [API docs](http://api.manga.net:3002/doccuments)
+
+### How it works.
+
+<p align="center">
+  <img src="https://github.com/onepiecehung/MBE/blob/develop/logic/Image/HighLevelDesign.png">
+</p>
+
+### Logic for user
+
+<p align="center">
+  <img src="https://github.com/onepiecehung/MBE/blob/develop/logic/Image/Introduction.png">
+</p>
+
+### How Registration works.
+
+<p align="center">
+  <img src="https://github.com/onepiecehung/MBE/blob/develop/logic/Image/Register.png">
+</p>
+
+
+### How the Translation team works.
+
+<p align="center">
+  <img src="https://github.com/onepiecehung/MBE/blob/develop/logic/Image/TeamLeader.png">
+</p>
 
 ### 1. Setup Environment:
   - File `.env`
 ````
-MONGO_HOST=localhost
-MONGO_PORT=27017
-MONGO_DATABASE_NAME=demo
-SERVER_PORT=3001
-SERVER_ORIGIN=*
-USER_ADMIN=admin
-PASS_ADMIN=admin
+PORT=2111
+RABBIT_URL="amqp://guest:guest@localhost:5672/"
+URL_DB=mongodb+srv://onepiecehung:Hung01684657540@3hmanga-p9tow.gcp.mongodb.net/truyentranh?retryWrites=true&w=majority
 ````
 ### 2. Install package
 `npm install`
 ### 3. Run development
 `npm start`
-### 4. Run docker:
+### 4. Run docker: (Enough, don't use below, if you don't know it, thanks. After step 3 you can be running this project)
 - Start docker:
 `docker-compose up -d`
 - View container:

@@ -16,11 +16,11 @@ const MangaSchema = new Schema({
         required: true
     },
     author: [{
-        type: mongoose.Schema.Types.Number,
+        type: mongoose.Schema.Types.String,
         ref: "Author_Artist"
     }],
     artist: [{
-        type: mongoose.Schema.Types.Number,
+        type: mongoose.Schema.Types.String,
         ref: "Author_Artist"
     }],
     groupTranslationID: [{
@@ -65,7 +65,8 @@ const MangaSchema = new Schema({
     lastReadAt: {
         type: Date,
         default: Date.now()
-    }
+    },
+    totalChapter: { type: Number, default: 0 }
 }, {
     timestamps: true,
 })
