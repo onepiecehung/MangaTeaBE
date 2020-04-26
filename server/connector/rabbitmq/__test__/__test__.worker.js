@@ -4,7 +4,7 @@ const {
 } = require("../config/index")
 
 function testAMQP() {
-  RABBIT.sendDataToRabbit(JOB_NAME.TEST_RABBIT, { msg: '[RABBIT] Test ampq success.' });
+  RABBIT.sendDataToRabbit(JOB_NAME.TEST_RABBIT, { msg: `[RABBIT] Test ampq success: ${new Date().toISOString()}`});
 }
 
 module.exports = {

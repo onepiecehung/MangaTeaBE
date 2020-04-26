@@ -11,13 +11,14 @@ function init() {
             console.error(err);
         });
         client.on("connect", () => {
-            console.log(`Connect to Redis success: ${client.options.localhost}:${client.options.port}`.cyan.bold);
+            console.log(`Connect to Redis success: ${client.options.host}:${client.options.port}`.cyan.bold);
         })
         client.on("ready", () => {
-            console.log(`Redis is ready`.red.bold);
             console.log(`========== STATUS REDIS SERVER ==========`.red.bold);
-            console.log(client);
-            
+            console.log("Redis version: " + client.serverInfo.redis_version);
+            console.log("OS running: " + client.serverInfo.os);
+            console.log("Uptime: " + client.serverInfo.uptime_in_seconds + "s");
+            console.log(`================== END ==================`.red.bold);
         })
         return client;
     } else {

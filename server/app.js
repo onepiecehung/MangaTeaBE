@@ -8,7 +8,7 @@ import api from "./api/api"
 import subdomain from 'express-subdomain';// TODO create subdomain
 import cors from "cors"
 import {
-    SERVER, DATABASE, API_PATH
+    SERVER, DATABASE, API_PATH,SENTRY_DSN
 } from "./config/constants";
 import {
     CORS
@@ -33,7 +33,7 @@ const app = express();
 const Sentry = require('@sentry/node');
 
 Sentry.init({
-    dsn: 'https://f8d024586a034c8fbcbeda728a6819eb@o381083.ingest.sentry.io/5207860'
+    dsn: SENTRY_DSN
 });
 // The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
