@@ -1,23 +1,21 @@
 const mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
 const {
-    DATABASE
-} = require("../../../server/config/constants")
+    SERVER, DATABASE, API_PATH
+} = require("../../../server/config/constants");
+// TODO setup database
+mongoose.Promise = global.Promise;
 
-
-const connection = mongoose.createConnection(DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL, {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-connection.on('connected', () => {
-    console.log(`[ Database =>] Connection to the database successful. ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.yellow)
-})
-
-connection.on("error", function (err) {
-    console.log(`[ Database =>] The connection to the database failed: ${err}. = ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.red)
-});
-
-
-module.exports = connection;
+mongoose
+    .connect(DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL, {
+        useCreateIndex: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(
+        () => {
+            console.log(`[ Database =>] Connection to the database successful. ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.yellow)
+            console.log(`The APIs service running on port ${SERVER.PORT}`.cyan.bold)
+            console.log(`Document API: http://${API_PATH}.yourdomain.com/${SERVER.DOCS_PATH} or http://${SERVER.URL_API_HOST}:${SERVER.PORT}/${SERVER.DOCS_PATH}`.cyan)
+        },
+        err => console.log(`[ Database =>] The connection to the database failed: ${err}. = ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.red)
+    );
