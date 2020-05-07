@@ -33,6 +33,9 @@ const DATABASE = {
     URL_DB: process.env.URL_DB || `mongodb+srv://${USER_DB}:${PASSWORD_DB}@${URL_HOST}/${NAME_DB}?retryWrites=true&w=majority` || URL_DB_LOCAL
 }
 
+
+const SENTRY_DSN = process.env.SENTRY_DSN || `https://f8d024586a034c8fbcbeda728a6819eb@o381083.ingest.sentry.io/5207860`
+
 module.exports = {
     API_PATH,
     SERVER,
@@ -41,5 +44,6 @@ module.exports = {
     PASSWORD_DB,
     NAME_DB,
     URL_HOST,
-    DATABASE
+    DATABASE,
+    SENTRY_DSN
 }
