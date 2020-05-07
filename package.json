@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"nodemon ./server/bin/www.js\" \"node ./server/workers/start.worker.js\"",
+    "start": "nodemon ./server/bin/www.js",
+    "start-all": "concurrently \"nodemon ./server/bin/www.js\" \"node ./server/workers/start.worker.js\"",
     "start-pm2": "pm2 startOrReload process.deploy.json",
     "worker-rabbitmq": "node ./server/workers/start.worker.js",
     "worker-crawl-mangadex": "node ./server/workers/crawlManga.worker.js"

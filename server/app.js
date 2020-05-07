@@ -2,13 +2,12 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import mongoose from "mongoose";
 import router from "./routes/index"
 import api from "./api/api"
 import subdomain from 'express-subdomain';// TODO create subdomain
 import cors from "cors"
 import {
-    SERVER, DATABASE, API_PATH
+    SENTRY_DSN
 } from "./config/constants";
 import {
     CORS
@@ -33,7 +32,7 @@ const app = express();
 const Sentry = require('@sentry/node');
 
 Sentry.init({
-    dsn: 'https://f8d024586a034c8fbcbeda728a6819eb@o381083.ingest.sentry.io/5207860'
+    dsn: SENTRY_DSN
 });
 // The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
@@ -49,24 +48,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-
-// TODO setup database
-mongoose.Promise = global.Promise;
-
-mongoose
-    .connect(DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL, {
-        useCreateIndex: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(
-        () => {
-            console.log(`[ Database =>] Connection to the database successful. ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.yellow)
-            console.log(`The APIs service running on port ${SERVER.PORT}`.cyan.bold)
-            console.log(`Document API: http://${API_PATH}.yourdomain.com/${SERVER.DOCS_PATH} or http://${SERVER.URL_API_HOST}:${SERVER.PORT}/${SERVER.DOCS_PATH}`.cyan)
-        },
-        err => console.log(`[ Database =>] The connection to the database failed: ${err}. = ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.red)
-    );
 
 
 // TODO setup subdomain, router

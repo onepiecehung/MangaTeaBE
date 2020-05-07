@@ -8,3 +8,4 @@ require('dotenv').config(dotEnvConfigs);
 require("colors")
 // require("../../database/redis/client")
 require("./server")
+require("../../database/mongo/init/index")

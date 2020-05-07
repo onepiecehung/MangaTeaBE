@@ -2,7 +2,7 @@ const response = require("../../util/response.json")
 const UserValidator = require("./user.validation")
 const UserService = require("./user.service")
 const utils = require("../../util/help")
-const Redis = require("../../database/redis/client")
+// const Redis = require("../../database/redis/client")
 
 export async function Register(req, res) {
     try {
@@ -46,13 +46,13 @@ export async function Profile(req, res) {
 
 export async function getUserById(req, res) {
     try {
-        const myKey = "UserInfo:" + req.params.id;
-        const value = await Redis.getJson(myKey);
-        if (value) {
-            return response.success(res, value);
-        }
+        // const myKey = "UserInfo:" + req.params.id;
+        // const value = await Redis.getJson(myKey);
+        // if (value) {
+        //     return response.success(res, value);
+        // }
         let data = await UserService.getUserById(req.params.id)
-        await Redis.setJson(myKey, data);
+        // await Redis.setJson(myKey, data);
         return response.success(res, data)
     } catch (error) {
         return response.error(res, req, error)

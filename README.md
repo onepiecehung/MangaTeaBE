@@ -23,13 +23,21 @@
 
 
 ## Introduction: 
-- Test api in swagger [API docs](http://api.manga.net:3002/doccuments)
+- Test api in swagger [API docs](http://api.manga.net:2111/doccuments)
 
 ### How it works.
 
 <p align="center">
   <img src="https://github.com/onepiecehung/MBE/blob/develop/logic/Image/HighLevelDesign.png">
 </p>
+
+
+### Recommender Systems.
+
+<p align="center">
+  <img src="https://github.com/onepiecehung/MBE/blob/develop/logic/Image/RecommenderSystems.png">
+</p>
+
 
 ### Logic for user
 
