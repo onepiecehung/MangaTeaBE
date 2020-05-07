@@ -13,7 +13,20 @@ const autoIncrement = require('mongoose-plugin-autoinc');
 const MangaSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        index: true
+    },
+    idAniList: {
+        type: Number
+    },
+    idMal: {
+        type: Number
+    },
+    otherName: {
+        romaji: { type: String },
+        english: { type: String },
+        native: { type: String },
+        userPreferred: { type: String },
     },
     author: [{
         type: mongoose.Schema.Types.String,
@@ -35,26 +48,75 @@ const MangaSchema = new Schema({
         type: mongoose.Schema.Types.Number,
         ref: "Users"
     }],
-    cover: {
+    coverImage: {
+        large: { type: String },
+        medium: { type: String }
+    },
+    bannerImage: {
         type: String
     },
-    genre: [{
-        type: mongoose.Schema.Types.String,
-        ref: "Genre"
+    format: {
+        type: String
+    },
+    countryOfOrigin: {
+        type: String
+    },
+    characters: [{
+        id: { type: Number },
+        name: { type: String }
+    }],
+    externalLinks: [{
+        type: String
+    }],
+    isAdult: {
+        type: Boolean,
+        default: false
+    },
+    averageScore: {
+        type: Number
+    },
+    meanScore: {
+        type: Number
+    },
+    popularity: {
+        type: Number
+    },
+    trending: {
+        type: Number
+    },
+    staff: [{
+        id: { type: Number },
+        name: { type: String }
+    }],
+    tags: [{
+        name: { type: String },
+        isMediaSpoiler: { type: Boolean, default: false }
+    }],
+    startDate: {
+        year: { type: Number },
+        month: { type: Number },
+        day: { type: Number }
+    },
+    endDate: {
+        year: { type: Number },
+        month: { type: Number },
+        day: { type: Number }
+    },
+    genres: [{
+        type: String
     }],
     rate: [{
         type: mongoose.Schema.Types.Number,
         ref: "Rating"
     }],
     status: {
-        type: mongoose.Schema.Types.Number,
-        ref: "Status"
+        type: String
     },
     permission: {
         type: mongoose.Schema.Types.Number,
         ref: "Permission"
     },
-    descripttion: { type: String, default: "Manga descripttion" },
+    description: { type: String, default: "Manga description" },
     source: [{
         type: String
     }],
@@ -75,7 +137,7 @@ const MangaSchema = new Schema({
 
 MangaSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoError' && error.code === 11000)
-        next(new Error('This doccument is already exists, please try again'));
+        next(new Error('This document is already exists, please try again'));
     else next(error);
 });
 
