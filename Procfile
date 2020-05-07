@@ -1,1 +1,1 @@
-worker: npm worker-crawl-AniList
+worker: npm workerCrawlAniList
