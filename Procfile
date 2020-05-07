@@ -1,1 +1,1 @@
-worker: npm workerCrawlAniList
+worker: node ./server/workers/crawlMangaAniList.worker.js
