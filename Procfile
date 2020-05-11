@@ -1,1 +1,0 @@
-worker: node ./server/workers/crawlMangaAniList.worker.js

@@ -6,7 +6,7 @@ const {
 mongoose.Promise = global.Promise;
 
 mongoose
-    .connect(`mongodb+srv://onepiecehung:Hung01684657540@3hmanga-p9tow.gcp.mongodb.net/truyentranh?retryWrites=true&w=majority`, {
+    .connect(`mongodb://localhost:27017/truyentranh`, {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true

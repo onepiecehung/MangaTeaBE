@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import router from "./routes/index"
 import api from "./api/api"
-import subdomain from 'express-subdomain';// TODO create subdomain
 import cors from "cors"
 import {
     SENTRY_DSN
@@ -51,7 +50,7 @@ app.use(cookieParser());
 
 
 // TODO setup subdomain, router
-app.use(subdomain('api', api));
+app.use('/v1', api);
 app.use("/", router)
 
 

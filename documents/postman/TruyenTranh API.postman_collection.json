@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "a5fc0420-8637-4f3d-a481-f63474392005",
+		"name": "TruyenTranh API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ngontranpro@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "jackngon",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"type": "text"
+								},
+								{
+									"key": "hung",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/register",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ngontranpro@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/login",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_NGON}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/user/me",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/user/11",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Member",
+			"item": [
+				{
+					"name": "Get member by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/member/10",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Country",
+			"item": [
+				{
+					"name": "Auto create country",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/country/all",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"country",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Create auto all status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/status/all",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"status",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/status/create",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"status",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Genre",
+			"item": [
+				{
+					"name": "Get all genre from github",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://raw.githubusercontent.com/Kurozora/anime/master/anime-genres.json",
+							"protocol": "https",
+							"host": [
+								"raw",
+								"githubusercontent",
+								"com"
+							],
+							"path": [
+								"Kurozora",
+								"anime",
+								"master",
+								"anime-genres.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auto create all genre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/genre/all",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"genre",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all genre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/genre/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"genre",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  genre by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/genre/1",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"genre",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "Auto create role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/role/all",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"role",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Manga",
+			"item": [
+				{
+					"name": "get manga",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/manga?skip=0&limit=1",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"manga"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0",
+									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

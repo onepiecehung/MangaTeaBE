@@ -63,7 +63,7 @@
 ````
 PORT=2111
 RABBIT_URL="amqp://guest:guest@localhost:5672/"
-URL_DB=mongodb+srv://onepiecehung:Hung01684657540@3hmanga-p9tow.gcp.mongodb.net/truyentranh?retryWrites=true&w=majority
+URL_DB=
 ````
 ### 2. Install package
 `npm install`

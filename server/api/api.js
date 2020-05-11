@@ -5,11 +5,12 @@ const swaggerUI = require("swagger-ui-express");
 const { detect } = require('detect-browser');
 const { getIP, getClientIp } = require("../../util/help")
 const UserRouter = require("../../packages/user/user.routes")
-const MemberRouter = require("../../packages/menber/member.routes")
+const MemberRouter = require("../../packages/member/member.routes")
 const CountryRouter = require("../../packages/country/country.routes")
 const StatusRouter = require("../../packages/status/status.routes")
 const RoleRouter = require("../../packages/role/role.routes")
 const GenreRouter = require("../../packages/genre/genre.routes")
+const MangaRouter =  require("../../packages/manga/manga.routes")
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -32,7 +33,7 @@ router.use("/country", CountryRouter)
 router.use("/status", StatusRouter)
 router.use("/role", RoleRouter)
 router.use("/genre", GenreRouter)
-// router.use('/genre', genreRouter);
+router.use('/manga', MangaRouter);
 
 
 router.get('/', function (req, res) {

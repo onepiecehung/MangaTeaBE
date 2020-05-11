@@ -8,7 +8,7 @@
     "start-pm2": "pm2 startOrReload process.deploy.json",
     "worker-rabbitmq": "node ./server/workers/start.worker.js",
     "worker-crawl-mangadex": "node ./server/workers/crawlManga.worker.js",
-    "workerCrawlAniList": "node ./server/workers/crawlMangaAniList.worker.js"
+    "workerCrawlAniList": "nodemon ./server/workers/crawlMangaAniList.worker.js"
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",
@@ -31,7 +31,6 @@
     "dotenv": "^8.2.0",
     "express": "~4.17.1",
     "express-session": "^1.17.0",
-    "express-subdomain": "^1.0.5",
     "http-errors": "~1.6.2",
     "ioredis": "^4.16.1",
     "jsonwebtoken": "^8.5.1",

@@ -12,13 +12,13 @@ function sleep(ms) {
 async function name(start) {
     try {
         var k = 0
-        for (let i = start; i < 150000; i++) {
-            k = i + 1
+        for (let i = start; i > 1020; i--) {
+            k = i - 1
             await Anilist.media.manga(i).then(async data => {
                 if (data.status == 404) {
                     logger.debug(`Khong tim thay id: ${i}`)
-                    logger.debug(data)
-                    await sleep(1000)
+                    // logger.debug(data)
+                    // await sleep(1000)
                     // name(k)
                 }
                 else {
@@ -51,7 +51,7 @@ async function name(start) {
                     logger.info(`Tim thay id: ${i} , da ghi thanh cong vao database`)
                 }
             });
-            await sleep(1000)
+            // await sleep(1000)
         }
     } catch (error) {
         console.log();
@@ -60,7 +60,7 @@ async function name(start) {
     }
 }
 
-name(158)
+name(35899)
 
 
 
