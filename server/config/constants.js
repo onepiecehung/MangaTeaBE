@@ -35,6 +35,7 @@ const DATABASE = {
 
 
 const SENTRY_DSN = process.env.SENTRY_DSN || `https://f8d024586a034c8fbcbeda728a6819eb@o381083.ingest.sentry.io/5207860`
+const CLIENT_ID_IMGUR = process.env.CLIENT_ID_IMGUR || `35fc7e0355c68dc`
 
 module.exports = {
     API_PATH,
@@ -45,5 +46,6 @@ module.exports = {
     NAME_DB,
     URL_HOST,
     DATABASE,
-    SENTRY_DSN
+    SENTRY_DSN,
+    CLIENT_ID_IMGUR
 }

@@ -66,7 +66,9 @@ export const JOB_NAME = {
   RESEND_OTP: "RESEND_OTP"
 };
 
-
+/**
+ * JWT
+ */
 export const CONFIG = {
   jwt_expiration: 60 * 60 * 24 * 7,
   jwt_encryption: `hkashd3478asfju4t9349934fnsf98@434543sdfslf`
@@ -74,14 +76,32 @@ export const CONFIG = {
 
 
 export const USER_ERROR = {
-  EMAIL_HAS_EXISTS: "EMAIL_HAS_EXISTS",
-  EMAIL_NOT_EXISTS: "EMAIL_NOT_EXISTS",
-  USERNAME_HAS_EXISTS: "USERNAME_HAS_EXISTS",
-  PASSWORD_INVALID: "PASSWORD_INVALID"
+  EMAIL_HAS_EXISTS: "EMAIL HAS EXISTS",
+  EMAIL_NOT_EXISTS: "EMAIL NOT EXISTS",
+  USERNAME_HAS_EXISTS: "USERNAME HAS EXISTS",
+  PASSWORD_INVALID: "PASSWORD INVALID",
+  USER_NOT_FOUND: "USER NOT FOUND"
 }
 
 
 
+/**
+ * 
+ * @param {*} Manga
+ * @param {*} callback 
+ */
+export const MANGA = {
+  MANGA_SAVED_EXIST: "MANGA SAVED EXIST",
+  MANGA_NOT_EXISTS: "MANGA NOT EXISTS",
+  MANGA_NOT_FOUND: "MANGA NOT FOUND",
+  MANGA_MISSING_ID: "MISSING ID MANGA"
+}
+
+
+
+/**
+ * CORS
+ */
 export function ALLOW_URL(origin, callback) {
   let whitelist = process.env.SERVER_ORIGIN || "*"
   if (whitelist.indexOf(origin) !== -1) {
@@ -92,9 +112,7 @@ export function ALLOW_URL(origin, callback) {
 }
 
 
-/**
- * CORS
- */
+
 export const CORS = {
   // Find and fill your options here: https://github.com/expressjs/cors#configuration-options
   origin: "*" || ALLOW_URL,

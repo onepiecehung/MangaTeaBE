@@ -12,7 +12,7 @@ const moment = require("moment");
 const UserSchema = new mongoose.Schema({
     // index: { type: Number, unique: true, required: true },
     email: { type: String, required: true, unique: true, index: 1 },
-    fullname: { type: String, },
+    fullName: { type: String, },
     username: { type: String, required: true },
     password: { type: String, required: true },
     phoneNumber: { type: String, },
@@ -43,8 +43,7 @@ const UserSchema = new mongoose.Schema({
     lastLoginAt: { type: Date },
     avatar: { type: String },
     permission: [{
-        type: mongoose.Schema.Types.Number,
-        ref: "Permission"
+        type: Number
     }],
     fromCountry: {
         type: mongoose.Schema.Types.Number,
@@ -56,6 +55,14 @@ const UserSchema = new mongoose.Schema({
         ref: "Appellation"
         // default: "Unknown_ID"
     }],
+    about: {
+        type: String,
+        default: "Unknown"
+    },
+    linkSocial: [{
+        type: String,
+        default: "Unknown"
+    }]
 }, {
     timestamps: true,
     toJSON: {

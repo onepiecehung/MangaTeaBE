@@ -1,11 +1,4 @@
-const CODE = {
-    TOKEN_HAS_EXPIRED: "Token has expired"
-}
-
-const responseCODE = {
-
-}
-
-module.exports = {
-    CODE
+export const CODE = {
+    TOKEN_HAS_EXPIRED: "Token has expired",
+    PERMISSION_DENIED: "Permission denied"
 }

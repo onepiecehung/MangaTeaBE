@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 const autoIncrement = require('mongoose-plugin-autoinc');
 
 const AppellationSchema = new Schema({
-    name: { type: String, required: true, unique: true },
-    code: { type: Number, required: true, unique: true },
-    detail: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    code: { type: Number, required: true },
+    type: { type: Number, required: true },
+    detail: { type: String, required: true },
 }, {
     timestamps: true,
 })
@@ -15,7 +16,7 @@ const AppellationSchema = new Schema({
 
 AppellationSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoError' && error.code === 11000)
-        next(new Error('This doccument is already exists, please try again'));
+        next(new Error('This document is already exists, please try again'));
     else next(error);
 });
 

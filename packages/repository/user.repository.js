@@ -24,3 +24,11 @@ export async function checkPassword(password) {
 export async function findById(id) {
     return UserModel.findById(id)
 }
+
+export async function changePassword(id, data) {
+    return UserModel.findByIdAndUpdate(id, { password: data.newPassword })
+}
+
+export async function findByIdAndUpdate(id, update) {
+    return UserModel.findByIdAndUpdate(id, update)
+}

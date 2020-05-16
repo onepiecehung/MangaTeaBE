@@ -3,10 +3,7 @@ const MemberRepository = require("../repository/member.repository")
 const logger = require("../../util/logger")
 const { USER_ERROR, CONFIG } = require("../../globalConstant/index")
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt")
-
-
-
+const bcrypt = require("bcrypt");
 
 
 /**
@@ -87,6 +84,57 @@ export async function getUserById(id) {
     try {
         let data = await UserRepository.findById(id)
         return data
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+export async function changePassword(data, userAuth) {
+    try {
+        const userInfo = await UserRepository.findById(userAuth._id);
+        if (!userInfo) {
+            return Promise.reject(USER_ERROR.USER_NOT_FOUND);
+        }
+        const passwordCorrect = await bcrypt.compareSync(data.password, userInfo.password);
+        if (!passwordCorrect) {
+            return Promise.reject(USER_ERROR.PASSWORD_INVALID);
+        }
+        let salt = bcrypt.genSaltSync(10);
+        data.newPassword = bcrypt.hashSync(data.newPassword, salt);
+        await UserRepository.changePassword(userInfo._id, data);
+        return true
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function uploadAvatar(userAuth, url_ava) {
+    try {
+        const userInfo = await UserRepository.findById(userAuth._id);
+        if (!userInfo) {
+            return Promise.reject(USER_ERROR.USER_NOT_FOUND);
+        }
+        userInfo.set("avatar", url_ava)
+        let user = await UserRepository.save(userInfo)
+        return user
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function updateProfile(userAuth, userInfoUpdate) {
+    try {
+        const userInfo = await UserRepository.findById(userAuth._id);
+        if (!userInfo) {
+            return Promise.reject(USER_ERROR.USER_NOT_FOUND);
+        }
+        await UserRepository.findByIdAndUpdate(userAuth._id, userInfoUpdate)
+        return true
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);

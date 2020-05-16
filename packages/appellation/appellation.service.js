@@ -1,0 +1,1 @@
+import AppellationRepository from "../repository/appellation.repository";

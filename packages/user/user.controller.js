@@ -2,6 +2,9 @@ const response = require("../../util/response.json")
 const UserValidator = require("./user.validation")
 const UserService = require("./user.service")
 const utils = require("../../util/help")
+const axios = require("axios")
+const { CLIENT_ID_IMGUR } = require("../../server/config/constants")
+const FormData = require('form-data');
 // const Redis = require("../../database/redis/client")
 
 export async function Register(req, res) {
@@ -54,6 +57,54 @@ export async function getUserById(req, res) {
         let data = await UserService.getUserById(req.params.id)
         // await Redis.setJson(myKey, data);
         return response.success(res, data)
+    } catch (error) {
+        return response.error(res, req, error)
+    }
+}
+
+export async function changePassword(req, res) {
+    try {
+        let validateResult = UserValidator.validateChangePassword(req.body);
+        if (validateResult.error) {
+            return response.error(res, req, {
+                message: validateResult.error.details[0].message
+            });
+        }
+        let data = await UserService.changePassword(req.body, req.user)
+        return response.success(res, data, 200)
+    } catch (error) {
+        return response.error(res, req, error)
+    }
+}
+
+export async function uploadAvatar(req, res) {
+    try {
+        let dataImage = new FormData()
+        dataImage.append("image", req.file.buffer)
+        const formHeaders = dataImage.getHeaders();
+        let url_ava = await axios.post("https://api.imgur.com/3/image/", dataImage, {
+            headers: {
+                'Authorization': `Client-ID ${CLIENT_ID_IMGUR}`,
+                ...formHeaders
+            },
+        })
+        let data = await UserService.uploadAvatar(req.user, url_ava.data.data.link)
+        return response.success(res, data, 200)
+    } catch (error) {
+        return response.error(res, req, error)
+    }
+}
+
+export async function updateProfile(req, res) {
+    try {
+        let validateResult = UserValidator.validateUpdateProfile(req.body);
+        if (validateResult.error) {
+            return response.error(res, req, {
+                message: validateResult.error.details[0].message
+            });
+        }
+        let data = await UserService.updateProfile(req.user, req.body)
+        return response.success(res, data, 200)
     } catch (error) {
         return response.error(res, req, error)
     }

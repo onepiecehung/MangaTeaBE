@@ -10,7 +10,7 @@ const autoIncrement = require('mongoose-plugin-autoinc');
 
 const GroupTranslationSchema = new Schema({
     name: { type: String, required: true },
-    userOwerID: {
+    userOwnerID: {
         type: mongoose.Schema.Types.Number,
         ref: "Users",
         required: true
@@ -28,7 +28,7 @@ const GroupTranslationSchema = new Schema({
         type: mongoose.Schema.Types.Number,
         ref: "Rating"
     }],
-    langauge: [{
+    language: [{
         type: mongoose.Schema.Types.Number,
         ref: "Country"
     }],
@@ -51,9 +51,9 @@ const GroupTranslationSchema = new Schema({
 
 
 
-GroupTranslatioSchema.post('save', function (error, doc, next) {
+GroupTranslationSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoError' && error.code === 11000)
-        next(new Error('This doccument is already exists, please try again'));
+        next(new Error('This document is already exists, please try again'));
     else next(error);
 });
 

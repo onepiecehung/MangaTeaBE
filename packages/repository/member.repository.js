@@ -6,6 +6,10 @@ export async function create(memberInfo) {
     return MemberRepository.create(memberClass)
 }
 
+export async function save(memberInfo) {
+    return memberInfo.save()
+}
+
 export async function findByIdAndUpdateUserId(memberID, userID) {
     return MemberRepository.findByIdAndUpdate({ _id: memberID }, { userID: userID })
 }
@@ -16,4 +20,8 @@ export async function findById(id) {
 
 export async function findByIdAndPopulate(id) {
     return MemberRepository.findById(id).populate("userID")
+}
+
+export async function findByUserID(id) {
+    return MemberRepository.findOne({ userID: id })
 }
