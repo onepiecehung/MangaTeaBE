@@ -18,17 +18,17 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "ngontranpro@gmail.com",
+									"value": "anhhung15957@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "username",
-									"value": "jackngon",
+									"value": "ds11222",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "1234567",
+									"value": "123456",
 									"type": "text"
 								},
 								{
@@ -65,12 +65,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "ngontranpro@gmail.com",
+									"value": "anhhung15957@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "1234567",
+									"value": "123456",
 									"type": "text"
 								}
 							],
@@ -132,6 +132,79 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5MjUzNjM0LCJleHAiOjE1ODk4NTg0MzR9.t2rlWgjgOGmP_BenWmbiy0mRLMMPdeD-Y8edzAZTVLc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "1234567",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/change-password",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload avatar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/79335279_1375587515981142_4250371353485508608_n.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/upload-avatar",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"upload-avatar"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -152,6 +225,210 @@
 							"path": [
 								"member",
 								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add save manga",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5NDQ3NzcwLCJleHAiOjE1OTAwNTI1NzB9.PE1L-J2fg-mdVtPmxbX-P5z6BxCT8OQrSb18d0t_MnM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/member/save-manga?idManga=5",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"save-manga"
+							],
+							"query": [
+								{
+									"key": "idManga",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove save manga",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5NDQ3NzcwLCJleHAiOjE1OTAwNTI1NzB9.PE1L-J2fg-mdVtPmxbX-P5z6BxCT8OQrSb18d0t_MnM"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/member/unsaved-manga?idManga=2",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"unsaved-manga"
+							],
+							"query": [
+								{
+									"key": "idManga",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add manga to favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5NDQ3NzcwLCJleHAiOjE1OTAwNTI1NzB9.PE1L-J2fg-mdVtPmxbX-P5z6BxCT8OQrSb18d0t_MnM"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/member/add-to-favorite?idManga=2",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"add-to-favorite"
+							],
+							"query": [
+								{
+									"key": "idManga",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove manga from favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5NDQ3NzcwLCJleHAiOjE1OTAwNTI1NzB9.PE1L-J2fg-mdVtPmxbX-P5z6BxCT8OQrSb18d0t_MnM"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/member/remove-from-favorite?idManga=3",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"remove-from-favorite"
+							],
+							"query": [
+								{
+									"key": "idManga",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove manga from history reading",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5NDQ3NzcwLCJleHAiOjE1OTAwNTI1NzB9.PE1L-J2fg-mdVtPmxbX-P5z6BxCT8OQrSb18d0t_MnM"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/member/remove-from-history?idManga=5",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"remove-from-history"
+							],
+							"query": [
+								{
+									"key": "idManga",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add manga to history reading",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5NDQ3NzcwLCJleHAiOjE1OTAwNTI1NzB9.PE1L-J2fg-mdVtPmxbX-P5z6BxCT8OQrSb18d0t_MnM"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/member/add-to-history?idManga=2",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"add-to-history"
+							],
+							"query": [
+								{
+									"key": "idManga",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove all manga from history reading",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5NDQ3NzcwLCJleHAiOjE1OTAwNTI1NzB9.PE1L-J2fg-mdVtPmxbX-P5z6BxCT8OQrSb18d0t_MnM"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/member/remove-all-history",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"remove-all-history"
 							]
 						}
 					},
@@ -360,6 +637,70 @@
 									"value": "1",
 									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Rating",
+			"item": [
+				{
+					"name": "create/update rating",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5Njg3MjY5LCJleHAiOjE1OTAyOTIwNjl9.e7A0_QO7E3Wa1_QYM19iHVA_yDNDtzPBOA5ndkTHHDg"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "mangaID",
+									"value": "2",
+									"description": "1 trong 2 (manga hoặc group)",
+									"type": "text"
+								},
+								{
+									"key": "groupTranslationID",
+									"value": "3",
+									"description": "chọn 1 trong 2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "rateNumber",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "typeRating",
+									"value": "MANGA",
+									"description": "Nếu là manga thì TYPE là \"MANGA\", Group thì \"GROUPTRANSLATION\"",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/rating/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"rating",
+								""
 							]
 						}
 					},
