@@ -1,5 +1,5 @@
-const response = require("../../util/response.json")
-const CountryService = require("./country.service")
+import * as response from "../../util/response.json";
+import * as CountryService from "./country.service";
 
 export async function addAllCountry(req, res) {
     try {

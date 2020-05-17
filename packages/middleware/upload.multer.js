@@ -1,8 +1,8 @@
-const path = require('path');
-// const shell = require('shelljs');
-const multer = require('multer');
-// const fs = require("fs")
-// const utils = require('../utils/utils');
+import path from 'path';
+// const shell from 'shelljs');
+import multer from 'multer';
+// const fs from "fs")
+// const utils from '../utils/utils');
 
 
 // var storage = multer.diskStorage({

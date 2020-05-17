@@ -1,8 +1,8 @@
-const { Router } = require("express")
+import { Router } from 'express';
 const router = new Router();
-const UserController = require("./user.controller")
-const { Authentication } = require("../../util/JWT/jwt")
-const { upload } = require("../middleware/upload.multer")
+import * as UserController from "./user.controller";
+import { Authentication } from "../../util/JWT/jwt";
+import { upload } from "../middleware/upload.multer";
 // authen
 // multer
 // validation
@@ -35,7 +35,7 @@ router.route("/update-profile")
         Authentication,
         UserController.updateProfile
     )
-    
+
 router.route("/change-password")
     .put(
         Authentication,
@@ -49,4 +49,4 @@ router.route("/upload-avatar")
         UserController.uploadAvatar
     )
 
-module.exports = router
+export default router;

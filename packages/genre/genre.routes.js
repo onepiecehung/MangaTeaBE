@@ -1,6 +1,8 @@
-const { Router } = require("express");
+import { Router } from 'express';
 const router = new Router();
-const GenreController = require('./genre.controller');
+import * as GenreController from './genre.controller';
+
+
 router.route("/all")
     .post(
         GenreController.autoCreateAllGenre

@@ -1,6 +1,6 @@
-const CountryRepository = require("../repository/country.repository")
-const logger = require("../../util/logger")
-const axios = require("axios")
+import * as  CountryRepository from "../repository/country.repository";
+import * as  logger from "../../util/logger";
+import axios from "axios";
 export async function addAllCountry() {
     try {
         let data = await axios({

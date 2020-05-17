@@ -1,5 +1,5 @@
-const MangaRepository = require("../repository/manga.repository")
-const logger = require("../../util/logger")
+import * as MangaRepository from "../repository/manga.repository";
+import * as logger from "../../util/logger";
 
 export async function find(keyword) {
     try {

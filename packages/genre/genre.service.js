@@ -1,5 +1,5 @@
-const GenreRepository = require("../repository/genre.repository")
-const logger = require("../../util/logger")
+import * as GenreRepository from "../repository/genre.repository";
+import * as logger from "../../util/logger";
 
 
 

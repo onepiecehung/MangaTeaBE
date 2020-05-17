@@ -1,5 +1,6 @@
-const RoleRepository = require("../repository/role.repository")
-const logger = require("../../util/logger")
+import * as logger from "../../util/logger";
+
+import * as RoleRepository from "../repository/role.repository";
 
 export async function insertMultiple(roleInfoArray) {
     try {

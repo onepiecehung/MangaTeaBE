@@ -1,8 +1,8 @@
-const jwt = require("jsonwebtoken")
-const response = require("../../util/response.json")
-const { CONFIG } = require("../../globalConstant/index")
-const { CODE } = require("../../globalConstant/error")
-const UserRepository = require("../../packages/repository/user.repository")
+import jwt from "jsonwebtoken";
+import * as response from "../../util/response.json";
+import { CONFIG } from "../../globalConstant/index";
+import { CODE } from "../../globalConstant/error";
+import * as UserRepository from "../../packages/repository/user.repository";
 
 
 

@@ -1,6 +1,6 @@
-const response = require("../../util/response.json")
-const { GENRE } = require("../../database/mongo/data/genre.data")
-const GenreService = require("./genre.service")
+import * as response from "../../util/response.json";
+import { GENRE } from "../../database/mongo/data/genre.data";
+import * as GenreService from "./genre.service";
 
 
 

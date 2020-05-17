@@ -1,16 +1,18 @@
-const express = require("express");
-const router = express.Router();
-const swaggerSpec = require('../bin/docs');
-const swaggerUI = require("swagger-ui-express");
-const { detect } = require('detect-browser');
-const { getIP, getClientIp } = require("../../util/help")
-const UserRouter = require("../../packages/user/user.routes")
-const MemberRouter = require("../../packages/member/member.routes")
-const CountryRouter = require("../../packages/country/country.routes")
-const StatusRouter = require("../../packages/status/status.routes")
-const RoleRouter = require("../../packages/role/role.routes")
-const GenreRouter = require("../../packages/genre/genre.routes")
-const MangaRouter =  require("../../packages/manga/manga.routes")
+import { Router } from 'express';
+
+const router = new Router();
+import swaggerSpec from '../bin/docs';
+import swaggerUI from "swagger-ui-express";
+import { detect } from 'detect-browser';
+import { getIP, getClientIp } from "../../util/help";
+import UserRouter from "../../packages/user/user.routes";
+import MemberRouter from "../../packages/member/member.routes";
+import CountryRouter from "../../packages/country/country.routes";
+import StatusRouter from "../../packages/status/status.routes";
+import RoleRouter from "../../packages/role/role.routes";
+import GenreRouter from "../../packages/genre/genre.routes";
+import MangaRouter from "../../packages/manga/manga.routes";
+import RatingRouter from "../../packages/rating/rating.routes";
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -34,6 +36,7 @@ router.use("/status", StatusRouter)
 router.use("/role", RoleRouter)
 router.use("/genre", GenreRouter)
 router.use('/manga', MangaRouter);
+router.use("/rating", RatingRouter)
 
 
 router.get('/', function (req, res) {
@@ -46,4 +49,4 @@ router.use('/documents', swaggerUI.serve);
 router.get('/documents', swaggerUI.setup(swaggerSpec));
 
 
-module.exports = router;
+export default router;

@@ -1,11 +1,14 @@
-const response = require("../../util/response.json")
-const UserValidator = require("./user.validation")
-const UserService = require("./user.service")
-const utils = require("../../util/help")
-const axios = require("axios")
-const { CLIENT_ID_IMGUR } = require("../../server/config/constants")
-const FormData = require('form-data');
-// const Redis = require("../../database/redis/client")
+import axios from "axios";
+import FormData from 'form-data';
+
+import { CLIENT_ID_IMGUR } from "../../server/config/constants";
+import * as utils from "../../util/help";
+
+import * as response from "../../util/response.json";
+import * as UserService from "./user.service";
+import * as UserValidator from "./user.validation";
+
+// const Redis from  "../../database/redis/client")
 
 export async function Register(req, res) {
     try {

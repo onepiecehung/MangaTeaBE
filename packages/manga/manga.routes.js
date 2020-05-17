@@ -1,6 +1,6 @@
-const { Router } = require("express");
+import { Router } from 'express';
 const router = new Router();
-const MangaController = require('./manga.controller');
+import * as MangaController from './manga.controller';
 
 router.route('/')
     .get(
@@ -8,4 +8,4 @@ router.route('/')
     );
 
 
-module.exports = router;
+export default router

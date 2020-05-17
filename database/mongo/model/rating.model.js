@@ -1,9 +1,7 @@
 const mongoose = require("mongoose")
+
 const Schema = mongoose.Schema;
 const autoIncrement = require('mongoose-plugin-autoinc');
-// const UserModel = require("./user.model")
-// const MangaModel = require("./manga.model")
-// const GroupTranslationModel = require("./groupTranslation.model")
 
 const RatingSchema = new Schema({
     mangaID: {
@@ -27,6 +25,13 @@ const RatingSchema = new Schema({
     },
     rateContent: {
         type: String
+    },
+    typeRating: {
+        type: String
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
 }, {
     timestamps: true,

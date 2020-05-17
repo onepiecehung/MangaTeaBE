@@ -1,8 +1,7 @@
-const response = require("../../util/response.json")
-const MemberService = require("./member.service")
-const { MANGA } = require("../../globalConstant/index")
+import { MANGA } from "../../globalConstant/index";
 
-
+import * as MemberService from "./member.service";
+import * as response from "../../util/response.json";
 
 export async function getMemberById(req, res) {
     try {

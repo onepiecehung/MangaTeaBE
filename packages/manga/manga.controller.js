@@ -1,5 +1,5 @@
-const response = require("../../util/response.json")
-const MangaService = require("./manga.service")
+import * as response from "../../util/response.json";
+import * as MangaService from "./manga.service";
 
 export async function find(req, res) {
     try {

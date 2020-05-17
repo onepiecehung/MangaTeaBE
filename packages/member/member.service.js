@@ -1,7 +1,8 @@
-const MemberRepository = require("../repository/member.repository")
-const MangaRepository = require("../repository/manga.repository")
-const logger = require("../../util/logger")
-const { USER_ERROR, MANGA } = require("../../globalConstant/index")
+import { USER_ERROR, MANGA } from "../../globalConstant/index";
+import * as logger from "../../util/logger";
+
+import * as MangaRepository from "../repository/manga.repository";
+import * as MemberRepository from "../repository/member.repository";
 
 export async function findByIdAndPopulate(id) {
     try {

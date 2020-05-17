@@ -1,10 +1,11 @@
-const UserRepository = require("../repository/user.repository")
-const MemberRepository = require("../repository/member.repository")
-const logger = require("../../util/logger")
-const { USER_ERROR, CONFIG } = require("../../globalConstant/index")
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
+import { USER_ERROR, CONFIG } from "../../globalConstant/index";
+import * as logger from "../../util/logger";
+
+import * as MemberRepository from "../repository/member.repository";
+import * as UserRepository from "../repository/user.repository";
 
 /**
  * 

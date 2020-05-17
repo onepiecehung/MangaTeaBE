@@ -1,4 +1,4 @@
-function getIP(req) {
+export function getIP(req) {
     var ipAddress = (req.headers["X-Forwarded-For"] || req.headers["x-forwarded-for"] || '').split(',')[0] || req.client.remoteAddress || req.headers["X-Client-IP"] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress || req.info.remoteAddress
     if (ipAddress.substr(0, 7) === "::ffff:") {
         ipAddress = ipAddress.substr(7)
@@ -7,7 +7,7 @@ function getIP(req) {
 }
 
 
-function getClientIp() {
+export function getClientIp() {
     var
         // Local ip address that we're trying to calculate
         address
@@ -30,8 +30,3 @@ function getClientIp() {
     return address
 }
 
-
-module.exports = {
-    getIP,
-    getClientIp
-}

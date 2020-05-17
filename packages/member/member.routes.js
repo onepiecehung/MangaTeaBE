@@ -1,7 +1,7 @@
-const { Router } = require("express")
+import { Router } from 'express';
 const router = new Router();
-const MemberController = require("./member.controller")
-const { Authentication } = require("../../util/JWT/jwt")
+import * as MemberController from "./member.controller";
+import { Authentication } from "../../util/JWT/jwt";
 
 
 // authen
@@ -57,4 +57,4 @@ router.route("/remove-all-history")
         MemberController.removeAllMangaHistory
     )
 
-module.exports = router
+export default router;

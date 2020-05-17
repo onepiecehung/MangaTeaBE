@@ -99,6 +99,17 @@ export const MANGA = {
 
 
 
+
+/**
+ * 
+ * @param {*} Rating
+ * @param {*} callback 
+ */
+
+ export const RATING ={
+   RATING_ID:"MangaID and GroupTranslationID are not empty or cannot appear at the same time."
+ }
+
 /**
  * CORS
  */

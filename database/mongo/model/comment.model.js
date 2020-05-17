@@ -9,19 +9,24 @@ const autoIncrement = require('mongoose-plugin-autoinc');
 const CommentSchema = new Schema({
     chapterID: {
         type: mongoose.Schema.Types.Number,
-        ref: "Chapter"
+        ref: "Chapter",
+        index: true
     },
     mangaID: {
         type: mongoose.Schema.Types.Number,
-        ref: "Manga"
+        ref: "Manga",
+        index: true
     },
     groupTranslationID: {
         type: mongoose.Schema.Types.Number,
-        ref: "GroupTranslation"
+        ref: "GroupTranslation",
+        index: true
     },
     userID: {
         type: mongoose.Schema.Types.Number,
-        ref: "Users"
+        ref: "Users",
+        required: true,
+        index: true
     },
     commentContent: {
         type: String,

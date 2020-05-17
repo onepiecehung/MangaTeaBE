@@ -1,10 +1,12 @@
-﻿import createError from "http-errors";
-import express from "express";
-import cookieParser from "cookie-parser";
-import logger from "morgan";
-import router from "./routes/index"
-import api from "./api/api"
+﻿import cookieParser from "cookie-parser";
 import cors from "cors"
+import createError from "http-errors";
+import express from "express";
+import logger from "morgan";
+
+import api from "./api/api"
+import router from "./routes/index"
+
 import {
     SENTRY_DSN
 } from "./config/constants";
@@ -78,4 +80,4 @@ if (process.env.NODE_ENV === "production") {
 
 
 
-module.exports = app;
+export default app;

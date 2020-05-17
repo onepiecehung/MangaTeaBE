@@ -1,7 +1,5 @@
-﻿const express = require("express");
-
-
-const router = express.Router();
+﻿import { Router } from 'express';
+const router = new Router();
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -14,4 +12,4 @@ router.get('/', function (req, res) {
 });
 
 
-module.exports = router;
+export default router;
