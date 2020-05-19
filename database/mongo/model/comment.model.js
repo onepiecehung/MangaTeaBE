@@ -37,9 +37,19 @@ const CommentSchema = new Schema({
         type: Boolean,
         default: true
     },
+    isEdit: {
+        type: Boolean,
+        default: false
+    },
+    type: {
+        type: String,
+        index: true,
+        required: true
+    },
     reply: [{
         type: mongoose.Schema.Types.Number,
-        ref: 'Comment'
+        ref: 'Comment',
+        default: []
     }]
 }, {
     timestamps: true,

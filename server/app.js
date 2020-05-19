@@ -1,5 +1,5 @@
 ﻿import cookieParser from "cookie-parser";
-import cors from "cors"
+// import cors from "cors"
 import createError from "http-errors";
 import express from "express";
 import logger from "morgan";
@@ -10,9 +10,9 @@ import router from "./routes/index"
 import {
     SENTRY_DSN
 } from "./config/constants";
-import {
-    CORS
-} from "../globalConstant/index"
+// import {
+//     CORS
+// } from "../globalConstant/index"
 
 const {
     createQueue
@@ -40,7 +40,7 @@ app.use(Sentry.Handlers.requestHandler());
 // The error handler must be before any other error middleware
 app.use(Sentry.Handlers.errorHandler());
 
-app.use(cors(CORS))
+// app.use(cors(CORS))
 
 
 app.use(logger("dev"));

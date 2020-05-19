@@ -1,7 +1,6 @@
-import * as RatingRepository from "../repository/rating.repository";
 import * as logger from "../../util/logger";
 
-
+import * as RatingRepository from "../repository/rating.repository";
 
 export async function create(ratingInfo) {
     try {

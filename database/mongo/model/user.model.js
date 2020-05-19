@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
         ref: "Role",
         default: "MEMBER"
     },
-    sex: {
+    gender: {
         type: String,
         enum: ["MALE", "FEMALE", "OTHER"],
         default: "MALE"

@@ -10,6 +10,13 @@ export async function create(commentInfo) {
     return commentClass.save()
 }
 
+export async function save(commentInfo) {
+    return commentInfo.save()
+}
+
+export async function findByIdAndUpdate(id, update) {
+    return CommentModel.findByIdAndUpdate(id, update)
+}
 
 /**
  * 
@@ -61,4 +68,9 @@ export async function findByUserId(id) {
  */
 export async function findByStatus(status) {
     return CommentModel.find({ status: status })
+}
+
+
+export async function find(filters, skip, limit, sort) {
+    return CommentModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort)
 }

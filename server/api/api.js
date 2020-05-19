@@ -13,6 +13,7 @@ import RoleRouter from "../../packages/role/role.routes";
 import GenreRouter from "../../packages/genre/genre.routes";
 import MangaRouter from "../../packages/manga/manga.routes";
 import RatingRouter from "../../packages/rating/rating.routes";
+import CommentRouter from "../../packages/comment/comment.routes";
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -30,13 +31,14 @@ router.use(function timeLog(req, res, next) {
 
 
 router.use('/user', UserRouter);
-router.use("/member", MemberRouter)
-router.use("/country", CountryRouter)
-router.use("/status", StatusRouter)
-router.use("/role", RoleRouter)
-router.use("/genre", GenreRouter)
+router.use("/member", MemberRouter);
+router.use("/country", CountryRouter);
+router.use("/status", StatusRouter);
+router.use("/role", RoleRouter);
+router.use("/genre", GenreRouter);
 router.use('/manga', MangaRouter);
-router.use("/rating", RatingRouter)
+router.use("/rating", RatingRouter);
+router.use("/comment", CommentRouter)
 
 
 router.get('/', function (req, res) {

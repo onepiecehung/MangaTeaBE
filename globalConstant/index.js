@@ -106,9 +106,14 @@ export const MANGA = {
  * @param {*} callback 
  */
 
- export const RATING ={
-   RATING_ID:"MangaID and GroupTranslationID are not empty or cannot appear at the same time."
- }
+export const RATING = {
+  RATING_ID: "MangaID and GroupTranslationID are not empty or cannot appear at the same time."
+}
+
+
+export const COMMENT = {
+  COMMENT_NOT_FOUND: "Comment not found."
+}
 
 /**
  * CORS
