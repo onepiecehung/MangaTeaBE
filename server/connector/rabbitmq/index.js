@@ -8,6 +8,7 @@ async function createQueue() {
     try {
         await RABBIT.initChannel();
         RABBIT.initQueue(JOB_NAME.TEST_RABBIT, true);
+        RABBIT.initQueue(JOB_NAME.SEND_EMAIL_REG, true);
         logger.info('AMPQ queue is running...');
     } catch (error) {
         logger.error('AMPQ: createQueue initChannel error:');

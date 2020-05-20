@@ -61,6 +61,7 @@ export const CODE_ADMIN_ERROR = {
 export const JOB_NAME = {
   TEST_RABBIT: 'TEST_RABBIT',
   SEND_EMAIL: 'SEND_EMAIL',
+  SEND_EMAIL_REG: "SEND_EMAIL_REG",
   REGISTER_BONUS: 'REGISTER_BONUS',
   FORGOT_PASSWORD: "FORGOT_PASSWORD",
   RESEND_OTP: "RESEND_OTP"
@@ -98,7 +99,21 @@ export const MANGA = {
 }
 
 
-
+/**
+ * SendGird Config
+ * */
+export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || `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`;
+export const SENDER_EMAIL = process.env.SENDER_EMAIL || 'MangaTea <no-reply@mangatea.xyz>';
+export const TEMPLATE = {
+  REG: process.env.T_REG_MAIL || `d-89c3e2fe02774250b6579037b4c0a7ee`
+}
+export const FOOTER_EMAIL = {
+  nameCompany: process.env.NAME_COMPANY || `MangaTea Inc.`,
+  addressCompany: process.env.ADDRESS_COMPANY || `Ho Chi Minh City`,
+  phoneCompany: process.env.PHONE_COMPANY || `LOL`,
+  websiteCompany: process.env.WEBSITE_COMPANY || `MangaTea.xyz`,
+  supportCompany: process.env.SUPPORT_COMPANY || `MangaTea.xyz`
+};
 
 /**
  * 

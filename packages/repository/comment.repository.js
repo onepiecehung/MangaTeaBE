@@ -71,6 +71,10 @@ export async function findByStatus(status) {
 }
 
 
-export async function find(filters, skip, limit, sort) {
-    return CommentModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort)
+export async function find(filters, skip, limit, sort, populate) {
+    return (populate === true ? CommentModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort).populate("reply userID") : CommentModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort))
+}
+
+export async function countDocuments(filters) {
+    return CommentModel.countDocuments(filters.length ? { $and: filters } : {})
 }

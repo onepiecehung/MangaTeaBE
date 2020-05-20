@@ -1,8 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { USER_ERROR, CONFIG } from "../../globalConstant/index";
+import { USER_ERROR, CONFIG, JOB_NAME } from "../../globalConstant/index";
 import * as logger from "../../util/logger";
+import RABBIT from "../../server/connector/rabbitmq/init/index"
 
 import * as MemberRepository from "../repository/member.repository";
 import * as UserRepository from "../repository/user.repository";
@@ -24,6 +25,11 @@ export async function Register(userInfo) {
         }
         let data = await UserRepository.create(userInfo)
         await MemberRepository.create({ userID: data._id })
+        await RABBIT.sendDataToRabbit(JOB_NAME.SEND_EMAIL_REG, {
+            email: data.email,
+            fullName: (data.fullName) ? data.fullName : data.username,
+            urlActive: "Url is not available."
+        })
         return data
     } catch (error) {
         logger.error(error);

@@ -708,6 +708,142 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "create/update/reply comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5ODYwMDQ0LCJleHAiOjE1OTA0NjQ4NDR9.J0ea9OYeWsFRY5XduPbflG73vmO3bUPd-ZJb5saOzI4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "MANGA",
+									"description": "MANGA, CHAPTER, GROUPTRANSLATION",
+									"type": "text"
+								},
+								{
+									"key": "mangaID",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "chapterID",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "groupTranslationID",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "commentContent",
+									"value": "binh luan reply edited 2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/comment/?idu=2&idr",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"comment",
+								""
+							],
+							"query": [
+								{
+									"key": "idu",
+									"value": "2"
+								},
+								{
+									"key": "idr",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/comment/?populate=false",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"comment",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "20",
+									"disabled": true
+								},
+								{
+									"key": "chapterID",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "mangaID",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "groupTranslationID",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "userID",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "MANGA",
+									"disabled": true
+								},
+								{
+									"key": "isEdit",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "populate",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

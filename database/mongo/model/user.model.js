@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
     postalCode: { type: String },
     point: { type: Number, required: true, default: 0 },
     verifyPhone: { type: Boolean, default: false },
-    verifyEmail: { type: Boolean, default: true },
+    verifyEmail: { type: Boolean, default: false },
     online: { type: Boolean, default: false },
     ip: { type: String },
     loginCount: { type: Number, default: 0 },

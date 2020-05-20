@@ -1,3 +1,7 @@
+require('@babel/register');
+require('@babel/polyfill');
+require("colors")
+require("../../database/mongo/init/index")
 const {
     createQueue, createWorkers
 } = require('../connector/rabbitmq/index');
@@ -12,5 +16,6 @@ createQueue().then(() => {
             testAMQP();
     }, 5000);
 }).catch(error => {
-   console.log('Error init rabbit : ', error);
+    console.log('Error init rabbit : ', error);
 });
+

@@ -1,8 +1,8 @@
+import { COMMENT } from "../../globalConstant/index"
 import * as logger from "../../util/logger";
 
 import * as CommentRepository from "../repository/comment.repository";
-import { COMMENT } from "../../globalConstant/index"
-
+import { parseZone } from "moment";
 
 export async function createAndUpdate(body, query) {
     try {
@@ -106,8 +106,34 @@ export async function createAndUpdate(body, query) {
 
 export async function find(query) {
     try {
-        let data = await CommentRepository.find();
-        return data;
+        let filters = [];
+        if (query.mangaID) {
+            filters.push({ mangaID: parseInt(query.mangaID) })
+        }
+        if (query.chapterID) {
+            filters.push({ chapterID: parseInt(query.chapterID) })
+        }
+        if (query.groupTranslationID) {
+            filters.push({ groupTranslationID: parseInt(query.groupTranslationID) })
+        }
+        if (query.userID) {
+            filters.push({ userID: parseInt(query.userID) })
+        }
+        if (query.type) {
+            filters.push({ type: query.type })
+        }
+        if (query.isEdit) {
+            filters.push({ isEdit: query.isEdit })
+        }
+        const sort = { createAt: -1 };
+        const skip = parseInt(query.skip) || 0;
+        const limit = parseInt(query.limit) || 20;
+        const populate = query.populate || true
+        let [comments, totals] = await Promise.all([
+            CommentRepository.find(filters, skip, limit, sort, populate),
+            CommentRepository.countDocuments(filters)
+        ])
+        return { comments, totals }
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);
