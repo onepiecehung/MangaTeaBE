@@ -44,15 +44,15 @@ export async function AuthenticationPermission(req, res, next) {
             if (error) {
                 return response.error(res, req, error, 403)
             } else {
-                req.user = await UserRepository.findById(decoded._id)
-                if (user.role === "ADMIN" || user.role === "ROOT" || user.permission.includes(777) === true) {
+                req.user = await UserRepository.findById(decoded._id);
+                if (req.user.role === "ADMIN" || req.user.role === "ROOT" || req.user.permission.includes(777) === true) {
                     next()
                 } else {
-                    return response.error(res, req, CODE.PERMISSION_DENIED, 403)
+                    return response.error(res, req, CODE.PERMISSION_DENIED, 403);
                 }
             }
         })
     } else {
-        return response.error(res, req, CODE.TOKEN_HAS_EXPIRED, 403)
+        return response.error(res, req, CODE.TOKEN_HAS_EXPIRED, 403);
     }
 }

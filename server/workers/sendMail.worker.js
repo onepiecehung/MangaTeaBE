@@ -17,8 +17,8 @@ RABBIT.consumeData(JOB_NAME.SEND_EMAIL_REG, async (msg, channel) => {
         }
         // logger.info(userInfo)
         await SendGrid.sendEmail(message.email, TEMPLATE.REG, message);
-        userInfo.set("verifyEmail", true);
-        await UserRepository.save(userInfo);
+        // userInfo.set("verifyEmail", true);
+        // await UserRepository.save(userInfo);
         logger.info(`send email register success to: ${message.fullName}`);
         channel.ack(msg);
         return true;

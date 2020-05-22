@@ -130,6 +130,12 @@ export const COMMENT = {
   COMMENT_NOT_FOUND: "Comment not found."
 }
 
+
+export const APPELLATION = {
+  APPELLATION_ID_NOT_FOUND: "Appellation ID not found.",
+  APPELLATION_IS_EXIST: "Appellation is exist."
+}
+
 /**
  * CORS
  */

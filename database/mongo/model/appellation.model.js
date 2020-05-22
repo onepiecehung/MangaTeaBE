@@ -5,7 +5,9 @@ const autoIncrement = require('mongoose-plugin-autoinc');
 const AppellationSchema = new Schema({
     name: { type: String, required: true },
     code: { type: Number, required: true },
-    type: { type: Number, required: true },
+    type: { type: String, required: true },
+    createBy: { type: mongoose.Schema.Types.Number, ref: "Users" },
+    updateBy: { type: mongoose.Schema.Types.Number, ref: "Users" },
     detail: { type: String, required: true },
 }, {
     timestamps: true,

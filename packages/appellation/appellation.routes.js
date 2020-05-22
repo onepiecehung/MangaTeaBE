@@ -1,10 +1,19 @@
-const { Router } = require("express")
+import { Router } from 'express';
 const router = new Router();
 
-const { AuthenticationPermission } = require("../../util/JWT/jwt")
+import { AuthenticationPermission } from "../../util/JWT/jwt";
+import * as AppellationController from "./appellation.controller";
 
+router.route("/")
+    .post(
+        AuthenticationPermission,
+        AppellationController.createAndUpdate
+    )
 
-router.router("/create")
-.post(
-    
-)
+router.route("/")
+    .get(
+        AuthenticationPermission,
+        AppellationController.find
+    )
+
+export default router;
