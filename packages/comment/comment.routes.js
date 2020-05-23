@@ -10,8 +10,6 @@ router.route("/")
         Authentication,
         CommentController.createAndUpdate
     )
-
-router.route("/")
     .get(
         CommentController.find
     )

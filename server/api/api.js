@@ -15,6 +15,8 @@ import MangaRouter from "../../packages/manga/manga.routes";
 import RatingRouter from "../../packages/rating/rating.routes";
 import CommentRouter from "../../packages/comment/comment.routes";
 import AppellationRouter from "../../packages/appellation/appellation.routes";
+import AuthorRouter from "../../packages/author/author.routes";
+
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -41,7 +43,7 @@ router.use('/manga', MangaRouter);
 router.use("/rating", RatingRouter);
 router.use("/comment", CommentRouter);
 router.use("/appellation", AppellationRouter);
-
+router.use("/author", AuthorRouter);
 
 router.get('/', function (req, res) {
     res.send('Welcome to our API!');

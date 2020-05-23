@@ -9,8 +9,6 @@ router.route("/")
         AuthenticationPermission,
         AppellationController.createAndUpdate
     )
-
-router.route("/")
     .get(
         AuthenticationPermission,
         AppellationController.find

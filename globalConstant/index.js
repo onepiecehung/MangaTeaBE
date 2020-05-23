@@ -136,6 +136,11 @@ export const APPELLATION = {
   APPELLATION_IS_EXIST: "Appellation is exist."
 }
 
+export const AUTHOR = {
+  AUTHOR_ID_NOT_FOUND: "Author ID not found.",
+  AUTHOR_IS_EXIST: "Author is exist."
+}
+
 /**
  * CORS
  */

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./server/bin/www.js",
-    "start-all": "concurrently \"nodemon ./server/bin/www.js\" \"node ./server/workers/start.worker.js\"",
+    "start-all": "concurrently \"node ./server/workers/start.worker.js\" \"nodemon ./server/bin/www.js\"",
     "start-pm2": "pm2 startOrReload process.deploy.json",
     "worker-rabbitmq": "node ./server/workers/start.worker.js",
     "worker-crawl-mangadex": "node ./server/workers/crawlManga.worker.js",

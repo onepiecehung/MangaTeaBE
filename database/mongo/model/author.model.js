@@ -6,22 +6,27 @@ const autoIncrement = require('mongoose-plugin-autoinc');
 // const MangaModel = require("./manga.model")
 
 const Author_ArtistSchema = new Schema({
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    avatar: { type: String, default: "https://i.imgur.com/pCH9w6H.png" },
     manga: [{
         type: mongoose.Schema.Types.Number,
-        ref: "Manga"
+        ref: "Manga",
+        default: []
     }],
     role: {
         type: mongoose.Schema.Types.String,
-        ref: "Role"
+        ref: "Role",
+        default: "AUTHOR"
     },
-    country: [{
-        type: mongoose.Schema.Types.Number,
-        ref: "Country"
-    }],
-    sex: {
+    country: {
+        type: mongoose.Schema.Types.String,
+        ref: "Country",
+        default: "Japan"
+    },
+    gender: {
         type: String,
-        enum: ["Male", "Female", "Other"]
+        enum: ["MALE", "FEMALE", "OTHER"],
+        default: "MALE"
     },
     about: {
         type: String,
@@ -32,7 +37,9 @@ const Author_ArtistSchema = new Schema({
     },
     social: {
         type: String
-    }
+    },
+    createBy: { type: mongoose.Schema.Types.Number, ref: "Users" },
+    updateBy: { type: mongoose.Schema.Types.Number, ref: "Users" },
 }, {
     timestamps: true,
 })
