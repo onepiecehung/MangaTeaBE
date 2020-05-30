@@ -10,42 +10,34 @@ var MemberSchema = new Schema({
         type: mongoose.Schema.Types.Number,
         ref: "Users",
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     chapterUpload: [{
-        id_chapter: {
-            type: mongoose.Schema.Types.Number,
-            ref: "Chapter"
-        }
+        type: mongoose.Schema.Types.Number,
+        ref: "Chapter",
+        default: []
+    }],
+    mangaUpload: [{
+        type: mongoose.Schema.Types.Number,
+        ref: "Manga",
+        default: []
     }],
     mangaSaved: [{
-        id_manga: {
-            type: mongoose.Schema.Types.Number,
-            ref: "Manga"
-        },
-        timeSavedAt: {
-            type: Date,
-            default: Date.now()
-        }
+        type: mongoose.Schema.Types.Number,
+        ref: "Manga",
+        default: []
     }],
-    historyRead: [{
-        id_chapter: {
-            type: mongoose.Schema.Types.Number,
-            ref: "Manga"
-        },
-        timeReadAt: {
-            type: Date,
-            default: Date.now()
-        }
+    mangaFavorite: [{
+        type: mongoose.Schema.Types.Number,
+        ref: "Manga",
+        default: []
     }],
-    about: {
-        type: String,
-        default: "Unknown"
-    },
-    linkSocail: [{
-        type: String,
-        default: "Unknown"
-    }]
+    historyReading: [{
+        type: mongoose.Schema.Types.Number,
+        ref: "Manga",
+        default: []
+    }],
 }, {
     timestamps: true,
 
@@ -57,7 +49,7 @@ var MemberSchema = new Schema({
 
 MemberSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoError' && error.code === 11000)
-        next(new Error('This doccument is already exists, please try again'));
+        next(new Error('This document is already exists, please try again'));
     else next(error);
 });
 

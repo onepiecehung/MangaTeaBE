@@ -1,10 +1,7 @@
-const response = require("../../util/response.json")
-const StatusValidator = require("./status.validatation")
-const StatusService = require("./status.service")
-const { STATUS } = require("../../database/mongo/data/status.data")
-
-
-
+import { STATUS } from "../../database/mongo/data/status.data";
+import * as response from "../../util/response.json";
+import * as StatusService from "./status.service";
+import * as StatusValidator from "./status.validation";
 
 export async function create(req, res) {
     try {

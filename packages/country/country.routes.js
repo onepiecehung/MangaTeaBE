@@ -1,6 +1,6 @@
-const { Router } = require("express")
+import { Router } from 'express';
 const router = new Router();
-const CountryController = require("./country.controller")
+import * as CountryController from "./country.controller";
 
 // authen
 // multer
@@ -8,10 +8,10 @@ const CountryController = require("./country.controller")
 // service
 
 
-router.route('/all') 
+router.route('/all')
     .post(
         CountryController.addAllCountry
     );
 
 
-module.exports = router
+export default router

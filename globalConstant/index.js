@@ -61,12 +61,15 @@ export const CODE_ADMIN_ERROR = {
 export const JOB_NAME = {
   TEST_RABBIT: 'TEST_RABBIT',
   SEND_EMAIL: 'SEND_EMAIL',
+  SEND_EMAIL_REG: "SEND_EMAIL_REG",
   REGISTER_BONUS: 'REGISTER_BONUS',
   FORGOT_PASSWORD: "FORGOT_PASSWORD",
   RESEND_OTP: "RESEND_OTP"
 };
 
-
+/**
+ * JWT
+ */
 export const CONFIG = {
   jwt_expiration: 60 * 60 * 24 * 7,
   jwt_encryption: `hkashd3478asfju4t9349934fnsf98@434543sdfslf`
@@ -74,14 +77,73 @@ export const CONFIG = {
 
 
 export const USER_ERROR = {
-  EMAIL_HAS_EXISTS: "EMAIL_HAS_EXISTS",
-  EMAIL_NOT_EXISTS: "EMAIL_NOT_EXISTS",
-  USERNAME_HAS_EXISTS: "USERNAME_HAS_EXISTS",
-  PASSWORD_INVALID: "PASSWORD_INVALID"
+  EMAIL_HAS_EXISTS: "EMAIL HAS EXISTS",
+  EMAIL_NOT_EXISTS: "EMAIL NOT EXISTS",
+  USERNAME_HAS_EXISTS: "USERNAME HAS EXISTS",
+  PASSWORD_INVALID: "PASSWORD INVALID",
+  USER_NOT_FOUND: "USER NOT FOUND"
 }
 
 
 
+/**
+ * 
+ * @param {*} Manga
+ * @param {*} callback 
+ */
+export const MANGA = {
+  MANGA_SAVED_EXIST: "MANGA SAVED EXIST",
+  MANGA_NOT_EXISTS: "MANGA NOT EXISTS",
+  MANGA_NOT_FOUND: "MANGA NOT FOUND",
+  MANGA_MISSING_ID: "MISSING ID MANGA"
+}
+
+
+/**
+ * SendGird Config
+ * */
+export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || `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`;
+export const SENDER_EMAIL = process.env.SENDER_EMAIL || 'MangaTea <no-reply@mangatea.xyz>';
+export const TEMPLATE = {
+  REG: process.env.T_REG_MAIL || `d-89c3e2fe02774250b6579037b4c0a7ee`
+}
+export const FOOTER_EMAIL = {
+  nameCompany: process.env.NAME_COMPANY || `MangaTea Inc.`,
+  addressCompany: process.env.ADDRESS_COMPANY || `Ho Chi Minh City`,
+  phoneCompany: process.env.PHONE_COMPANY || `LOL`,
+  websiteCompany: process.env.WEBSITE_COMPANY || `MangaTea.xyz`,
+  supportCompany: process.env.SUPPORT_COMPANY || `MangaTea.xyz`
+};
+
+/**
+ * 
+ * @param {*} Rating
+ * @param {*} callback 
+ */
+
+export const RATING = {
+  RATING_ID: "MangaID and GroupTranslationID are not empty or cannot appear at the same time."
+}
+
+
+export const COMMENT = {
+  COMMENT_NOT_FOUND: "Comment not found."
+}
+
+
+export const APPELLATION = {
+  APPELLATION_ID_NOT_FOUND: "Appellation ID not found.",
+  APPELLATION_IS_EXIST: "Appellation is exist."
+}
+
+export const AUTHOR = {
+  AUTHOR_ID_NOT_FOUND: "Author ID not found.",
+  AUTHOR_IS_EXIST: "Author is exist."
+}
+
+/**
+ * CORS
+ */
 export function ALLOW_URL(origin, callback) {
   let whitelist = process.env.SERVER_ORIGIN || "*"
   if (whitelist.indexOf(origin) !== -1) {
@@ -92,9 +154,7 @@ export function ALLOW_URL(origin, callback) {
 }
 
 
-/**
- * CORS
- */
+
 export const CORS = {
   // Find and fill your options here: https://github.com/expressjs/cors#configuration-options
   origin: "*" || ALLOW_URL,

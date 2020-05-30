@@ -13,7 +13,7 @@ const StatusSchema = new Schema({
 
 StatusSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoError' && error.code === 11000)
-        next(new Error('This doccument is already exists, please try again'));
+        next(new Error('This document is already exists, please try again'));
     else next(error);
 });
 

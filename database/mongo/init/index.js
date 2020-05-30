@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const {
+import mongoose from "mongoose";
+import {
     SERVER, DATABASE, API_PATH
-} = require("../../../server/config/constants");
+} from "../../../server/config/constants";
 // TODO setup database
 mongoose.Promise = global.Promise;
 

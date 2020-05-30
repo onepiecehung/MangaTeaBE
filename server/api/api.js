@@ -1,15 +1,22 @@
-const express = require("express");
-const router = express.Router();
-const swaggerSpec = require('../bin/docs');
-const swaggerUI = require("swagger-ui-express");
-const { detect } = require('detect-browser');
-const { getIP, getClientIp } = require("../../util/help")
-const UserRouter = require("../../packages/user/user.routes")
-const MemberRouter = require("../../packages/menber/member.routes")
-const CountryRouter = require("../../packages/country/country.routes")
-const StatusRouter = require("../../packages/status/status.routes")
-const RoleRouter = require("../../packages/role/role.routes")
-const GenreRouter = require("../../packages/genre/genre.routes")
+import { Router } from 'express';
+
+const router = new Router();
+import swaggerSpec from '../bin/docs';
+import swaggerUI from "swagger-ui-express";
+import { detect } from 'detect-browser';
+import { getIP, getClientIp } from "../../util/help";
+import UserRouter from "../../packages/user/user.routes";
+import MemberRouter from "../../packages/member/member.routes";
+import CountryRouter from "../../packages/country/country.routes";
+import StatusRouter from "../../packages/status/status.routes";
+import RoleRouter from "../../packages/role/role.routes";
+import GenreRouter from "../../packages/genre/genre.routes";
+import MangaRouter from "../../packages/manga/manga.routes";
+import RatingRouter from "../../packages/rating/rating.routes";
+import CommentRouter from "../../packages/comment/comment.routes";
+import AppellationRouter from "../../packages/appellation/appellation.routes";
+import AuthorRouter from "../../packages/author/author.routes";
+
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -27,13 +34,16 @@ router.use(function timeLog(req, res, next) {
 
 
 router.use('/user', UserRouter);
-router.use("/member", MemberRouter)
-router.use("/country", CountryRouter)
-router.use("/status", StatusRouter)
-router.use("/role", RoleRouter)
-router.use("/genre", GenreRouter)
-// router.use('/genre', genreRouter);
-
+router.use("/member", MemberRouter);
+router.use("/country", CountryRouter);
+router.use("/status", StatusRouter);
+router.use("/role", RoleRouter);
+router.use("/genre", GenreRouter);
+router.use('/manga', MangaRouter);
+router.use("/rating", RatingRouter);
+router.use("/comment", CommentRouter);
+router.use("/appellation", AppellationRouter);
+router.use("/author", AuthorRouter);
 
 router.get('/', function (req, res) {
     res.send('Welcome to our API!');
@@ -45,4 +55,4 @@ router.use('/documents', swaggerUI.serve);
 router.get('/documents', swaggerUI.setup(swaggerSpec));
 
 
-module.exports = router;
+export default router;

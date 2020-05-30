@@ -1,6 +1,7 @@
-const StatusRepository = require("../repository/status.repository")
-const logger = require("../../util/logger")
-const { CODE_ERROR } = require("../../globalConstant/index")
+import { CODE_ERROR } from "../../globalConstant/index";
+import * as logger from "../../util/logger";
+
+import * as StatusRepository from "../repository/status.repository";
 
 export async function create(statusInfo) {
     try {

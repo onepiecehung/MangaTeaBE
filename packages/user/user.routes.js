@@ -1,7 +1,8 @@
-const { Router } = require("express")
+import { Router } from 'express';
 const router = new Router();
-const UserController = require("./user.controller")
-const { Authentication } = require("../../util/JWT/jwt")
+import * as UserController from "./user.controller";
+import { Authentication } from "../../util/JWT/jwt";
+import { upload } from "../middleware/upload.multer";
 // authen
 // multer
 // validation
@@ -28,4 +29,24 @@ router.route("/:id")
     .get(
         UserController.getUserById
     );
-module.exports = router
+
+router.route("/update-profile")
+    .put(
+        Authentication,
+        UserController.updateProfile
+    )
+
+router.route("/change-password")
+    .put(
+        Authentication,
+        UserController.changePassword
+    )
+
+router.route("/upload-avatar")
+    .post(
+        Authentication,
+        upload.single("image"),
+        UserController.uploadAvatar
+    )
+
+export default router;

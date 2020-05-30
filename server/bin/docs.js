@@ -1,6 +1,6 @@
-const swaggerJSDoc = require('swagger-jsdoc');
-const CONSTANTS = require("../config/constants");
+import swaggerJSDoc from 'swagger-jsdoc';
 
+import { SERVER } from "../config/constants";
 
 const swaggerDefinition = {
     info: {
@@ -15,7 +15,7 @@ const swaggerDefinition = {
             url: "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    host: `api.manga.net:${CONSTANTS.PORT}`,
+    host: `api.manga.net:${SERVER.PORT}`,
     // bashPath: "/v1",
     produces: ['application/json'],
     consumes: ['application/json'],
@@ -38,7 +38,5 @@ const options = {
     ],
 };
 
-const swaggerSpec = swaggerJSDoc(options);
-
-module.exports = swaggerSpec;
+export const swaggerSpec = swaggerJSDoc(options);
 

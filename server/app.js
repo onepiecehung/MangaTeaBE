@@ -1,17 +1,18 @@
-﻿import createError from "http-errors";
+﻿import cookieParser from "cookie-parser";
+// import cors from "cors"
+import createError from "http-errors";
 import express from "express";
-import cookieParser from "cookie-parser";
 import logger from "morgan";
-import router from "./routes/index"
+
 import api from "./api/api"
-import subdomain from 'express-subdomain';// TODO create subdomain
-import cors from "cors"
+import router from "./routes/index"
+
 import {
     SENTRY_DSN
 } from "./config/constants";
-import {
-    CORS
-} from "../globalConstant/index"
+// import {
+//     CORS
+// } from "../globalConstant/index"
 
 const {
     createQueue
@@ -39,8 +40,13 @@ app.use(Sentry.Handlers.requestHandler());
 // The error handler must be before any other error middleware
 app.use(Sentry.Handlers.errorHandler());
 
-app.use(cors(CORS))
+// app.use(cors(CORS))
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -51,7 +57,7 @@ app.use(cookieParser());
 
 
 // TODO setup subdomain, router
-app.use(subdomain('api', api));
+app.use('/v1', api);
 app.use("/", router)
 
 
@@ -79,4 +85,4 @@ if (process.env.NODE_ENV === "production") {
 
 
 
-module.exports = app;
+export default app;

@@ -9,19 +9,24 @@ const autoIncrement = require('mongoose-plugin-autoinc');
 const CommentSchema = new Schema({
     chapterID: {
         type: mongoose.Schema.Types.Number,
-        ref: "Chapter"
+        ref: "Chapter",
+        index: true
     },
     mangaID: {
         type: mongoose.Schema.Types.Number,
-        ref: "Manga"
+        ref: "Manga",
+        index: true
     },
     groupTranslationID: {
         type: mongoose.Schema.Types.Number,
-        ref: "GroupTranslation"
+        ref: "GroupTranslation",
+        index: true
     },
     userID: {
         type: mongoose.Schema.Types.Number,
-        ref: "Users"
+        ref: "Users",
+        required: true,
+        index: true
     },
     commentContent: {
         type: String,
@@ -32,9 +37,19 @@ const CommentSchema = new Schema({
         type: Boolean,
         default: true
     },
+    isEdit: {
+        type: Boolean,
+        default: false
+    },
+    type: {
+        type: String,
+        index: true,
+        required: true
+    },
     reply: [{
         type: mongoose.Schema.Types.Number,
-        ref: 'Comment'
+        ref: 'Comment',
+        default: []
     }]
 }, {
     timestamps: true,
@@ -45,7 +60,7 @@ const CommentSchema = new Schema({
 
 CommentSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoError' && error.code === 11000)
-        next(new Error('This doccument is already exists, please try again'));
+        next(new Error('This document is already exists, please try again'));
     else next(error);
 });
 

@@ -6,33 +6,40 @@ const autoIncrement = require('mongoose-plugin-autoinc');
 // const MangaModel = require("./manga.model")
 
 const Author_ArtistSchema = new Schema({
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    avatar: { type: String, default: "https://i.imgur.com/pCH9w6H.png" },
     manga: [{
         type: mongoose.Schema.Types.Number,
-        ref: "Manga"
+        ref: "Manga",
+        default: []
     }],
     role: {
         type: mongoose.Schema.Types.String,
-        ref: "Role"
+        ref: "Role",
+        default: "AUTHOR"
     },
-    country: [{
-        type: mongoose.Schema.Types.Number,
-        ref: "Country"
-    }],
-    sex: {
+    country: {
+        type: mongoose.Schema.Types.String,
+        ref: "Country",
+        default: "Japan"
+    },
+    gender: {
         type: String,
-        enum: ["Male", "Female", "Other"]
+        enum: ["MALE", "FEMALE", "OTHER"],
+        default: "MALE"
     },
     about: {
         type: String,
         default: "Write some about author/artist"
     },
-    brithday: {
+    birthday: {
         type: Date
     },
-    socail: {
+    social: {
         type: String
-    }
+    },
+    createBy: { type: mongoose.Schema.Types.Number, ref: "Users" },
+    updateBy: { type: mongoose.Schema.Types.Number, ref: "Users" },
 }, {
     timestamps: true,
 })
@@ -42,7 +49,7 @@ const Author_ArtistSchema = new Schema({
 
 Author_ArtistSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoError' && error.code === 11000)
-        next(new Error('This doccument is already exists, please try again'));
+        next(new Error('This document is already exists, please try again'));
     else next(error);
 });
 

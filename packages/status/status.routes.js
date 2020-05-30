@@ -1,6 +1,7 @@
-const { Router } = require("express")
+import { Router } from 'express';
+
 const router = new Router();
-const StatusController = require("./status.controller")
+import * as StatusController from "./status.controller";
 
 
 
@@ -16,4 +17,4 @@ router.route("/all")
         StatusController.autoCreateAllStatus
     )
 
-module.exports = router
+export default router;

@@ -1,9 +1,7 @@
 const mongoose = require("mongoose")
+
 const Schema = mongoose.Schema;
 const autoIncrement = require('mongoose-plugin-autoinc');
-// const UserModel = require("./user.model")
-// const MangaModel = require("./manga.model")
-// const GroupTranslationModel = require("./groupTranslation.model")
 
 const RatingSchema = new Schema({
     mangaID: {
@@ -27,6 +25,13 @@ const RatingSchema = new Schema({
     },
     rateContent: {
         type: String
+    },
+    typeRating: {
+        type: String
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
 }, {
     timestamps: true,
@@ -39,7 +44,7 @@ const RatingSchema = new Schema({
 
 RatingSchema.post('save', function (error, doc, next) {
     if (error.name === 'MongoError' && error.code === 11000)
-        next(new Error('This doccument is already exists, please try again'));
+        next(new Error('This document is already exists, please try again'));
     else next(error);
 });
 

@@ -22,8 +22,8 @@ export async function findById(id) {
  * 
  * @param {Number} id 
  */
-export async function findByUserOwerId(id) {
-    return GroupTranslationModel.find({ userOwerID: id })
+export async function findByUserOwnerId(id) {
+    return GroupTranslationModel.find({ userOwnerID: id })
 }
 
 /**

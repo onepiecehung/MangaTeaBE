@@ -1,6 +1,6 @@
 import SendGridMail from '@sendgrid/mail';
-import logger from "../../server/api/logger";
-import { SENDGRID_API_KEY, SENDER_EMAIL , FOOTER_EMAIL} from '../../configs';
+import logger from "../logger";
+import { SENDGRID_API_KEY, SENDER_EMAIL, FOOTER_EMAIL } from '../../globalConstant/index';
 
 SendGridMail.setApiKey(SENDGRID_API_KEY);
 /**
