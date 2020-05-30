@@ -157,7 +157,10 @@
 									"value": "123456",
 									"type": "text"
 								}
-							]
+							],
+							"options": {
+								"urlencoded": {}
+							}
 						},
 						"url": {
 							"raw": "{{API_HOST}}/user/change-password",
@@ -191,7 +194,10 @@
 									"type": "file",
 									"src": "/E:/79335279_1375587515981142_4250371353485508608_n.jpg"
 								}
-							]
+							],
+							"options": {
+								"formdata": {}
+							}
 						},
 						"url": {
 							"raw": "{{API_HOST}}/user/upload-avatar",
@@ -441,7 +447,7 @@
 			"name": "Country",
 			"item": [
 				{
-					"name": "Auto create country",
+					"name": "[Don't using] Auto create country",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -619,7 +625,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_HOST}}/manga?skip=0&limit=1",
+							"raw": "{{API_HOST}}/manga?skip=&limit=&sort&fromCreatedAt&toCreatedAt&id=&authorName=Kei Kanai&isAdult=true&country=JP&tags&format&status",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -629,13 +635,73 @@
 							"query": [
 								{
 									"key": "skip",
-									"value": "0",
+									"value": "",
 									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
 								},
 								{
 									"key": "limit",
-									"value": "1",
+									"value": "",
 									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
+								},
+								{
+									"key": "sort",
+									"value": null,
+									"description": "object (nên bỏ trống)"
+								},
+								{
+									"key": "fromCreatedAt",
+									"value": null,
+									"description": "time"
+								},
+								{
+									"key": "toCreatedAt",
+									"value": null,
+									"description": "time"
+								},
+								{
+									"key": "genre",
+									"value": "Mystery",
+									"description": "[\"Drama\",\"Mystery\"] Array or String (truyền string thì 1 biến, truyền nhiều biến lên là array)",
+									"disabled": true
+								},
+								{
+									"key": "genre",
+									"value": "Drama",
+									"description": "[\"Drama\",\"Mystery\"] Array or String",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "get manga by id (có id này mọi thứ còn lại là vô nghĩa)"
+								},
+								{
+									"key": "authorName",
+									"value": "Kei Kanai"
+								},
+								{
+									"key": "isAdult",
+									"value": "true"
+								},
+								{
+									"key": "country",
+									"value": "JP",
+									"description": "viết tắt tên quốc gia (JP,KR,CN, chủ yếu truyện từ 3 qg này)"
+								},
+								{
+									"key": "tags",
+									"value": null,
+									"description": "cái này sau này sẽ bổ xung dữ liệu để search"
+								},
+								{
+									"key": "format",
+									"value": null,
+									"description": "MANGA, ONE_SHOT, NOVEL"
+								},
+								{
+									"key": "status",
+									"value": null,
+									"description": "FINISHED, RELEASING"
 								}
 							]
 						}
@@ -691,7 +757,10 @@
 									"value": "false",
 									"type": "text"
 								}
-							]
+							],
+							"options": {
+								"urlencoded": {}
+							}
 						},
 						"url": {
 							"raw": "{{API_HOST}}/rating/",
@@ -753,7 +822,10 @@
 									"value": "binh luan reply edited 2",
 									"type": "text"
 								}
-							]
+							],
+							"options": {
+								"urlencoded": {}
+							}
 						},
 						"url": {
 							"raw": "{{API_HOST}}/comment/?idu=2&idr",
@@ -836,6 +908,134 @@
 								{
 									"key": "populate",
 									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Appellation",
+			"item": [
+				{
+					"name": "create/update appelation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "testpppppppppppp",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "MANGA",
+									"description": "[\"CHAPTER\", \"MANGA\", \"GROUPTRANSLATION\", \"AUTHOR\", \"USER\"]",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "MANGA",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/appellation/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"appellation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/appellation/?name=test&code&type&createBy&updateBy&detail",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"appellation",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "test"
+								},
+								{
+									"key": "code",
+									"value": null
+								},
+								{
+									"key": "type",
+									"value": null,
+									"description": "[\"CHAPTER\", \"MANGA\", \"GROUPTRANSLATION\", \"AUTHOR\", \"USER\"]"
+								},
+								{
+									"key": "createBy",
+									"value": null,
+									"description": "userID"
+								},
+								{
+									"key": "updateBy",
+									"value": null,
+									"description": "userID"
+								},
+								{
+									"key": "detail",
+									"value": null
 								}
 							]
 						}
