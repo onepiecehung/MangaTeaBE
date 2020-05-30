@@ -12,7 +12,8 @@ export async function find(keyword) {
             isAdult,
             country,
             tags,
-            format
+            format,
+            status
         } = keyword
         if (id) {
             let data = await MangaRepository.findById(id);
