@@ -128,7 +128,8 @@ const MangaSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    totalChapter: { type: Number, default: 0 }
+    totalChapter: { type: Number, default: 0 },
+    view: { type: Number, default: 0 }
 }, {
     timestamps: true,
 })

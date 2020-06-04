@@ -56,3 +56,21 @@ export async function AuthenticationPermission(req, res, next) {
         return response.error(res, req, CODE.TOKEN_HAS_EXPIRED, 403);
     }
 }
+
+export async function AuthenticationChecking(req, res, next) {
+    let token = getToken(req.headers)
+    if (token) {
+        jwt.verify(token, CONFIG.jwt_encryption, async (error, decoded) => {
+            if (error) {
+                req.user = false;
+                next();
+            } else {
+                req.user = await UserRepository.findById(decoded._id);
+                next();
+            }
+        })
+    } else {
+        req.user = false;
+        next();
+    }
+}

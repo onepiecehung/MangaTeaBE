@@ -1,7 +1,4 @@
 const mongoose = require("mongoose");
-const {
-    SERVER, DATABASE, API_PATH
-} = require("../../../server/config/constants");
 // TODO setup database
 mongoose.Promise = global.Promise;
 
@@ -14,6 +11,4 @@ mongoose
     .then(
         () => {
             console.log(`[ Database =>] Connection to the database successful. mongodb://localhost:27017/truyentranh`)
-        },
-        err => console.log(`[ Database =>] The connection to the database failed: ${err}. = ${DATABASE.URL_DB ? DATABASE.URL_DB : DATABASE.URL_DB_LOCAL}`.red)
-    );
+        });

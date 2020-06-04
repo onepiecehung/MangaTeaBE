@@ -8,7 +8,9 @@
     "start-pm2": "pm2 startOrReload process.deploy.json",
     "worker-rabbitmq": "node ./server/workers/start.worker.js",
     "worker-crawl-mangadex": "node ./server/workers/crawlManga.worker.js",
-    "workerCrawlAniList": "nodemon ./server/workers/crawlMangaAniList.worker.js"
+    "workerCrawlAniList": "nodemon ./server/workers/crawlMangaAniList.worker.js",
+    "createUser": "nodemon ./server/workers/users/createUser.worker.js",
+    "createSampleData": "nodemon ./server/workers/users/createDataSample.js"
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",
@@ -49,6 +51,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.10.1",
     "anilist-node": "^1.4.0",
+    "babel-eslint": "^10.1.0",
     "colors": "^1.4.0",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",

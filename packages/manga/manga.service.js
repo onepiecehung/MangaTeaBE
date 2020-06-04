@@ -18,7 +18,6 @@ export async function find(keyword) {
         if (id) {
             let data = await MangaRepository.findById(id);
             return data;
-
         }
         const sort = keyword.sort || { createdAt: -1 }
         const limit = parseInt(keyword.limit) || 20
