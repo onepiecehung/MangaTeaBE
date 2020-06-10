@@ -141,6 +141,13 @@ export const AUTHOR = {
   AUTHOR_IS_EXIST: "Author is exist."
 }
 
+
+export const GROUP_TRANSLATION = {
+  GROUP_TRANSLATION_IS_NOT_FOUND: "Group translation is not found.",
+  GROUP_TRANSLATION_IS_EXIST: "Group translation is exist.",
+  GROUP_TRANSLATION_IS_NOT_EXIST: "Group translation is not exist.",
+  GROUP_TRANSLATION_permission_denied: "You do not have permission to update.",
+}
 /**
  * CORS
  */

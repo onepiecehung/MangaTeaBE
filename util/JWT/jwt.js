@@ -74,3 +74,23 @@ export async function AuthenticationChecking(req, res, next) {
         next();
     }
 }
+
+export async function AuthenticationCheckPoint(req, res, next) {
+    let token = getToken(req.headers)
+    if (token) {
+        jwt.verify(token, CONFIG.jwt_encryption, async (error, decoded) => {
+            if (error) {
+                return response.error(res, req, error, 403)
+            } else {
+                req.user = await UserRepository.findById(decoded._id);
+                if (req.user.role === "ADMIN" || req.user.role === "ROOT" || req.user.point >= 100 || req.user.permission.includes(777) === true) {
+                    next()
+                } else {
+                    return response.error(res, req, CODE.THE_SCORE_IS_NOT_ENOUGH, 403);
+                }
+            }
+        })
+    } else {
+        return response.error(res, req, CODE.TOKEN_HAS_EXPIRED, 403);
+    }
+}

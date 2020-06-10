@@ -192,7 +192,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/E:/79335279_1375587515981142_4250371353485508608_n.jpg"
+									"src": "/E:/102337855_254415575658075_1843813942281321727_n.jpg"
 								}
 							],
 							"options": {
@@ -625,7 +625,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_HOST}}/manga?skip=&limit=&sort&fromCreatedAt&toCreatedAt&id=&authorName=Kei Kanai&isAdult=true&country=JP&tags&format&status",
+							"raw": "{{API_HOST}}/manga?skip=&limit=&sort&fromCreatedAt&toCreatedAt&genre=Mystery&id=&tags&format&status",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -661,8 +661,7 @@
 								{
 									"key": "genre",
 									"value": "Mystery",
-									"description": "[\"Drama\",\"Mystery\"] Array or String (truyền string thì 1 biến, truyền nhiều biến lên là array)",
-									"disabled": true
+									"description": "[\"Drama\",\"Mystery\"] Array or String (truyền string thì 1 biến, truyền nhiều biến lên là array)"
 								},
 								{
 									"key": "genre",
@@ -677,16 +676,19 @@
 								},
 								{
 									"key": "authorName",
-									"value": "Kei Kanai"
+									"value": "Kei Kanai",
+									"disabled": true
 								},
 								{
 									"key": "isAdult",
-									"value": "true"
+									"value": "true",
+									"disabled": true
 								},
 								{
 									"key": "country",
 									"value": "JP",
-									"description": "viết tắt tên quốc gia (JP,KR,CN, chủ yếu truyện từ 3 qg này)"
+									"description": "viết tắt tên quốc gia (JP,KR,CN, chủ yếu truyện từ 3 qg này)",
+									"disabled": true
 								},
 								{
 									"key": "tags",
@@ -1037,6 +1039,191 @@
 									"key": "detail",
 									"value": null
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Group Translation",
+			"item": [
+				{
+					"name": "create and update group",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsImlhdCI6MTU5MTc3ODM4MCwiZXhwIjoxNTkyMzgzMTgwfQ.EAn1wfTABmEdpZZYZogRR4N0vcKxBqQWpXeMOWE8LrI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Group 10\",\n\t\"language\":[21],\n\t\"web\":\"mangagroup.net\",\n\t\"discord\":\"discord.gg/123abc\",\n\t\"email\":\"email@group.com\",\n\t\"about\":\"some about group\"\n}"
+						},
+						"url": {
+							"raw": "{{API_HOST}}/group/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get group",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsImlhdCI6MTU5MTc3ODM4MCwiZXhwIjoxNTkyMzgzMTgwfQ.EAn1wfTABmEdpZZYZogRR4N0vcKxBqQWpXeMOWE8LrI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_HOST}}/group/?id=1&populate=true&name=Group 2&userOwnerID&web&discord&email&about&isUploadMember&updateBy&createBy",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"group",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "get gr by id"
+								},
+								{
+									"key": "populate",
+									"value": "true",
+									"description": "true/false (need false)"
+								},
+								{
+									"key": "name",
+									"value": "Group 2",
+									"description": "tên gr cần tìm"
+								},
+								{
+									"key": "userOwnerID",
+									"value": null,
+									"description": "id user tạo ra group"
+								},
+								{
+									"key": "web",
+									"value": null,
+									"description": "web của group"
+								},
+								{
+									"key": "discord",
+									"value": null,
+									"description": "discord của gr"
+								},
+								{
+									"key": "email",
+									"value": null,
+									"description": "email của gr"
+								},
+								{
+									"key": "about",
+									"value": null,
+									"description": "mô tả gr"
+								},
+								{
+									"key": "isUploadMember",
+									"value": null,
+									"description": "true/false (quyền upload)"
+								},
+								{
+									"key": "updateBy",
+									"value": null,
+									"description": "gr đc update by id"
+								},
+								{
+									"key": "createBy",
+									"value": null,
+									"description": "gr đc create by id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload ava && photo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/E:/EZlHQMGU8AAoVAK.jpg"
+								},
+								{
+									"key": "cover",
+									"type": "file",
+									"src": "/E:/102337855_254415575658075_1843813942281321727_n.jpg"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/group/upload/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"group",
+								"upload",
+								""
 							]
 						}
 					},

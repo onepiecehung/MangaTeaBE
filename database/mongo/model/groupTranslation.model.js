@@ -16,25 +16,35 @@ const GroupTranslationSchema = new Schema({
         required: true
     },
     userMemberID: [{
-        type: mongoose.Schema.type.Number,
+        type: mongoose.Schema.Types.Number,
         ref: "Users",
-        required: true
+        default: [],
     }],
     mangaID: [{
         type: mongoose.Schema.Types.Number,
-        ref: "Manga"
+        ref: "Manga",
+        default: []
     }],
-    rate: [{
+    chapterID: [{
         type: mongoose.Schema.Types.Number,
-        ref: "Rating"
+        ref: "Chapter",
+        default: []
+    }],
+    rating: [{
+        type: mongoose.Schema.Types.Number,
+        ref: "Rating",
+        default: []
     }],
     language: [{
         type: mongoose.Schema.Types.Number,
-        ref: "Country"
+        ref: "Country",
+        default: []
     }],
-    cover: { type: String },
-    avatar: { type: String },
-    web: { type: String },
+    cover: { type: String, default: "" },
+    avatar: { type: String, default: "" },
+    web: { type: String, default: "" },
+    discord: { type: String, default: "" },
+    email: { type: String, default: "" },
     about: { type: String, default: "About your group" },
     status: {
         type: mongoose.Schema.Types.Number,
@@ -43,8 +53,17 @@ const GroupTranslationSchema = new Schema({
     permission: {
         type: mongoose.Schema.Types.Number,
         ref: "Permission"
-
-    }
+    },
+    isUploadMember: { type: Boolean, default: true },
+    createBy: {
+        type: mongoose.Schema.Types.Number,
+        ref: "Users"
+    },
+    updateBy: {
+        type: mongoose.Schema.Types.Number,
+        ref: "Users"
+    },
+    view: { type: Number, default: 0 }
 }, {
     timestamps: true,
 })

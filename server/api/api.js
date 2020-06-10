@@ -16,6 +16,7 @@ import RatingRouter from "../../packages/rating/rating.routes";
 import CommentRouter from "../../packages/comment/comment.routes";
 import AppellationRouter from "../../packages/appellation/appellation.routes";
 import AuthorRouter from "../../packages/author/author.routes";
+import GroupTranslationRouter from "../../packages/groupTranslation/groupTranslation.routes";
 
 
 // middleware that is specific to this router
@@ -44,6 +45,7 @@ router.use("/rating", RatingRouter);
 router.use("/comment", CommentRouter);
 router.use("/appellation", AppellationRouter);
 router.use("/author", AuthorRouter);
+router.use("/group", GroupTranslationRouter);
 
 router.get('/', function (req, res) {
     res.send('Welcome to our API!');

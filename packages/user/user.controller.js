@@ -1,9 +1,7 @@
-import axios from "axios";
-import FormData from 'form-data';
 
-import { CLIENT_ID_IMGUR } from "../../server/config/constants";
 import * as utils from "../../util/help";
 
+import { uploadImgur } from "../middleware/upload.imgur";
 import * as response from "../../util/response.json";
 import * as UserService from "./user.service";
 import * as UserValidator from "./user.validation";
@@ -82,16 +80,8 @@ export async function changePassword(req, res) {
 
 export async function uploadAvatar(req, res) {
     try {
-        let dataImage = new FormData()
-        dataImage.append("image", req.file.buffer)
-        const formHeaders = dataImage.getHeaders();
-        let url_ava = await axios.post("https://api.imgur.com/3/image/", dataImage, {
-            headers: {
-                'Authorization': `Client-ID ${CLIENT_ID_IMGUR}`,
-                ...formHeaders
-            },
-        })
-        let data = await UserService.uploadAvatar(req.user, url_ava.data.data.link)
+        let url_ava = await uploadImgur(req.file.buffer);
+        let data = await UserService.uploadAvatar(req.user, url_ava.data.link)
         return response.success(res, data, 200)
     } catch (error) {
         return response.error(res, req, error)

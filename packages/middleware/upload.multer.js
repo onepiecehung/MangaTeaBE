@@ -29,7 +29,7 @@ import multer from 'multer';
 // Check File Type
 function checkFileType(file, cb) {
     // Allowed ext
-    const filetypes = /jpeg|jpg|png|gif/;
+    const filetypes = /jpeg|jpg|png|gif|tif|tiff|bmp|eps|jfif/;
     // Check ext
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     // Check mime
@@ -38,12 +38,12 @@ function checkFileType(file, cb) {
     if (mimetype && extname) {
         return cb(null, true);
     } else {
-        cb("Error: Images Only!");
+        cb(new Error("Error: Images Only! (jpeg|jpg|png|gif|tif|tiff|bmp|eps|jfif)"));
     }
 }
 export const upload = multer({
     limits: {
-        fileSize: 4 * 1024 * 1024,
+        fileSize: 10 * 1024 * 1024,
     },
     fileFilter: function (req, file, cb) {
         checkFileType(file, cb);

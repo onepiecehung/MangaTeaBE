@@ -33,8 +33,7 @@ const options = {
     swaggerDefinition,
     apis: [
         'server/doc/validatorErrorHandler.js',
-        'server/apis/*/*.docs.js',
-        'server/apis/*/*.model.js',
+        '../../packages/*/*.docs.js',
     ],
 };
 
