@@ -1,5 +1,7 @@
-import * as MangaRepository from "../repository/manga.repository";
 import * as logger from "../../util/logger";
+
+import * as MangaRepository from "../repository/manga.repository";
+import { MANGA } from "../../globalConstant";
 
 export async function find(keyword) {
     try {
@@ -59,6 +61,39 @@ export async function find(keyword) {
             MangaRepository.countDocuments(filters)
         ])
         return { manga, total }
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+export async function createAndUpdate(data) {
+    try {
+        let mangaInfo = data.body;
+        let userInfo = data.user;
+        if (mangaInfo.id) {
+            let checkManga = await MangaRepository.findById(mangaInfo.id);
+            if (!checkManga) {
+                return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND));
+            }
+            if (checkManga.createBy === userInfo._id || userInfo.role === "ROOT" || userInfo.role === "ADMIN" || userInfo.permission.includes(777) === true) {
+                mangaInfo.updateBy = userInfo._id;
+                await MangaRepository.findByIdAndUpdate(mangaInfo.id, mangaInfo);
+                return true;
+            }
+            return Promise.reject(new Error(MANGA.MANGA_permission_denied))
+        }
+        let tempBody = mangaInfo;
+        delete tempBody.coverImage;
+        delete tempBody.bannerImage;
+        let checkExist = await MangaRepository.findOne(tempBody);
+        if (checkExist) {
+            return Promise.reject(new Error(MANGA.MANGA_IS_EXISTS))
+        }
+        mangaInfo.updateBy = userInfo._id;
+        mangaInfo.createBy = userInfo._id;
+        let dataManga = await MangaRepository.create(mangaInfo);
+        return dataManga;
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);

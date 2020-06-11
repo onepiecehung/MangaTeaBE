@@ -86,17 +86,6 @@ export const USER_ERROR = {
 
 
 
-/**
- * 
- * @param {*} Manga
- * @param {*} callback 
- */
-export const MANGA = {
-  MANGA_SAVED_EXIST: "MANGA SAVED EXIST",
-  MANGA_NOT_EXISTS: "MANGA NOT EXISTS",
-  MANGA_NOT_FOUND: "MANGA NOT FOUND",
-  MANGA_MISSING_ID: "MISSING ID MANGA"
-}
 
 
 /**
@@ -148,6 +137,21 @@ export const GROUP_TRANSLATION = {
   GROUP_TRANSLATION_IS_NOT_EXIST: "Group translation is not exist.",
   GROUP_TRANSLATION_permission_denied: "You do not have permission to update.",
 }
+
+/**
+ * 
+ * @param {*} Manga
+ * @param {*} callback 
+ */
+export const MANGA = {
+  MANGA_SAVED_EXIST: "MANGA SAVED EXIST",
+  MANGA_NOT_EXISTS: "MANGA IS NOT EXISTS",
+  MANGA_IS_EXISTS: "MANGA IS EXISTS",
+  MANGA_NOT_FOUND: "MANGA IS NOT FOUND",
+  MANGA_MISSING_ID: "MISSING ID MANGA",
+  MANGA_permission_denied: "Permission denied"
+}
+
 /**
  * CORS
  */

@@ -46,3 +46,12 @@ export async function find(filters, limit, skip, sort) {
 export async function countDocuments(filters) {
     return MangaModel.countDocuments(filters.length > 0 ? { $and: filters } : {})
 }
+
+
+export async function findByIdAndUpdate(id, update) {
+    return MangaModel.findByIdAndUpdate(id, update);
+}
+
+export async function findOne(filter) {
+    return MangaModel.findOne(filter);
+}

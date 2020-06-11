@@ -12,9 +12,12 @@ export async function createAndUpdate(data) {
             if (!checkGroup) {
                 return Promise.reject(new Error(GROUP_TRANSLATION.GROUP_TRANSLATION_IS_NOT_FOUND));
             }
-            groupTranslationInfo.updateBy = userInfo._id;
-            await GroupTranslationRepository.findByIdAndUpdate(groupTranslationInfo.id, groupTranslationInfo);
-            return true;
+            if (checkGroup.createBy === userInfo._id || userInfo.role === "ROOT" || userInfo.role === "ADMIN" || userInfo.permission.includes(777) === true) {
+                groupTranslationInfo.updateBy = userInfo._id;
+                await GroupTranslationRepository.findByIdAndUpdate(groupTranslationInfo.id, groupTranslationInfo);
+                return true;
+            }
+            return Promise.reject(new Error(GROUP_TRANSLATION.GROUP_TRANSLATION_permission_denied));
         }
         let checkExist = await GroupTranslationRepository.findOne(groupTranslationInfo);
         if (checkExist) {
