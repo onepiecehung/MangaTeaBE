@@ -18,15 +18,20 @@ const ChapterSchema = new Schema({
     chapterNumber: {
         type: Number,
         required: true,
-        default: 0
+        default: -1
     },
-    uploadBy: {
+    createBy: {
+        type: mongoose.Schema.Types.Number,
+        ref: "Users",
+    },
+    updateBy: {
         type: mongoose.Schema.Types.Number,
         ref: "Users",
     },
     groupTranslation: {
-        type: mongoose.Schema.Types.String,
-        ref: "GroupTranslation"
+        type: mongoose.Schema.Types.Number,
+        ref: "GroupTranslation",
+        default: 0
     },
     language: {
         type: mongoose.Schema.Types.Number,
@@ -35,25 +40,32 @@ const ChapterSchema = new Schema({
     photo: [{
         type: String
     }],
+    photoImgur: [{
+        type: String
+    }],
+    photoDrive: [{
+        type: String
+    }],
+    photoAw3: [{
+        type: String
+    }],
     view: {
         type: Number,
         default: 0
     },
     mangaID: {
         type: mongoose.Schema.Types.Number,
-        ref: "Manga"
+        ref: "Manga",
+        required: true
     },
     status: {
         type: mongoose.Schema.Types.String,
-        ref: "Status"
+        ref: "Status",
+        default: "RELEASE"
     },
     permission: {
         type: mongoose.Schema.Types.Number,
         ref: "Permission"
-    },
-    lastReadAt: {
-        type: Date,
-        default: Date.now()
     }
 }, {
     timestamps: true

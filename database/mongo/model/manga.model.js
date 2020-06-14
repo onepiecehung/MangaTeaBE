@@ -128,7 +128,8 @@ const MangaSchema = new Schema({
     }],
     chapter: [{
         type: mongoose.Schema.Types.Number,
-        ref: "Chapter"
+        ref: "Chapter",
+        default: []
     }],
     totalChapter: { type: Number, default: 0 },
     view: { type: Number, default: 0 }

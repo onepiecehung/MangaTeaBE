@@ -1,7 +1,7 @@
+import { MANGA } from "../../globalConstant";
 import * as logger from "../../util/logger";
 
 import * as MangaRepository from "../repository/manga.repository";
-import { MANGA } from "../../globalConstant";
 
 export async function find(keyword) {
     try {

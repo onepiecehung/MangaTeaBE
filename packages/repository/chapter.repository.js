@@ -27,3 +27,11 @@ export async function findById(id) {
 export async function findByName(name) {
     return ChapterModel.find({ name: name })
 }
+
+export async function findByIdAndUpdate(id, update) {
+    return ChapterModel.findByIdAndUpdate(id, update);
+}
+
+export async function findOne(filter) {
+    return ChapterModel.findOne(filter);
+}

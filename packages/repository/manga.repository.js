@@ -55,3 +55,8 @@ export async function findByIdAndUpdate(id, update) {
 export async function findOne(filter) {
     return MangaModel.findOne(filter);
 }
+
+
+export async function addChapter(idManga, idChapter) {
+    return MangaModel.updateOne({ _id: idManga }, { $push: { chapter: idChapter } });
+}

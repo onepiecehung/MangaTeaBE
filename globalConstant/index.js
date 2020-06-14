@@ -152,6 +152,13 @@ export const MANGA = {
   MANGA_permission_denied: "Permission denied"
 }
 
+export const CHAPTER = {
+  CHAPTER_IS_NOT_FOUND: "Chapter is not found.",
+  CHAPTER_IS_EXIST: "Chapter is exist.",
+  CHAPTER_IS_NOT_EXIST: "Chapter is not exist.",
+  CHAPTER_permission_denied: "You do not have permission to update.",
+}
+
 /**
  * CORS
  */

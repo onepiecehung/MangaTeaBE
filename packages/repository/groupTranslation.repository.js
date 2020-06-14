@@ -54,3 +54,7 @@ export async function countDocuments(filters) {
 export async function findByIdAndPopulate(id, populate) {
     return (populate === false ? GroupTranslationModel.findById(id) : GroupTranslationModel.findById(id).populate("userOwnerID userMemberID mangaID chapterID rating language createBy updateBy"));
 }
+
+export async function addChapter(idGroup, idChapter) {
+    return GroupTranslationModel.update({ _id: idGroup }, { $push: { chapterID: idChapter } })
+}
