@@ -56,5 +56,5 @@ export async function findByIdAndPopulate(id, populate) {
 }
 
 export async function addChapter(idGroup, idChapter) {
-    return GroupTranslationModel.update({ _id: idGroup }, { $push: { chapterID: idChapter } })
+    return GroupTranslationModel.updateOne({ _id: idGroup }, { $push: { chapterID: idChapter } })
 }

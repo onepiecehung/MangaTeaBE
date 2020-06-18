@@ -4,6 +4,7 @@ import * as logger from "../../util/logger";
 import * as ChapterRepository from "../repository/chapter.repository";
 import * as GroupTranslationRepository from "../repository/groupTranslation.repository";
 import * as MangaRepository from "../repository/manga.repository";
+
 export async function createAndUpdate(data) {
     try {
         let chapterInfo = data.body;

@@ -49,6 +49,9 @@ const ChapterSchema = new Schema({
     photoAw3: [{
         type: String
     }],
+    photoKIT: [{
+        type: String
+    }],
     view: {
         type: Number,
         default: 0

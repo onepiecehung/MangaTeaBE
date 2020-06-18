@@ -1,7 +1,10 @@
-import * as response from "../../util/response.json";
+import { uploadImgBB } from "../middleware/upload.imgbb";
 import { uploadImgur } from "../middleware/upload.imgur";
+import { uploadImageKIT } from "../middleware/upload.imagekit";
 import * as ChapterService from "./chapter.service";
 import * as ChapterValidator from "./chapter.validation";
+import * as response from "../../util/response.json";
+import * as logger from "../../util/logger";
 
 export async function find(req, res) {
     try {
@@ -25,11 +28,12 @@ export async function createAndUpdate(req, res) {
             if (req.files.image) {
                 let dataArray = [];
                 for (const element of req.files.image) {
-                    let urlImage = await uploadImgur(element.buffer);
-                    dataArray.push(urlImage.data.link);
+                    let urlImage = await uploadImageKIT(element.buffer, `${req.body.mangaID}-${req.body.chapterNumber}-${element.originalname}`);
+                    dataArray.push(urlImage.url);
+                    logger.info(`${element.originalname}=>${urlImage.url}`);
                 }
                 req.body.photo = dataArray;
-                req.body.photoImgur = dataArray;
+                req.body.photoKIT = dataArray;
             }
         }
         let data = await ChapterService.createAndUpdate(req);

@@ -36,4 +36,6 @@ export const DATABASE = {
 
 export const SENTRY_DSN = process.env.SENTRY_DSN || `https://f8d024586a034c8fbcbeda728a6819eb@o381083.ingest.sentry.io/5207860`
 export const CLIENT_ID_IMGUR = process.env.CLIENT_ID_IMGUR || `35fc7e0355c68dc`
+export const CLIENT_ID_IMGUR2 = process.env.CLIENT_ID_IMGUR2 || `f4c4ba6576cbbf3`
+export const KEY_IMGBB = process.env.KEY_IMGBB || `299d506587f39fbcee3e90ea4493a30a`
 
