@@ -2,8 +2,9 @@ import { MANGA } from "../../globalConstant";
 import * as logger from "../../util/logger";
 
 import * as MangaRepository from "../repository/manga.repository";
+import * as MemberRepository from "../repository/member.repository";
 
-export async function find(keyword) {
+export async function find(keyword, user) {
     try {
         const {
             fromCreatedAt,
@@ -18,10 +19,18 @@ export async function find(keyword) {
             status
         } = keyword
         if (id) {
-            let data = await MangaRepository.findById(id);
-            return data;
+            let manga = await MangaRepository.findById(id);
+            if (manga) {
+                manga.set("view", manga.view ? manga.view + 1 : 1);
+                await MangaRepository.save(manga);
+                if (user !== false && user._id) {
+                    await MemberRepository.addMangaHistory(user._id, manga._id);
+                }
+                return manga;
+            }
+            return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
-        const sort = keyword.sort || { createdAt: -1 }
+        const sort = keyword.sort ? { createdAt: keyword.sort } : { createdAt: -1 }
         const limit = parseInt(keyword.limit) || 20
         const skip = parseInt(keyword.skip) || 0
         let filters = [];
@@ -35,7 +44,7 @@ export async function find(keyword) {
             if (Array.isArray(genre)) {
                 filters.push({ genres: { $all: genre } });
             } else {
-                filters.push({ genres: genre });
+                filters.push({ genres: new RegExp(genre, "i") });
             }
         }
         if (authorName) {
@@ -57,7 +66,7 @@ export async function find(keyword) {
             filters.push({ status: status });
         }
         let [manga, total] = await Promise.all([
-            MangaRepository.find(filters, limit, skip, sort),
+            MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
             MangaRepository.countDocuments(filters)
         ])
         return { manga, total }

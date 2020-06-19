@@ -5,7 +5,7 @@ import * as response from "../../util/response.json";
 
 export async function find(req, res) {
     try {
-        let data = await MangaService.find(req.query);
+        let data = await MangaService.find(req.query, req.user);
         return response.success(res, data, 200);
     } catch (error) {
         return response.error(res, req, error);

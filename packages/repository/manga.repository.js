@@ -11,6 +11,9 @@ export async function create(mangaInfo) {
     return mangaClass.save()
 }
 
+export async function save(mangaInfo) {
+    return mangaInfo.save();
+}
 
 /**
  * 

@@ -25,3 +25,8 @@ export async function findByIdAndPopulate(id) {
 export async function findByUserID(id) {
     return MemberRepository.findOne({ userID: id })
 }
+
+
+export async function addMangaHistory(idUser, idManga) {
+    return MemberRepository.updateOne({ userID: idUser }, { $push: { historyReading: idManga } });
+}
