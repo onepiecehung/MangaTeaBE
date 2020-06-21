@@ -4,6 +4,7 @@ import * as logger from "../../util/logger";
 import * as ChapterRepository from "../repository/chapter.repository";
 import * as GroupTranslationRepository from "../repository/groupTranslation.repository";
 import * as MangaRepository from "../repository/manga.repository";
+import * as MemberRepository from "../repository/member.repository";
 
 export async function createAndUpdate(data) {
     try {
@@ -33,6 +34,7 @@ export async function createAndUpdate(data) {
         chapterInfo.createBy = userInfo._id;
         let dataChapter = await ChapterRepository.create(chapterInfo);
         await MangaRepository.addChapter(chapterInfo.mangaID, dataChapter._id);
+        await MemberRepository.addChapterUpload(userInfo._id, dataChapter._id);
         if (chapterInfo.groupTranslation) {
             let dataGroup = await GroupTranslationRepository.findById(chapterInfo.groupTranslation);
             if (dataGroup && (dataGroup.isUploadMember === false || dataGroup.userOwnerID === userInfo._id || dataGroup.userMemberID.includes(userInfo._id) === true)) {

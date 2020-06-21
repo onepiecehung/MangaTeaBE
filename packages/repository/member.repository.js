@@ -30,3 +30,7 @@ export async function findByUserID(id) {
 export async function addMangaHistory(idUser, idManga) {
     return MemberRepository.updateOne({ userID: idUser }, { $push: { historyReading: idManga } });
 }
+
+export async function addChapterUpload(idUser, idChapter) {
+    return MemberRepository.updateOne({ userID: idUser }, { $push: { chapterUpload: idChapter } });
+}

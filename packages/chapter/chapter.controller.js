@@ -18,6 +18,7 @@ export async function find(req, res) {
 
 
 export async function createAndUpdate(req, res) {
+    req.setTimeout(500000);
     try {
         let validateResult = ChapterValidator.validateCreateAndUpdate(req.body);
         if (validateResult.error) {
