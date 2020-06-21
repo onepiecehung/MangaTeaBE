@@ -1,6 +1,8 @@
+import { findAndMoveElementToLastArray } from "../../util/help";
 import { MANGA } from "../../globalConstant";
 import * as logger from "../../util/logger";
 
+import * as ChapterRepository from "../repository/chapter.repository";
 import * as MangaRepository from "../repository/manga.repository";
 import * as MemberRepository from "../repository/member.repository";
 
@@ -16,7 +18,8 @@ export async function find(keyword, user) {
             country,
             tags,
             format,
-            status
+            status,
+            name
         } = keyword
         if (id) {
             let manga = await MangaRepository.findById(id);
@@ -24,9 +27,20 @@ export async function find(keyword, user) {
                 manga.set("view", manga.view ? manga.view + 1 : 1);
                 await MangaRepository.save(manga);
                 if (user !== false && user._id) {
-                    await MemberRepository.addMangaHistory(user._id, manga._id);
+                    let memberInfo = await MemberRepository.findByUserID(user._id);
+                    if (memberInfo && memberInfo.historyReading) {
+                        if (memberInfo.historyReading.includes(manga._id) === true) {
+                            let tempArray = await findAndMoveElementToLastArray(manga._id, memberInfo.historyReading)
+                            memberInfo.set("historyReading", tempArray);
+                            await MemberRepository.save(memberInfo);
+                        } else {
+                            await MemberRepository.addMangaHistory(user._id, manga._id);
+                        }
+                    }
                 }
-                return manga;
+                let tempManga = manga;
+                let mangaMeta = await getMetaDataManga(tempManga);
+                return mangaMeta;
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
@@ -34,6 +48,9 @@ export async function find(keyword, user) {
         const limit = parseInt(keyword.limit) || 20
         const skip = parseInt(keyword.skip) || 0
         let filters = [];
+        if (name) {
+            filters.push({ name: new RegExp(name, "i") });
+        }
         if (fromCreatedAt) {
             filters.push({ createdAt: { $gte: new Date(fromCreatedAt) } });
         }
@@ -65,14 +82,46 @@ export async function find(keyword, user) {
         if (status) {
             filters.push({ status: status });
         }
-        let [manga, total] = await Promise.all([
+        let [mangaMeta, total] = await Promise.all([
             MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
             MangaRepository.countDocuments(filters)
         ])
+        let tempManga = mangaMeta;
+        let manga = await getMetaDataManga(tempManga);
         return { manga, total }
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);
+    }
+}
+
+async function getMetaDataManga(manga) {
+    try {
+        let isArray = Array.isArray(manga);
+        if (!isArray) {
+            manga = [manga];
+        }
+        let promise = manga.map(async e => {
+            if (e.chapter) {
+                if (e.chapter.length > 4) {
+                    let lengthChapter = e.chapter.length;
+                    let ArrayChapterId = [];
+                    ArrayChapterId.push(e.chapter[0]);
+                    ArrayChapterId.push(e.chapter[lengthChapter - 3]);
+                    ArrayChapterId.push(e.chapter[lengthChapter - 2]);
+                    ArrayChapterId.push(e.chapter[lengthChapter - 1]);
+                    e.chapter = await ChapterRepository.findArrayChapter(ArrayChapterId);
+                } else {
+                    e.chapter = await ChapterRepository.findArrayChapter(e.chapter);
+                }
+            }
+            return e;
+        })
+        let data = await Promise.all(promise);
+        return isArray ? data : data[0];
+    } catch (error) {
+        logger.error(error);
+        return manga;
     }
 }
 

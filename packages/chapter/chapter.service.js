@@ -36,7 +36,9 @@ export async function createAndUpdate(data) {
         if (chapterInfo.groupTranslation) {
             let dataGroup = await GroupTranslationRepository.findById(chapterInfo.groupTranslation);
             if (dataGroup && (dataGroup.isUploadMember === false || dataGroup.userOwnerID === userInfo._id || dataGroup.userMemberID.includes(userInfo._id) === true)) {
-                await GroupTranslationRepository.addChapter(chapterInfo.groupTranslation, dataChapter._id);
+                if (dataGroup.chapterID.includes(dataChapter._id) === false) {
+                    await GroupTranslationRepository.addChapter(chapterInfo.groupTranslation, dataChapter._id);
+                }
             }
         }
         return dataChapter;

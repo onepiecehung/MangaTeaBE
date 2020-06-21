@@ -5,6 +5,7 @@ import * as ChapterService from "./chapter.service";
 import * as ChapterValidator from "./chapter.validation";
 import * as response from "../../util/response.json";
 import * as logger from "../../util/logger";
+import { JOB_NAME } from "../../globalConstant/index";
 
 export async function find(req, res) {
     try {

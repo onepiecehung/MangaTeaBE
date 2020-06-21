@@ -35,3 +35,26 @@ export async function findByIdAndUpdate(id, update) {
 export async function findOne(filter) {
     return ChapterModel.findOne(filter);
 }
+
+export async function findArrayChapter(idArray) {
+    return ChapterModel.find({
+        _id: {
+            $in: idArray
+        }
+    },
+        {
+            name: 1,
+            chapterNumber: 1,
+            updatedAt: 1
+        }
+    );
+}
+
+
+export async function findArrayChapterV2(idArray) {
+    return ChapterModel.find({
+        _id: {
+            $in: idArray
+        }
+    });
+}

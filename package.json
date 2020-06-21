@@ -10,7 +10,8 @@
     "worker-crawl-mangadex": "node ./server/workers/crawlManga.worker.js",
     "workerCrawlAniList": "nodemon ./server/workers/crawlMangaAniList.worker.js",
     "createUser": "nodemon ./server/workers/users/createUser.worker.js",
-    "createSampleData": "nodemon ./server/workers/users/createDataSample.js"
+    "createSampleData": "nodemon ./server/workers/users/createDataSample.js",
+    "createSampleDataChapter": "nodemon ./server/workers/createChapter.worker.js"
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",

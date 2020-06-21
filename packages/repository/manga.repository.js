@@ -47,7 +47,7 @@ export async function find(filters, limit, skip, sort) {
  * @param {Json} filters 
  */
 export async function countDocuments(filters) {
-    return MangaModel.countDocuments(filters.length > 0 ? { $and: filters } : {})
+    return MangaModel.countDocuments(filters.length ? { $and: filters } : {})
 }
 
 
