@@ -3,8 +3,10 @@ import { MANGA } from "../../globalConstant";
 import * as logger from "../../util/logger";
 
 import * as ChapterRepository from "../repository/chapter.repository";
+import * as CommentRepository from "../repository/comment.repository";
 import * as MangaRepository from "../repository/manga.repository";
 import * as MemberRepository from "../repository/member.repository";
+import * as RatingRepository from "../repository/rating.repository";
 
 export async function find(keyword, user) {
     try {
@@ -40,11 +42,14 @@ export async function find(keyword, user) {
                 }
                 let tempManga = manga;
                 let mangaMeta = await getMetaDataManga(tempManga);
-                return mangaMeta;
+                let chapter = await ChapterRepository.findByIdManga(manga._id);
+                let rating = await RatingRepository.findRatingByMangaId(manga._id);
+                let comment = await CommentRepository.findByMangaId(manga._id);
+                return { manga: mangaMeta, chapter, rating, comment };
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
-        const sort = keyword.sort ? { createdAt: keyword.sort } : { createdAt: -1 }
+        const sort = keyword.sort ? { updatedAt: keyword.sort } : { updatedAt: -1 }
         const limit = parseInt(keyword.limit) || 20
         const skip = parseInt(keyword.skip) || 0
         let filters = [];

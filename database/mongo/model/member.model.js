@@ -38,6 +38,11 @@ var MemberSchema = new Schema({
         ref: "Manga",
         default: []
     }],
+    historyReadingChapter: [{
+        type: mongoose.Schema.Types.Number,
+        ref: "Chapter",
+        default: []
+    }],
 }, {
     timestamps: true,
 

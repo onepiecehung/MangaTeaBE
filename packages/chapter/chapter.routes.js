@@ -5,17 +5,17 @@ const router = new Router();
 import { upload } from "../middleware/upload.multer";
 
 import * as ChapterController from "./chapter.controller";
-import { Authentication } from "../../util/JWT/jwt";
+import { Authentication, AuthenticationChecking } from "../../util/JWT/jwt";
 
 
 
 
 
 router.route("/")
-    // .get(
-    //     AuthenticationChecking,
-    //     ChapterController.find
-    // )
+    .get(
+        AuthenticationChecking,
+        ChapterController.find
+    )
     .post(
         Authentication,
         upload.fields([

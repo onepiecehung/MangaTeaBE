@@ -9,7 +9,7 @@ import { JOB_NAME } from "../../globalConstant/index";
 
 export async function find(req, res) {
     try {
-        let data = await ChapterService.find(req.query);
+        let data = await ChapterService.find(req.query, req.user);
         return response.success(res, data, 200);
     } catch (error) {
         return response.error(res, req, error);
@@ -32,7 +32,7 @@ export async function createAndUpdate(req, res) {
                 for (const element of req.files.image) {
                     let urlImage = await uploadImageKIT(element.buffer, `${req.body.mangaID}-${req.body.chapterNumber}-${element.originalname}`);
                     dataArray.push(urlImage.url);
-                    logger.info(`${element.originalname}=>${urlImage.url}`);
+                    logger.info(`${element.originalname} => ${urlImage.url}`);
                 }
                 req.body.photo = dataArray;
                 req.body.photoKIT = dataArray;
