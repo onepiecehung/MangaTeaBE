@@ -71,7 +71,23 @@ const ChapterSchema = new Schema({
         ref: "Permission"
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: {
+        transform: function (doc, e) {
+            delete e.photoKIT;
+            delete e.photoDrive;
+            delete e.photoImgur;
+            delete e.photoAw3;
+        }
+    },
+    toObject: {
+        transform: function (doc, e) {
+            delete e.photoKIT;
+            delete e.photoDrive;
+            delete e.photoImgur;
+            delete e.photoAw3;
+        }
+    }
 })
 
 

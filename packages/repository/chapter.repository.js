@@ -77,3 +77,7 @@ export async function countDocuments(filters) {
 export async function findByIdManga(idManga) {
     return ChapterModel.find({ mangaID: idManga });
 }
+
+export async function findByIdMangaPopulate(idManga) {
+    return ChapterModel.find({ mangaID: idManga }).populate("groupTranslation language");
+}

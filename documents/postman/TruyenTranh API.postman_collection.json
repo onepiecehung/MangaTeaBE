@@ -211,6 +211,42 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Login - yjy94377@eveav.com",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "yjy94377@eveav.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/login",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -623,9 +659,15 @@
 					"name": "get manga",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{API_HOST}}/manga?skip=&limit=&sort&fromCreatedAt&toCreatedAt&genre=Mystery&id=&tags&format&status",
+							"raw": "{{API_HOST}}/manga?skip=&limit=&id=21052&sort=1&fromCreatedAt&toCreatedAt&tags&format&status&name=Isekai Cheat Survival Meshi",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -644,34 +686,20 @@
 									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
 								},
 								{
-									"key": "sort",
-									"value": null,
-									"description": "object (nên bỏ trống)"
-								},
-								{
-									"key": "fromCreatedAt",
-									"value": null,
-									"description": "time"
-								},
-								{
-									"key": "toCreatedAt",
-									"value": null,
-									"description": "time"
+									"key": "genre",
+									"value": "Adventure",
+									"description": "[\"Drama\",\"Mystery\"] Array or String (truyền string thì 1 biến, truyền nhiều biến lên là array)",
+									"disabled": true
 								},
 								{
 									"key": "genre",
-									"value": "Mystery",
-									"description": "[\"Drama\",\"Mystery\"] Array or String (truyền string thì 1 biến, truyền nhiều biến lên là array)"
-								},
-								{
-									"key": "genre",
-									"value": "Drama",
+									"value": "drama",
 									"description": "[\"Drama\",\"Mystery\"] Array or String",
 									"disabled": true
 								},
 								{
 									"key": "id",
-									"value": "",
+									"value": "21052",
 									"description": "get manga by id (có id này mọi thứ còn lại là vô nghĩa)"
 								},
 								{
@@ -691,20 +719,92 @@
 									"disabled": true
 								},
 								{
+									"key": "sort",
+									"value": "1"
+								},
+								{
+									"key": "fromCreatedAt",
+									"value": null
+								},
+								{
+									"key": "toCreatedAt",
+									"value": null
+								},
+								{
 									"key": "tags",
-									"value": null,
-									"description": "cái này sau này sẽ bổ xung dữ liệu để search"
+									"value": null
 								},
 								{
 									"key": "format",
-									"value": null,
-									"description": "MANGA, ONE_SHOT, NOVEL"
+									"value": null
 								},
 								{
 									"key": "status",
-									"value": null,
-									"description": "FINISHED, RELEASING"
+									"value": null
+								},
+								{
+									"key": "name",
+									"value": "Isekai Cheat Survival Meshi"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create and update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjc4MSwicm9sZSI6Ik1FTUJFUiIsImlhdCI6MTU5MTg2MTUzOSwiZXhwIjoxNTkyNDY2MzM5fQ.n8mrAKmfIddjxjLID2msSS6GUn_y1eImSHKqZ6WeXs4",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "banner",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "cover",
+									"type": "file",
+									"src": []
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/manga",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"manga"
 							]
 						}
 					},
@@ -1062,7 +1162,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsImlhdCI6MTU5MTc3ODM4MCwiZXhwIjoxNTkyMzgzMTgwfQ.EAn1wfTABmEdpZZYZogRR4N0vcKxBqQWpXeMOWE8LrI",
+								"value": "{{TOKEN_MEMBER}}",
 								"type": "text"
 							},
 							{
@@ -1073,7 +1173,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Group 10\",\n\t\"language\":[21],\n\t\"web\":\"mangagroup.net\",\n\t\"discord\":\"discord.gg/123abc\",\n\t\"email\":\"email@group.com\",\n\t\"about\":\"some about group\"\n}"
+							"raw": "{\n\t\"name\": \"Prophet's Release\",\n\t\"language\": [\n\t\t240\n\t],\n\t\"web\": \"https://prophetsrelease.mangadex.com/\",\n\t\"discord\": \"https://discord.gg/xBFPCQe\",\n\t\"email\": \"email@group.com\",\n\t\"about\": \"We do fantasy manga! And we need TRANSLATORS! You are welcome to propose new manga for us to pick up, but make sure it's \\n a) fantasy; \\n b) not licensed; \\n c) not scanlated by someone else already.\\nOur releases are available as downloadable archives from our web site.\\nWe don't currently accept donations, but the like button is always up there ^^\"\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{API_HOST}}/group/",
@@ -1112,7 +1215,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{API_HOST}}/group/?id=1&populate=true&name=Group 2&userOwnerID&web&discord&email&about&isUploadMember&updateBy&createBy",
@@ -1213,7 +1319,10 @@
 									"value": "1",
 									"type": "text"
 								}
-							]
+							],
+							"options": {
+								"formdata": {}
+							}
 						},
 						"url": {
 							"raw": "{{API_HOST}}/group/upload/",
@@ -1224,6 +1333,307 @@
 								"group",
 								"upload",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Chapter",
+			"item": [
+				{
+					"name": "create and Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							},
+							{
+								"key": "Keep-Alive",
+								"value": "timeout=5000000, max=10000000",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"description": "file",
+									"type": "file",
+									"src": [
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-01.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-02.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-03.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-04-05.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-06.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-07.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-08.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-09.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-10.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-11.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-12.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-13.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-14.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-15.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-16.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-17.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-18.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-19.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-20.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-21.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-22.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-23.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-24.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-25.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-26.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-27.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-28.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-29.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-30.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-31.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-32.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/PR-Credit-Page_meshi15.png"
+									]
+								},
+								{
+									"key": "name",
+									"value": "Chapter 15",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "chapterNumber",
+									"value": "15",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "mangaID",
+									"value": "21052",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "groupTranslation",
+									"value": "11",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "240",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "chỉ gửi lên khi chỉnh sửa",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/chapter/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"chapter",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://api.imgbb.com/1/upload?key={{IMGBB}}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/NguyenHuuHung/Desktop/posters.tar/posters/18.jpg",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"value": "https://i.imgur.com/4itP0nL.jpg",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "https://api.imgbb.com/1/upload?key={{IMGBB}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"imgbb",
+								"com"
+							],
+							"path": [
+								"1",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{IMGBB}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get chapter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							},
+							{
+								"key": "Keep-Alive",
+								"value": "timeout=5000000, max=10000000",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Chapter 15",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "chapterNumber",
+									"value": "15",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "mangaID",
+									"value": "21052",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "groupTranslation",
+									"value": "11",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "240",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"description": "chỉ gửi lên khi chỉnh sửa",
+									"type": "text"
+								},
+								{
+									"key": "fromCreatedAt",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "toCreatedAt",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "123",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/chapter/?chapterNumber=15&mangaID=21052&groupTranslation=11&language=240&id=1&fromCreatedAt=&name=Chapter 15&toCreatedAt=&status=123",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"chapter",
+								""
+							],
+							"query": [
+								{
+									"key": "chapterNumber",
+									"value": "15",
+									"description": "number"
+								},
+								{
+									"key": "mangaID",
+									"value": "21052",
+									"description": "number"
+								},
+								{
+									"key": "groupTranslation",
+									"value": "11",
+									"description": "number"
+								},
+								{
+									"key": "language",
+									"value": "240",
+									"description": "number"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"description": "chỉ gửi lên khi chỉnh sửa"
+								},
+								{
+									"key": "fromCreatedAt",
+									"value": ""
+								},
+								{
+									"key": "name",
+									"value": "Chapter 15",
+									"description": "string"
+								},
+								{
+									"key": "toCreatedAt",
+									"value": ""
+								},
+								{
+									"key": "status",
+									"value": "123"
+								}
 							]
 						}
 					},

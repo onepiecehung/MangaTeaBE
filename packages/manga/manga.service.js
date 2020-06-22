@@ -4,9 +4,12 @@ import * as logger from "../../util/logger";
 
 import * as ChapterRepository from "../repository/chapter.repository";
 import * as CommentRepository from "../repository/comment.repository";
+import * as CountryRepository from "../repository/country.repository";
+import * as GroupTranslationRepository from "../repository/groupTranslation.repository";
 import * as MangaRepository from "../repository/manga.repository";
 import * as MemberRepository from "../repository/member.repository";
 import * as RatingRepository from "../repository/rating.repository";
+import * as UserRepository from "../repository/user.repository";
 
 export async function find(keyword, user) {
     try {
@@ -43,9 +46,11 @@ export async function find(keyword, user) {
                 let tempManga = manga;
                 let mangaMeta = await getMetaDataManga(tempManga);
                 let chapter = await ChapterRepository.findByIdManga(manga._id);
+                let tempChapter = chapter;
+                let chapterMeta = await getMetaDataChapter(tempChapter);
                 let rating = await RatingRepository.findRatingByMangaId(manga._id);
                 let comment = await CommentRepository.findByMangaId(manga._id);
-                return { manga: mangaMeta, chapter, rating, comment };
+                return { manga: mangaMeta, chapter: chapterMeta, rating, comment };
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
@@ -129,6 +134,32 @@ async function getMetaDataManga(manga) {
         return manga;
     }
 }
+
+async function getMetaDataChapter(chapter) {
+    try {
+        let isArray = Array.isArray(chapter);
+        if (!isArray) {
+            chapter = [chapter];
+        }
+        let promise = chapter.map(async e => {
+            if (e.groupTranslation) {
+                e.groupTranslation = await GroupTranslationRepository.getNameAndId(e.groupTranslation);
+            }
+            if (e.language) {
+                e.language = await CountryRepository.findForChapter(e.language);
+            }
+            if (e.createBy) {
+                e.createBy = await UserRepository.getUsernameAndId(e.createBy);
+            }
+            return e;
+        })
+        let data = await Promise.all(promise);
+        return isArray ? data : data[0];
+    } catch (error) {
+        logger.error(error);
+    }
+}
+
 
 export async function createAndUpdate(data) {
     try {
