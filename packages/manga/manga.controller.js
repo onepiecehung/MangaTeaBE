@@ -11,6 +11,14 @@ export async function find(req, res) {
         return response.error(res, req, error);
     }
 }
+export async function findAtHome(req, res) {
+    try {
+        let data = await MangaService.findAtHome(req.query, req.user);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
 
 export async function createAndUpdate(req, res) {
     try {

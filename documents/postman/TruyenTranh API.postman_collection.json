@@ -667,7 +667,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/manga?skip=&limit=&id=21052&sort=1&fromCreatedAt&toCreatedAt&tags&format&status&name=Isekai Cheat Survival Meshi",
+							"raw": "{{API_HOST}}/manga?id=21059",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -678,12 +678,14 @@
 								{
 									"key": "skip",
 									"value": "",
-									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
+									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html",
+									"disabled": true
 								},
 								{
 									"key": "limit",
 									"value": "",
-									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
+									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html",
+									"disabled": true
 								},
 								{
 									"key": "genre",
@@ -696,11 +698,6 @@
 									"value": "drama",
 									"description": "[\"Drama\",\"Mystery\"] Array or String",
 									"disabled": true
-								},
-								{
-									"key": "id",
-									"value": "21052",
-									"description": "get manga by id (có id này mọi thứ còn lại là vô nghĩa)"
 								},
 								{
 									"key": "authorName",
@@ -720,31 +717,42 @@
 								},
 								{
 									"key": "sort",
-									"value": "1"
-								},
-								{
-									"key": "fromCreatedAt",
-									"value": null
-								},
-								{
-									"key": "toCreatedAt",
-									"value": null
-								},
-								{
-									"key": "tags",
-									"value": null
-								},
-								{
-									"key": "format",
-									"value": null
-								},
-								{
-									"key": "status",
-									"value": null
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "name",
-									"value": "Isekai Cheat Survival Meshi"
+									"value": "Isekai Cheat Survival Meshi",
+									"disabled": true
+								},
+								{
+									"key": "fromCreatedAt",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "toCreatedAt",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "tags",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "format",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "21059"
 								}
 							]
 						}
@@ -805,6 +813,68 @@
 							],
 							"path": [
 								"manga"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get home page",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjc4MSwicm9sZSI6Ik1FTUJFUiIsImlhdCI6MTU5MjkwMDc0MSwiZXhwIjoxNTkzNTA1NTQxfQ.RB19vTiF4vbBmJLvPyC06c2Pd-8UzGrZ2Gbs1AeE5Tw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/manga/home?historyReading=1&skip&limit&sort",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"manga",
+								"home"
+							],
+							"query": [
+								{
+									"key": "historyReading",
+									"value": "1",
+									"description": "lay thi truyen vao 1, khong thi thoi. (khong truyen 3 bien cung 1 luc, neu truyen 3 bien cung 1 luc, thu tu uu tien se la tu tren xuong)"
+								},
+								{
+									"key": "trending",
+									"value": "-1",
+									"description": "1 or -1 (-1 la lay top tu tren xuong 1->100 do pho bien giam dan)",
+									"disabled": true
+								},
+								{
+									"key": "popularity",
+									"value": "-1",
+									"description": "1 or -1",
+									"disabled": true
+								},
+								{
+									"key": "slide",
+									"value": "true",
+									"description": "true",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								},
+								{
+									"key": "sort",
+									"value": null,
+									"description": "khong truyen vao"
+								}
 							]
 						}
 					},
@@ -1583,7 +1653,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_HOST}}/chapter/?chapterNumber=15&mangaID=21052&groupTranslation=11&language=240&id=1&fromCreatedAt=&name=Chapter 15&toCreatedAt=&status=123",
+							"raw": "{{API_HOST}}/chapter/?mangaID=21052&fromCreatedAt=&toCreatedAt=",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -1595,7 +1665,8 @@
 								{
 									"key": "chapterNumber",
 									"value": "15",
-									"description": "number"
+									"description": "number",
+									"disabled": true
 								},
 								{
 									"key": "mangaID",
@@ -1605,17 +1676,20 @@
 								{
 									"key": "groupTranslation",
 									"value": "11",
-									"description": "number"
+									"description": "number",
+									"disabled": true
 								},
 								{
 									"key": "language",
 									"value": "240",
-									"description": "number"
+									"description": "number",
+									"disabled": true
 								},
 								{
 									"key": "id",
 									"value": "1",
-									"description": "chỉ gửi lên khi chỉnh sửa"
+									"description": "get chapter by id",
+									"disabled": true
 								},
 								{
 									"key": "fromCreatedAt",
@@ -1624,7 +1698,8 @@
 								{
 									"key": "name",
 									"value": "Chapter 15",
-									"description": "string"
+									"description": "string",
+									"disabled": true
 								},
 								{
 									"key": "toCreatedAt",
@@ -1632,7 +1707,8 @@
 								},
 								{
 									"key": "status",
-									"value": "123"
+									"value": "RELEASE",
+									"disabled": true
 								}
 							]
 						}

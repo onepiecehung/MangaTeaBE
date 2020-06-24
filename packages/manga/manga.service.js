@@ -1,6 +1,7 @@
 import { findAndMoveElementToLastArray } from "../../util/help";
-import { MANGA } from "../../globalConstant";
+import { MANGA, USER_ERROR } from "../../globalConstant";
 import * as logger from "../../util/logger";
+import * as Redis from "../../database/redis/client";
 
 import * as ChapterRepository from "../repository/chapter.repository";
 import * as CommentRepository from "../repository/comment.repository";
@@ -27,6 +28,11 @@ export async function find(keyword, user) {
             name
         } = keyword
         if (id) {
+            let myKey = `MangaInfo:${id}`;
+            let value = await Redis.getJson(myKey);
+            if (value) {
+                return value;
+            }
             let manga = await MangaRepository.findById(id);
             if (manga) {
                 manga.set("view", manga.view ? manga.view + 1 : 1);
@@ -43,14 +49,16 @@ export async function find(keyword, user) {
                         }
                     }
                 }
-                let tempManga = manga;
-                let mangaMeta = await getMetaDataManga(tempManga);
-                let chapter = await ChapterRepository.findByIdManga(manga._id);
+                // let tempManga = manga;
+                // let mangaMeta = await getMetaDataManga(tempManga);
+                let chapter = await ChapterRepository.findByIdMangaSelect(manga._id);
                 let tempChapter = chapter;
                 let chapterMeta = await getMetaDataChapter(tempChapter);
                 let rating = await RatingRepository.findRatingByMangaId(manga._id);
                 let comment = await CommentRepository.findByMangaId(manga._id);
-                return { manga: mangaMeta, chapter: chapterMeta, rating, comment };
+                let data = { manga, chapter: chapterMeta, rating, comment };
+                await Redis.setJson(myKey, data, 300)
+                return data;
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
@@ -166,6 +174,11 @@ export async function createAndUpdate(data) {
         let mangaInfo = data.body;
         let userInfo = data.user;
         if (mangaInfo.id) {
+            let myKey = `MangaInfo:${mangaInfo.id}`;
+            let value = await Redis.getJson(myKey);
+            if (value) {
+                await Redis.deleteKey(myKey);
+            }
             let checkManga = await MangaRepository.findById(mangaInfo.id);
             if (!checkManga) {
                 return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND));
@@ -188,6 +201,86 @@ export async function createAndUpdate(data) {
         mangaInfo.createBy = userInfo._id;
         let dataManga = await MangaRepository.create(mangaInfo);
         return dataManga;
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function findAtHome(keyword, user) {
+    try {
+        const {
+            historyReading,
+            trending,
+            popularity,
+            slide
+        } = keyword;
+        // const sort = keyword.sort ? { updatedAt: keyword.sort } : { updatedAt: -1 }
+        const limit = parseInt(keyword.limit) || 20
+        const skip = parseInt(keyword.skip) || 0
+        let filters = [];
+        if (historyReading == 1) {
+            if (user !== false) {
+                let member = await MemberRepository.findByUserID(user._id);
+                if (!member) {
+                    return Promise.reject(new Error(USER_ERROR.USER_NOT_FOUND))
+                }
+                if (member.historyReading.length === 0) {
+                    return { message: `You are not logged in or you have no reading history.` };
+                }
+                let manga = await MangaRepository.findArrayMangaMin(member.historyReading, limit, skip > 0 ? (skip - 1) * limit : skip, {});
+                let data = { manga: manga, total: member.historyReading.length }
+                return data;
+            }
+            return { message: `You are not logged in or you have no reading history.` };
+        }
+        if (slide) {
+            if (user !== false) {
+                let member = await MemberRepository.findByUserID(user._id);
+                if (!member) {
+                    return Promise.reject(new Error(USER_ERROR.USER_NOT_FOUND))
+                }
+                if (member.mangaSuggested.length !== 0) {
+                    let manga = await MangaRepository.findArrayMangaMin(member.mangaSuggested, limit, skip > 0 ? (skip - 1) * limit : skip, {});
+                    let data = { manga: manga, total: member.mangaSuggested.length }
+                    return data;
+                }
+                let [mangaMeta, total] = await Promise.all([
+                    MangaRepository.findAtHome(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { popularity: -1 }),
+                    MangaRepository.countDocuments(filters)
+                ])
+                let tempManga = mangaMeta;
+                let manga = await getMetaDataManga(tempManga);
+                return { manga, total }
+            }
+            let [mangaMeta, total] = await Promise.all([
+                MangaRepository.findAtHome(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { popularity: -1 }),
+                MangaRepository.countDocuments(filters)
+            ])
+            let tempManga = mangaMeta;
+            let manga = await getMetaDataManga(tempManga);
+            return { manga, total }
+        }
+        if (trending) {
+            let [mangaMeta, total] = await Promise.all([
+                MangaRepository.findAtHome(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { trending: trending }),
+                MangaRepository.countDocuments(filters)
+            ])
+            let tempManga = mangaMeta;
+            let manga = await getMetaDataManga(tempManga);
+            return { manga, total }
+        }
+        if (popularity) {
+            let [mangaMeta, total] = await Promise.all([
+                MangaRepository.findAtHome(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { popularity: popularity }),
+                MangaRepository.countDocuments(filters)
+            ])
+            let tempManga = mangaMeta;
+            let manga = await getMetaDataManga(tempManga);
+            return { manga, total }
+        }
+        return Promise.reject(new Error("Params is incorrect!"))
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);

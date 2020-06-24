@@ -61,5 +61,30 @@ export async function findOne(filter) {
 
 
 export async function addChapter(idManga, idChapter) {
-    return MangaModel.updateOne({ _id: idManga }, { $push: { chapter: idChapter } });
+    return MangaModel.updateOne({ _id: idManga }, {
+        $push: { chapter: idChapter },
+        lastUpdatedChapter: Date.now()
+    });
+}
+
+export async function findArrayMangaMin(ArrayId, limit, skip, sort) {
+    return MangaModel.find({
+        _id: { $in: ArrayId }
+    }, {
+        name: 1,
+        genres: 1,
+        coverImage: 1,
+        bannerImage: 1
+    }).limit(limit).skip(skip).sort(sort)
+}
+
+
+export async function findAtHome(filters, limit, skip, sort) {
+    return MangaModel.find(filters.length > 0 ? { $and: filters } : {}, {
+        name: 1,
+        genres: 1,
+        coverImage: 1,
+        bannerImage: 1,
+        chapter: 1
+    }).limit(limit).skip(skip).sort(sort)
 }

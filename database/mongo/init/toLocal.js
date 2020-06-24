@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 mongoose
-    .connect(`mongodb://localhost:27017/truyentranh_0621`, {
+    .connect(`mongodb://localhost:27017/truyentranh_0623`, {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true

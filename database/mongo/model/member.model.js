@@ -43,6 +43,11 @@ var MemberSchema = new Schema({
         ref: "Chapter",
         default: []
     }],
+    mangaSuggested: [{
+        type: mongoose.Schema.Types.Number,
+        ref: "Manga",
+        default: []
+    }],
 }, {
     timestamps: true,
 

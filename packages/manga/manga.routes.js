@@ -22,4 +22,10 @@ router.route('/')
     )
 
 
+router.route("/home")
+    .get(
+        AuthenticationChecking,
+        MangaController.findAtHome
+    )
+
 export default router;
