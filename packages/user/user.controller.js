@@ -6,7 +6,7 @@ import * as response from "../../util/response.json";
 import * as UserService from "./user.service";
 import * as UserValidator from "./user.validation";
 
-// const Redis from  "../../database/redis/client")
+import Redis from "../../database/redis/client";
 
 export async function Register(req, res) {
     try {
@@ -97,8 +97,47 @@ export async function updateProfile(req, res) {
             });
         }
         let data = await UserService.updateProfile(req.user, req.body)
-        return response.success(res, data, 200)
+        return response.success(res, data, 200);
     } catch (error) {
         return response.error(res, req, error)
+    }
+}
+
+export async function resetPassword(req, res) {
+    try {
+        const myKey = "UserForgotPass:" + req.user._id;
+        const value = await Redis.getJson(myKey);
+        if (!value || value !== req.body.token) {
+            return response.error(res, req, `Links are no longer available or expired.`, 403);
+        }
+        let data = await UserService.resetPassword(req.body, req.user);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
+
+
+export async function verifyEmail(req, res) {
+    try {
+        const myKey = "UserVerify:" + req.user._id;
+        const value = await Redis.getJson(myKey);
+        if (!value || value !== req.body.token) {
+            return response.error(res, req, `Links are no longer available or expired.`, 403);
+        }
+        let data = await UserService.verifyEmail(req.user);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
+
+
+export async function forgotPassword(req, res) {
+    try {
+        let data = await UserService.forgotPassword(req.body);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
     }
 }

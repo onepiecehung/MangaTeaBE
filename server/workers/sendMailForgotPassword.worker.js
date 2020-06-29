@@ -5,7 +5,7 @@ import RABBIT from "../connector/rabbitmq/init/index";
 
 import * as UserRepository from "../../packages/repository/user.repository";
 
-RABBIT.consumeData(JOB_NAME.SEND_EMAIL_REG, async (msg, channel) => {
+RABBIT.consumeData(JOB_NAME.FORGOT_PASSWORD, async (msg, channel) => {
     try {
         let message = JSON.parse(msg.content.toString());
         logger.debug(message);
@@ -15,7 +15,7 @@ RABBIT.consumeData(JOB_NAME.SEND_EMAIL_REG, async (msg, channel) => {
             return true;
         }
         // logger.info(userInfo)
-        await SendGrid.sendEmail(message.email, TEMPLATE.REG, message);
+        await SendGrid.sendEmail(message.email, TEMPLATE.FORGOT_PASSWORD, message);
         // userInfo.set("verifyEmail", true);
         // await UserRepository.save(userInfo);
         logger.info(`send email register success to: ${message.fullName}`);

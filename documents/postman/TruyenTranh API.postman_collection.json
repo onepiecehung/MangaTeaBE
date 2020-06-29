@@ -61,21 +61,12 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "anhhung15957@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "123456",
-									"type": "text"
-								}
-							],
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"anhhung15957@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
 							"options": {
-								"urlencoded": {}
+								"raw": {
+									"language": "json"
+								}
 							}
 						},
 						"url": {
@@ -243,6 +234,146 @@
 							"path": [
 								"user",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"anhhung15957@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								},
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/login",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_MEMBER}}",
+									"description": "This token the same token in header, this for check redis.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/verify-email",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"verify-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_MEMBER}}",
+									"description": "This token the same token in header, this for check redis.",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"description": "This's a new password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/reset-password",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "anhhung15957@gmail.com",
+									"description": "Enter email you want to reset password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/forgot-password",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"forgot-password"
 							]
 						}
 					},
