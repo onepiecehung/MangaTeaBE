@@ -62,7 +62,7 @@ export async function find(keyword, user) {
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
-        const sort = keyword.sort ? { updatedAt: keyword.sort } : { updatedAt: -1 }
+        const sort = keyword.sort ? { _id: keyword.sort } : { _id: -1 }
         const limit = parseInt(keyword.limit) || 20
         const skip = parseInt(keyword.skip) || 0
         let filters = [];
