@@ -19,3 +19,7 @@ export async function findForChapter(id) {
         flag: 1,
     })
 }
+
+export async function find(filters) {
+    return CountryModel.find(filters.length > 0 ? { $and: filters } : {});
+}

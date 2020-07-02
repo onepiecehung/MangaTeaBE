@@ -630,6 +630,39 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "find",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/country?name=Viet",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"country"
+							],
+							"query": [
+								{
+									"key": "domain",
+									"value": ".us",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Viet"
+								},
+								{
+									"key": "id",
+									"value": "240",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
