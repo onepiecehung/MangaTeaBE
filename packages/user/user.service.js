@@ -67,7 +67,12 @@ async function generateTokenActivated(object) {
 async function generateToken(user) {
     try {
         let expiration_time = parseInt(CONFIG.jwt_expiration);
-        return jwt.sign({ _id: user._id, role: user.role }, CONFIG.jwt_encryption, {
+        return jwt.sign({
+            _id: user._id,
+            role: user.role,
+            point: user.point || 0,
+            permission: user.permission || 0
+        }, CONFIG.jwt_encryption, {
             expiresIn: expiration_time
         });
     } catch (error) {
