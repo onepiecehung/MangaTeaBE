@@ -9,7 +9,7 @@ const schema = Joi.object({
     commentContent: Joi.string()
         .required()
         .max(10000)
-        .min(10),
+        .min(2),
     type: Joi.string()
         .required()
         .valid(...["CHAPTER", "MANGA", "GROUPTRANSLATION"])
@@ -26,7 +26,7 @@ const createAndUpdate = schema.keys({
     commentContent: Joi.string()
         .required()
         .max(10000)
-        .min(10),
+        .min(2),
     type: Joi.string()
         .required()
         .valid(...["CHAPTER", "MANGA", "GROUPTRANSLATION"])

@@ -2,7 +2,6 @@ import { COMMENT } from "../../globalConstant/index"
 import * as logger from "../../util/logger";
 
 import * as CommentRepository from "../repository/comment.repository";
-import { parseZone } from "moment";
 
 export async function createAndUpdate(body, query) {
     try {
