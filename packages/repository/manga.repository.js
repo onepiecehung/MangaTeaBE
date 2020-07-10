@@ -88,3 +88,13 @@ export async function findAtHome(filters, limit, skip, sort) {
         chapter: 1
     }).limit(limit).skip(skip).sort(sort)
 }
+
+export async function findArrayMangaMinUser(ArrayId, limit, skip) {
+    return MangaModel.find({
+        _id: { $in: ArrayId }
+    }, {
+        name: 1,
+        coverImage: 1,
+        bannerImage: 1
+    }).limit(limit).skip(skip)
+}

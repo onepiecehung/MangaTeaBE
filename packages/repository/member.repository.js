@@ -22,6 +22,10 @@ export async function findByIdAndPopulate(id) {
     return MemberRepository.findById(id).populate("userID")
 }
 
+export async function findByIdUserAndPopulate(id) {
+    return (await MemberRepository.findOne({ userID: id })).populate("userID");
+}
+
 export async function findByUserID(id) {
     return MemberRepository.findOne({ userID: id })
 }

@@ -1,6 +1,7 @@
 import { USER_ERROR, MANGA } from "../../globalConstant/index";
 import * as logger from "../../util/logger";
 
+import { getMetaDataManga } from "../helper/manga.response";
 import * as MangaRepository from "../repository/manga.repository";
 import * as MemberRepository from "../repository/member.repository";
 
@@ -8,6 +9,55 @@ export async function findByIdAndPopulate(id) {
     try {
         let data = await MemberRepository.findByIdAndPopulate(id)
         return data
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+export async function findByIdUserAndPopulate(id, query) {
+    try {
+        const {
+            mangaFavorite,
+            mangaSaved,
+            mangaUpload,
+            chapterUpload,
+            historyReading,
+            historyReadingChapter,
+            mangaSuggested,
+        } = query;
+        const limit = parseInt(query.limit) || 20
+        const skip = parseInt(query.skip) || 0
+        let data = await MemberRepository.findByUserID(id);
+        if (mangaFavorite == 1 && data.mangaFavorite.length > 0) {
+            let result = await getMetaDataManga(data.mangaFavorite, limit, skip);
+            return result;
+        }
+        if (mangaSaved == 1 && data.mangaSaved.length > 0) {
+            let result = await getMetaDataManga(data.mangaSaved, limit, skip);
+            return result;
+        }
+        if (chapterUpload == 1 && data.chapterUpload.length > 0) {
+            let result = await getMetaDataManga(data.chapterUpload, limit, skip);
+            return result;
+        }
+        if (historyReading == 1 && data.historyReading.length > 0) {
+            let result = await getMetaDataManga(data.historyReading, limit, skip);
+            return result;
+        }
+        if (mangaUpload == 1 && data.mangaUpload.length > 0) {
+            let result = await getMetaDataManga(data.mangaUpload, limit, skip);
+            return result;
+        }
+        if (historyReadingChapter == 1 && data.historyReadingChapter.length > 0) {
+            // let result = await getMetaDataManga(data.historyReadingChapter, limit, skip);
+            return null;
+        }
+        if (mangaSuggested == 1 && data.mangaSuggested.length > 0) {
+            let result = await getMetaDataManga(data.mangaSuggested, limit, skip);
+            return result;
+        }
+        return { manga: [], total: 0 };
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);
