@@ -1,7 +1,7 @@
 require('@babel/register');
 require('@babel/polyfill');
 require("colors")
-require("../../../database/mongo/init/toLocal")
+require("../../../database/mongo/init/index")
 
 const Redis = require("../../../database/redis/client")
 const logger = require("../../../util/logger");
@@ -23,7 +23,7 @@ async function run() {
             }
         }
     } else {
-        let ratingData = await RatingModel.find({}, {
+        let ratingData = await RatingModel.find({ userID: { $in: [2057, 339, 211] } }, {
             userID: 1,
             mangaID: 1,
             rateNumber: 1
