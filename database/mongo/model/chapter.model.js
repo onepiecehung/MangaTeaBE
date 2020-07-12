@@ -69,6 +69,10 @@ const ChapterSchema = new Schema({
     permission: {
         type: mongoose.Schema.Types.Number,
         ref: "Permission"
+    },
+    uploadAt: {
+        type: Date,
+        default: Date.now()
     }
 }, {
     timestamps: true,

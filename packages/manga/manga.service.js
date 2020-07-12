@@ -1,3 +1,5 @@
+const raccoon = require('raccoon');
+
 import { findAndMoveElementToLastArray } from "../../util/help";
 import { MANGA, USER_ERROR } from "../../globalConstant";
 import * as logger from "../../util/logger";
@@ -62,7 +64,7 @@ export async function find(keyword, user) {
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
-        const sort = keyword.sort ? { _id: keyword.sort } : { _id: -1 }
+        const sort = keyword.sort ? { lastUpdatedChapter: keyword.sort } : { lastUpdatedChapter: -1 }
         const limit = parseInt(keyword.limit) || 20
         const skip = parseInt(keyword.skip) || 0
         let filters = [];
@@ -237,6 +239,12 @@ export async function findAtHome(keyword, user) {
         }
         if (slide) {
             if (user !== false) {
+                let arraySlide = await raccoon.recommendFor(user._id, limit);
+                if (arraySlide.length != 0) {
+                    let manga = await MangaRepository.findArrayMangaMin(arraySlide, limit, skip > 0 ? (skip - 1) * limit : skip, {});
+                    let data = { manga: manga, total: arraySlide.length }
+                    return data;
+                }
                 let member = await MemberRepository.findByUserID(user._id);
                 if (!member) {
                     return Promise.reject(new Error(USER_ERROR.USER_NOT_FOUND))
