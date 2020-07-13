@@ -27,7 +27,9 @@ export async function find(keyword, user) {
             tags,
             format,
             status,
-            name
+            name,
+            year,
+            yearEnd
         } = keyword
         if (id) {
             let myKey = `MangaInfo:${id}`;
@@ -101,6 +103,12 @@ export async function find(keyword, user) {
         }
         if (status) {
             filters.push({ status: status });
+        }
+        if (year) {
+            filters.push({ "startDate.year": parseInt(year) })
+        }
+        if (yearEnd) {
+            filters.push({ "endDate.year": parseInt(yearEnd) })
         }
         let [mangaMeta, total] = await Promise.all([
             MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),

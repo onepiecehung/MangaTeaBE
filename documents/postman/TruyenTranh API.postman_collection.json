@@ -214,11 +214,17 @@
 								{
 									"key": "email",
 									"value": "yjy94377@eveav.com",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "password",
 									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "phanducthang41756@gmail.com",
 									"type": "text"
 								}
 							],
@@ -903,7 +909,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/manga?id=21059",
+							"raw": "{{API_HOST}}/manga?year=2011",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -988,7 +994,17 @@
 								},
 								{
 									"key": "id",
-									"value": "21059"
+									"value": "21059",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2011"
+								},
+								{
+									"key": "yearEnd",
+									"value": "2003",
+									"disabled": true
 								}
 							]
 						}
@@ -1061,12 +1077,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjc4MSwicm9sZSI6Ik1FTUJFUiIsImlhdCI6MTU5MjkwMDc0MSwiZXhwIjoxNTkzNTA1NTQxfQ.RB19vTiF4vbBmJLvPyC06c2Pd-8UzGrZ2Gbs1AeE5Tw",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMzOSwicm9sZSI6Ik1FTUJFUiIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk0NTYwMzI4LCJleHAiOjE1OTUxNjUxMjh9.Hw6QZB8vG8CmS21xayE8o6Hbhjtl1foGshcrLYHIGJY",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/manga/home?historyReading=1&skip&limit&sort",
+							"raw": "{{API_HOST}}/manga/home?slide=true",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -1078,7 +1094,8 @@
 								{
 									"key": "historyReading",
 									"value": "1",
-									"description": "lay thi truyen vao 1, khong thi thoi. (khong truyen 3 bien cung 1 luc, neu truyen 3 bien cung 1 luc, thu tu uu tien se la tu tren xuong)"
+									"description": "lay thi truyen vao 1, khong thi thoi. (khong truyen 3 bien cung 1 luc, neu truyen 3 bien cung 1 luc, thu tu uu tien se la tu tren xuong)",
+									"disabled": true
 								},
 								{
 									"key": "trending",
@@ -1095,21 +1112,23 @@
 								{
 									"key": "slide",
 									"value": "true",
-									"description": "true",
-									"disabled": true
+									"description": "true"
 								},
 								{
 									"key": "skip",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "limit",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "sort",
 									"value": null,
-									"description": "khong truyen vao"
+									"description": "khong truyen vao",
+									"disabled": true
 								}
 							]
 						}

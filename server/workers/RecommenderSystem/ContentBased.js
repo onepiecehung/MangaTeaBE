@@ -11,7 +11,7 @@ const ContentBasedRecommender = require('content-based-recommender')
 const recommender = new ContentBasedRecommender({
     maxVectorSize: 100,// 100 is default
     minScore: 0.1,
-    maxSimilarDocuments: 100,
+    maxSimilarDocuments: 5,
     debug: true
 });
 
