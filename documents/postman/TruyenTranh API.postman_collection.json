@@ -909,7 +909,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/manga?year=2011",
+							"raw": "{{API_HOST}}/manga?fromYearEnd=2010&toYearEnd=2013",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -999,12 +999,31 @@
 								},
 								{
 									"key": "year",
-									"value": "2011"
+									"value": "2011",
+									"disabled": true
 								},
 								{
 									"key": "yearEnd",
 									"value": "2003",
 									"disabled": true
+								},
+								{
+									"key": "fromYear",
+									"value": "2014",
+									"disabled": true
+								},
+								{
+									"key": "toYear",
+									"value": "2015",
+									"disabled": true
+								},
+								{
+									"key": "fromYearEnd",
+									"value": "2010"
+								},
+								{
+									"key": "toYearEnd",
+									"value": "2013"
 								}
 							]
 						}

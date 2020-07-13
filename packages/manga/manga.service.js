@@ -29,7 +29,11 @@ export async function find(keyword, user) {
             status,
             name,
             year,
-            yearEnd
+            yearEnd,
+            fromYear,
+            toYear,
+            fromYearEnd,
+            toYearEnd
         } = keyword
         if (id) {
             let myKey = `MangaInfo:${id}`;
@@ -109,6 +113,18 @@ export async function find(keyword, user) {
         }
         if (yearEnd) {
             filters.push({ "endDate.year": parseInt(yearEnd) })
+        }
+        if (fromYear) {
+            filters.push({ "startDate.year": { $gte: parseInt(fromYear) } });
+        }
+        if (toYear) {
+            filters.push({ "startDate.year": { $lte: parseInt(toYear) } });
+        }
+        if (fromYearEnd) {
+            filters.push({ "endDate.year": { $gte: parseInt(fromYearEnd) } });
+        }
+        if (toYearEnd) {
+            filters.push({ "endDate.year": { $lte: parseInt(toYearEnd) } });
         }
         let [mangaMeta, total] = await Promise.all([
             MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
