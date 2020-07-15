@@ -134,7 +134,10 @@ const MangaSchema = new Schema({
     totalChapter: { type: Number, default: 0 },
     view: { type: Number, default: 0 },
     lastUpdatedChapter: { type: Date, default: Date.now() },
-    uploadAt: { type: Date, default: Date.now() }
+    uploadAt: { type: Date, default: Date.now() },
+    suggestionGenres: { type: Array },
+    suggestionDescription: { type: Array },
+    suggestionTags: { type: Array },
 }, {
     timestamps: true,
 })

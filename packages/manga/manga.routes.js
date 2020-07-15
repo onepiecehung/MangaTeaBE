@@ -28,4 +28,11 @@ router.route("/home")
         MangaController.findAtHome
     )
 
+
+router.route("/suggestion")
+    .get(
+        MangaController.findSuggestion
+    )
+
+
 export default router;

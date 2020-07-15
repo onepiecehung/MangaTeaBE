@@ -318,3 +318,36 @@ export async function findAtHome(keyword, user) {
         return Promise.reject(error);
     }
 }
+
+
+export async function findSuggestion(keyword) {
+    try {
+        const {
+            genre,
+            tag,
+            description,
+            id
+        } = keyword;
+        const limit = parseInt(keyword.limit) || 20
+        const skip = parseInt(keyword.skip) || 0
+        if (description) {
+            let data = await MangaRepository.findById(id);
+            let result = await MangaRepository.findArrayMangaMinUser(data.suggestionDescription, limit, skip);
+            return result;
+        }
+        if (genre) {
+            let data = await MangaRepository.findById(id);
+            let result = await MangaRepository.findArrayMangaMinUser(data.suggestionGenres, limit, skip);
+            return result;
+        }
+        if (tag) {
+            let data = await MangaRepository.findById(id);
+            let result = await MangaRepository.findArrayMangaMinUser(data.suggestionTags, limit, skip);
+            return result;
+        }
+        return Promise.reject("Query is required!");
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}

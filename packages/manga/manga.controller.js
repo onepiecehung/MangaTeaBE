@@ -3,6 +3,19 @@ import * as MangaService from "./manga.service";
 import * as MangaValidator from "./manga.validation";
 import * as response from "../../util/response.json";
 
+
+export async function findSuggestion(req, res) {
+    try {
+        if (!req.query.id) {
+            return response.error(res, req, "ID manga is required!");
+        }
+        let data = await MangaService.findSuggestion(req.query);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
+
 export async function find(req, res) {
     try {
         let data = await MangaService.find(req.query, req.user);
