@@ -326,10 +326,20 @@ export async function findSuggestion(keyword) {
             genre,
             tag,
             description,
-            id
+            id,
+            all
         } = keyword;
         const limit = parseInt(keyword.limit) || 20
         const skip = parseInt(keyword.skip) || 0
+        if (all) {
+            let data = await MangaRepository.findById(id);
+            let [suggestionDescription, suggestionGenres, suggestionTags] = await Promise.all([
+                MangaRepository.findArrayMangaMinUser(data.suggestionDescription, limit, skip),
+                MangaRepository.findArrayMangaMinUser(data.suggestionGenres, limit, skip),
+                MangaRepository.findArrayMangaMinUser(data.suggestionTags, limit, skip)
+            ])
+            return { suggestionDescription, suggestionGenres, suggestionTags }
+        }
         if (description) {
             let data = await MangaRepository.findById(id);
             let result = await MangaRepository.findArrayMangaMinUser(data.suggestionDescription, limit, skip);
