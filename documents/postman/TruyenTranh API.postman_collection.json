@@ -61,21 +61,12 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "anhhung15957@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "123456",
-									"type": "text"
-								}
-							],
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"anhhung15957@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
 							"options": {
-								"urlencoded": {}
+								"raw": {
+									"language": "json"
+								}
 							}
 						},
 						"url": {
@@ -192,7 +183,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/E:/79335279_1375587515981142_4250371353485508608_n.jpg"
+									"src": "/E:/102337855_254415575658075_1843813942281321727_n.jpg"
 								}
 							],
 							"options": {
@@ -207,6 +198,188 @@
 							"path": [
 								"user",
 								"upload-avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login - yjy94377@eveav.com",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "yjy94377@eveav.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "phanducthang41756@gmail.com",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/login",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"anhhung15957@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								},
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/login",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_MEMBER}}",
+									"description": "This token the same token in header, this for check redis.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/verify-email",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"verify-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_MEMBER}}",
+									"description": "This token the same token in header, this for check redis.",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"description": "This's a new password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/reset-password",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "anhhung15957@gmail.com",
+									"description": "Enter email you want to reset password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/forgot-password",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"forgot-password"
 							]
 						}
 					},
@@ -439,6 +612,78 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get element on user (manga saved, history, etc)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjc4MSwicm9sZSI6Ik1FTUJFUiIsInBvaW50IjoxMDAwMCwicGVybWlzc2lvbiI6W10sImlhdCI6MTU5NDM3MDE4OCwiZXhwIjoxNTk0OTc0OTg4fQ.jCSxVNVjJnjl4Xj-bUutr5TAwWVYsCH2LkdGbspLMzg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/member/user?mangaFavorite=1&skip=1&limit=1",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"member",
+								"user"
+							],
+							"query": [
+								{
+									"key": "mangaFavorite",
+									"value": "1",
+									"description": "truyen vao` 1 neu muon lay, con khong thi khong truyen gi ca"
+								},
+								{
+									"key": "mangaSaved",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "chapterUpload",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "historyReading",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "mangaUpload",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "historyReadingChapter",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "mangaSuggested",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "1",
+									"description": "default: 0"
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"description": "default: 20"
+								}
+							]
+						},
+						"description": "thu tu uu tien tu tren xuong duoi"
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -459,6 +704,39 @@
 							"path": [
 								"country",
 								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/country?name=Viet",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"country"
+							],
+							"query": [
+								{
+									"key": "domain",
+									"value": ".us",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Viet"
+								},
+								{
+									"key": "id",
+									"value": "240",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -623,9 +901,15 @@
 					"name": "get manga",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{API_HOST}}/manga?skip=&limit=&sort&fromCreatedAt&toCreatedAt&id=&authorName=Kei Kanai&isAdult=true&country=JP&tags&format&status",
+							"raw": "{{API_HOST}}/manga?fromYearEnd=2010&toYearEnd=2013",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -636,72 +920,275 @@
 								{
 									"key": "skip",
 									"value": "",
-									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
+									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html",
+									"disabled": true
 								},
 								{
 									"key": "limit",
 									"value": "",
-									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html"
-								},
-								{
-									"key": "sort",
-									"value": null,
-									"description": "object (nên bỏ trống)"
-								},
-								{
-									"key": "fromCreatedAt",
-									"value": null,
-									"description": "time"
-								},
-								{
-									"key": "toCreatedAt",
-									"value": null,
-									"description": "time"
+									"description": "https://stackjava.com/mongodb/phan-trang-trong-mongodb-skip-limit-paging-trong-mongodb.html",
+									"disabled": true
 								},
 								{
 									"key": "genre",
-									"value": "Mystery",
+									"value": "Adventure",
 									"description": "[\"Drama\",\"Mystery\"] Array or String (truyền string thì 1 biến, truyền nhiều biến lên là array)",
 									"disabled": true
 								},
 								{
 									"key": "genre",
-									"value": "Drama",
+									"value": "drama",
 									"description": "[\"Drama\",\"Mystery\"] Array or String",
 									"disabled": true
 								},
 								{
-									"key": "id",
-									"value": "",
-									"description": "get manga by id (có id này mọi thứ còn lại là vô nghĩa)"
-								},
-								{
 									"key": "authorName",
-									"value": "Kei Kanai"
+									"value": "Kei Kanai",
+									"disabled": true
 								},
 								{
 									"key": "isAdult",
-									"value": "true"
+									"value": "true",
+									"disabled": true
 								},
 								{
 									"key": "country",
 									"value": "JP",
-									"description": "viết tắt tên quốc gia (JP,KR,CN, chủ yếu truyện từ 3 qg này)"
+									"description": "viết tắt tên quốc gia (JP,KR,CN, chủ yếu truyện từ 3 qg này)",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Isekai Cheat Survival Meshi",
+									"disabled": true
+								},
+								{
+									"key": "fromCreatedAt",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "toCreatedAt",
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "tags",
 									"value": null,
-									"description": "cái này sau này sẽ bổ xung dữ liệu để search"
+									"disabled": true
 								},
 								{
 									"key": "format",
 									"value": null,
-									"description": "MANGA, ONE_SHOT, NOVEL"
+									"disabled": true
 								},
 								{
 									"key": "status",
 									"value": null,
-									"description": "FINISHED, RELEASING"
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "21059",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2011",
+									"disabled": true
+								},
+								{
+									"key": "yearEnd",
+									"value": "2003",
+									"disabled": true
+								},
+								{
+									"key": "fromYear",
+									"value": "2014",
+									"disabled": true
+								},
+								{
+									"key": "toYear",
+									"value": "2015",
+									"disabled": true
+								},
+								{
+									"key": "fromYearEnd",
+									"value": "2010"
+								},
+								{
+									"key": "toYearEnd",
+									"value": "2013"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create and update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjc4MSwicm9sZSI6Ik1FTUJFUiIsImlhdCI6MTU5MTg2MTUzOSwiZXhwIjoxNTkyNDY2MzM5fQ.n8mrAKmfIddjxjLID2msSS6GUn_y1eImSHKqZ6WeXs4",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "banner",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "cover",
+									"type": "file",
+									"src": []
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/manga",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"manga"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get home page",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMzOSwicm9sZSI6Ik1FTUJFUiIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk0NTYwMzI4LCJleHAiOjE1OTUxNjUxMjh9.Hw6QZB8vG8CmS21xayE8o6Hbhjtl1foGshcrLYHIGJY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/manga/home?slide=true",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"manga",
+								"home"
+							],
+							"query": [
+								{
+									"key": "historyReading",
+									"value": "1",
+									"description": "lay thi truyen vao 1, khong thi thoi. (khong truyen 3 bien cung 1 luc, neu truyen 3 bien cung 1 luc, thu tu uu tien se la tu tren xuong)",
+									"disabled": true
+								},
+								{
+									"key": "trending",
+									"value": "-1",
+									"description": "1 or -1 (-1 la lay top tu tren xuong 1->100 do pho bien giam dan)",
+									"disabled": true
+								},
+								{
+									"key": "popularity",
+									"value": "-1",
+									"description": "1 or -1",
+									"disabled": true
+								},
+								{
+									"key": "slide",
+									"value": "true",
+									"description": "true"
+								},
+								{
+									"key": "skip",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": null,
+									"description": "khong truyen vao",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get manga suggestion by id manga",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_HOST}}/manga/suggestion?id=3&genre=true",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"manga",
+								"suggestion"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								},
+								{
+									"key": "tag",
+									"value": "true",
+									"description": "muốn lấy thì truyền true, nếu khong thì không truyền lên",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "true",
+									"description": "muốn lấy thì truyền true, nếu khong thì không truyền lên",
+									"disabled": true
+								},
+								{
+									"key": "genre",
+									"value": "true",
+									"description": "muốn lấy thì truyền true, nếu khong thì không truyền lên"
 								}
 							]
 						}
@@ -1036,6 +1523,507 @@
 								{
 									"key": "detail",
 									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Group Translation",
+			"item": [
+				{
+					"name": "create and update group",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Prophet's Release\",\n\t\"language\": [\n\t\t240\n\t],\n\t\"web\": \"https://prophetsrelease.mangadex.com/\",\n\t\"discord\": \"https://discord.gg/xBFPCQe\",\n\t\"email\": \"email@group.com\",\n\t\"about\": \"We do fantasy manga! And we need TRANSLATORS! You are welcome to propose new manga for us to pick up, but make sure it's \\n a) fantasy; \\n b) not licensed; \\n c) not scanlated by someone else already.\\nOur releases are available as downloadable archives from our web site.\\nWe don't currently accept donations, but the like button is always up there ^^\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/group/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get group",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsImlhdCI6MTU5MTc3ODM4MCwiZXhwIjoxNTkyMzgzMTgwfQ.EAn1wfTABmEdpZZYZogRR4N0vcKxBqQWpXeMOWE8LrI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/group/?id=1&populate=true&name=Group 2&userOwnerID&web&discord&email&about&isUploadMember&updateBy&createBy",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"group",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "get gr by id"
+								},
+								{
+									"key": "populate",
+									"value": "true",
+									"description": "true/false (need false)"
+								},
+								{
+									"key": "name",
+									"value": "Group 2",
+									"description": "tên gr cần tìm"
+								},
+								{
+									"key": "userOwnerID",
+									"value": null,
+									"description": "id user tạo ra group"
+								},
+								{
+									"key": "web",
+									"value": null,
+									"description": "web của group"
+								},
+								{
+									"key": "discord",
+									"value": null,
+									"description": "discord của gr"
+								},
+								{
+									"key": "email",
+									"value": null,
+									"description": "email của gr"
+								},
+								{
+									"key": "about",
+									"value": null,
+									"description": "mô tả gr"
+								},
+								{
+									"key": "isUploadMember",
+									"value": null,
+									"description": "true/false (quyền upload)"
+								},
+								{
+									"key": "updateBy",
+									"value": null,
+									"description": "gr đc update by id"
+								},
+								{
+									"key": "createBy",
+									"value": null,
+									"description": "gr đc create by id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload ava && photo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/E:/EZlHQMGU8AAoVAK.jpg"
+								},
+								{
+									"key": "cover",
+									"type": "file",
+									"src": "/E:/102337855_254415575658075_1843813942281321727_n.jpg"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/group/upload/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"group",
+								"upload",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Chapter",
+			"item": [
+				{
+					"name": "create and Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							},
+							{
+								"key": "Keep-Alive",
+								"value": "timeout=5000000, max=10000000",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"description": "file",
+									"type": "file",
+									"src": [
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-01.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-02.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-03.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-04-05.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-06.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-07.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-08.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-09.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-10.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-11.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-12.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-13.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-14.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-15.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-16.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-17.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-18.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-19.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-20.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-21.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-22.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-23.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-24.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-25.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-26.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-27.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-28.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-29.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-30.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-31.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/Meshi-32.png",
+										"/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 15 [Prophets Release]/PR-Credit-Page_meshi15.png"
+									]
+								},
+								{
+									"key": "name",
+									"value": "Chapter 15",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "chapterNumber",
+									"value": "15",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "mangaID",
+									"value": "21052",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "groupTranslation",
+									"value": "11",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "240",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "chỉ gửi lên khi chỉnh sửa",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/chapter/",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"chapter",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://api.imgbb.com/1/upload?key={{IMGBB}}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/NguyenHuuHung/Desktop/posters.tar/posters/18.jpg",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"value": "https://i.imgur.com/4itP0nL.jpg",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "https://api.imgbb.com/1/upload?key={{IMGBB}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"imgbb",
+								"com"
+							],
+							"path": [
+								"1",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{IMGBB}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get chapter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_MEMBER}}",
+								"type": "text"
+							},
+							{
+								"key": "Keep-Alive",
+								"value": "timeout=5000000, max=10000000",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Chapter 15",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "chapterNumber",
+									"value": "15",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "mangaID",
+									"value": "21052",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "groupTranslation",
+									"value": "11",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "240",
+									"description": "number",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"description": "chỉ gửi lên khi chỉnh sửa",
+									"type": "text"
+								},
+								{
+									"key": "fromCreatedAt",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "toCreatedAt",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "123",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/chapter/?mangaID=21052&fromCreatedAt=&toCreatedAt=",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"chapter",
+								""
+							],
+							"query": [
+								{
+									"key": "chapterNumber",
+									"value": "15",
+									"description": "number",
+									"disabled": true
+								},
+								{
+									"key": "mangaID",
+									"value": "21052",
+									"description": "number"
+								},
+								{
+									"key": "groupTranslation",
+									"value": "11",
+									"description": "number",
+									"disabled": true
+								},
+								{
+									"key": "language",
+									"value": "240",
+									"description": "number",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"description": "get chapter by id",
+									"disabled": true
+								},
+								{
+									"key": "fromCreatedAt",
+									"value": ""
+								},
+								{
+									"key": "name",
+									"value": "Chapter 15",
+									"description": "string",
+									"disabled": true
+								},
+								{
+									"key": "toCreatedAt",
+									"value": ""
+								},
+								{
+									"key": "status",
+									"value": "RELEASE",
+									"disabled": true
 								}
 							]
 						}

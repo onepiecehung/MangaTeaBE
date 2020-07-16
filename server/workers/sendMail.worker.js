@@ -1,5 +1,4 @@
-import { JOB_NAME } from "../connector/rabbitmq/config/index";
-import { TEMPLATE } from "../../globalConstant/index";
+import { TEMPLATE, JOB_NAME } from "../../globalConstant/index";
 import * as logger from "../../util/logger";
 import * as SendGrid from "../../util/sendGird/index";
 import RABBIT from "../connector/rabbitmq/init/index";

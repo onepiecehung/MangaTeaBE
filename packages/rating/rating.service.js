@@ -1,3 +1,5 @@
+const raccoon = require('raccoon');
+
 import * as logger from "../../util/logger";
 
 import * as RatingRepository from "../repository/rating.repository";
@@ -24,6 +26,11 @@ export async function create(ratingInfo) {
             }
             await RatingRepository.save(checkUpdate)
             return true;
+        }
+        if (ratingInfo.rateNumber < 6) {
+            await raccoon.disliked(ratingInfo.userID, ratingInfo.mangaID)
+        } else {
+            await raccoon.liked(ratingInfo.userID, ratingInfo.mangaID)
         }
         let data = await RatingRepository.create(ratingInfo);
         return data;

@@ -5,8 +5,17 @@ import * as response from "../../util/response.json";
 
 export async function getMemberById(req, res) {
     try {
-        let data = await MemberService.findByIdAndPopulate(req.params.id)
-        return response.success(res, data, 200)
+        let data = await MemberService.findByIdAndPopulate(req.params.id);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error)
+    }
+}
+
+export async function getMemberByIdUser(req, res) {
+    try {
+        let data = await MemberService.findByIdUserAndPopulate(req.user._id, req.query);
+        return response.success(res, data, 200);
     } catch (error) {
         return response.error(res, req, error)
     }

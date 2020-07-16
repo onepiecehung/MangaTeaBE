@@ -1,9 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { USER_ERROR, CONFIG, JOB_NAME } from "../../globalConstant/index";
+import { USER_ERROR, CONFIG, JOB_NAME, URL_FE } from "../../globalConstant/index";
 import * as logger from "../../util/logger";
 import RABBIT from "../../server/connector/rabbitmq/init/index"
+import Redis from "../../database/redis/client";
 
 import * as MemberRepository from "../repository/member.repository";
 import * as UserRepository from "../repository/user.repository";
@@ -25,10 +26,17 @@ export async function Register(userInfo) {
         }
         let data = await UserRepository.create(userInfo)
         await MemberRepository.create({ userID: data._id })
+        let token = await generateTokenActivated({
+            _id: data._id,
+            email: data.email,
+            access: `activated`
+        })
+        const myKey = "UserVerify:" + data._id;
+        await Redis.setJson(myKey, token, 60 * 60 * 4);
         await RABBIT.sendDataToRabbit(JOB_NAME.SEND_EMAIL_REG, {
             email: data.email,
             fullName: (data.fullName) ? data.fullName : data.username,
-            urlActive: "Url is not available."
+            urlActive: `${URL_FE}activated?token=${token}`
         })
         return data
     } catch (error) {
@@ -37,7 +45,20 @@ export async function Register(userInfo) {
     }
 }
 
-
+/**
+ * 
+ * @param {*} Object
+ */
+async function generateTokenActivated(object) {
+    try {
+        let expiration_time = parseInt(CONFIG.jwt_expiration);
+        return jwt.sign(object, CONFIG.jwt_encryption, {
+            expiresIn: expiration_time
+        });
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
 
 /**
  * 
@@ -46,7 +67,12 @@ export async function Register(userInfo) {
 async function generateToken(user) {
     try {
         let expiration_time = parseInt(CONFIG.jwt_expiration);
-        return jwt.sign({ _id: user._id, role: user.role }, CONFIG.jwt_encryption, {
+        return jwt.sign({
+            _id: user._id,
+            role: user.role,
+            point: user.point || 0,
+            permission: user.permission || 0
+        }, CONFIG.jwt_encryption, {
             expiresIn: expiration_time
         });
     } catch (error) {
@@ -117,6 +143,21 @@ export async function changePassword(data, userAuth) {
     }
 }
 
+export async function resetPassword(data, userAuth) {
+    try {
+        const userInfo = await UserRepository.findById(userAuth._id);
+        if (!userInfo) {
+            return Promise.reject(USER_ERROR.USER_NOT_FOUND);
+        }
+        let salt = bcrypt.genSaltSync(10);
+        data.password = bcrypt.hashSync(data.password, salt);
+        await UserRepository.findByIdAndUpdate(userInfo._id, { password: data.password });
+        return true
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
 
 export async function uploadAvatar(userAuth, url_ava) {
     try {
@@ -142,6 +183,53 @@ export async function updateProfile(userAuth, userInfoUpdate) {
         }
         await UserRepository.findByIdAndUpdate(userAuth._id, userInfoUpdate)
         return true
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+export async function verifyEmail(userAuth) {
+    try {
+        let userInfo = await UserRepository.findById(userAuth._id);
+        if (!userInfo) {
+            return Promise.reject(USER_ERROR.USER_NOT_FOUND);
+        }
+        let userInfo2 = await UserRepository.findByEmail(userAuth.email);
+        if (!userInfo2) {
+            return Promise.reject(USER_ERROR.EMAIL_NOT_EXISTS);
+        }
+        await UserRepository.findByIdAndUpdate(userAuth._id, {
+            status: "ACTIVATED",
+            verifyEmail: true
+        })
+        return true;
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function forgotPassword(userAuth) {
+    try {
+        let userInfo = await UserRepository.findByEmail(userAuth.email);
+        if (!userInfo) {
+            return Promise.reject(USER_ERROR.EMAIL_NOT_EXISTS);
+        }
+        let token = await generateTokenActivated({
+            _id: userInfo._id,
+            email: userInfo.email,
+            access: `forgotPassword`
+        })
+        const myKey = "UserForgotPass:" + userInfo._id;
+        await Redis.setJson(myKey, token, 60 * 60);
+        await RABBIT.sendDataToRabbit(JOB_NAME.FORGOT_PASSWORD, {
+            email: userInfo.email,
+            fullName: (userInfo.fullName) ? userInfo.fullName : userInfo.username,
+            urlActive: `${URL_FE}resetPassword?token=${token}`
+        })
+        return { message: `We have just sent you an email to confirm.` }
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);

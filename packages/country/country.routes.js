@@ -14,4 +14,9 @@ router.route('/all')
     );
 
 
+router.route("/")
+    .get(
+        CountryController.find
+    )
+
 export default router

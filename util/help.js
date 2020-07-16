@@ -30,3 +30,9 @@ export function getClientIp() {
     return address
 }
 
+export async function findAndMoveElementToLastArray(elementData, arrayData) {
+    let posMangaId = arrayData.indexOf(elementData);
+    arrayData.splice(posMangaId, 1);
+    arrayData.push(elementData);
+    return arrayData;
+}

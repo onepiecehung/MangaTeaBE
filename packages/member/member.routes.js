@@ -9,11 +9,18 @@ import { Authentication } from "../../util/JWT/jwt";
 // validation
 // service
 
+router.route("/user")
+    .get(
+        Authentication,
+        MemberController.getMemberByIdUser
+    );
+
 
 router.route('/:id')
     .get(
         MemberController.getMemberById
     );
+
 
 router.route("/save-manga")
     .post(

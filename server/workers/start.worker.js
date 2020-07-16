@@ -1,6 +1,12 @@
 require('@babel/register');
 require('@babel/polyfill');
 require("colors")
+const path = require('path');
+const dotEnvConfigs = {
+    path: path.resolve(process.cwd(), '.env'),
+};
+require('dotenv').config(dotEnvConfigs);
+
 require("../../database/mongo/init/index")
 const {
     createQueue, createWorkers

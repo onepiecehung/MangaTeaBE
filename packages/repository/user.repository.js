@@ -32,3 +32,12 @@ export async function changePassword(id, data) {
 export async function findByIdAndUpdate(id, update) {
     return UserModel.findByIdAndUpdate(id, update)
 }
+
+export async function getUsernameAndId(id) {
+    return UserModel.findOne({
+        _id: id
+    }, {
+        username: 1,
+        _id: 1
+    })
+}

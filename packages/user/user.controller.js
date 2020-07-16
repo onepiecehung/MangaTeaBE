@@ -1,14 +1,12 @@
-import axios from "axios";
-import FormData from 'form-data';
 
-import { CLIENT_ID_IMGUR } from "../../server/config/constants";
 import * as utils from "../../util/help";
 
+import { uploadImgur } from "../middleware/upload.imgur";
 import * as response from "../../util/response.json";
 import * as UserService from "./user.service";
 import * as UserValidator from "./user.validation";
 
-// const Redis from  "../../database/redis/client")
+import Redis from "../../database/redis/client";
 
 export async function Register(req, res) {
     try {
@@ -82,16 +80,8 @@ export async function changePassword(req, res) {
 
 export async function uploadAvatar(req, res) {
     try {
-        let dataImage = new FormData()
-        dataImage.append("image", req.file.buffer)
-        const formHeaders = dataImage.getHeaders();
-        let url_ava = await axios.post("https://api.imgur.com/3/image/", dataImage, {
-            headers: {
-                'Authorization': `Client-ID ${CLIENT_ID_IMGUR}`,
-                ...formHeaders
-            },
-        })
-        let data = await UserService.uploadAvatar(req.user, url_ava.data.data.link)
+        let url_ava = await uploadImgur(req.file.buffer);
+        let data = await UserService.uploadAvatar(req.user, url_ava.data.link)
         return response.success(res, data, 200)
     } catch (error) {
         return response.error(res, req, error)
@@ -107,8 +97,47 @@ export async function updateProfile(req, res) {
             });
         }
         let data = await UserService.updateProfile(req.user, req.body)
-        return response.success(res, data, 200)
+        return response.success(res, data, 200);
     } catch (error) {
         return response.error(res, req, error)
+    }
+}
+
+export async function resetPassword(req, res) {
+    try {
+        const myKey = "UserForgotPass:" + req.user._id;
+        const value = await Redis.getJson(myKey);
+        if (!value || value !== req.body.token) {
+            return response.error(res, req, `Links are no longer available or expired.`, 403);
+        }
+        let data = await UserService.resetPassword(req.body, req.user);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
+
+
+export async function verifyEmail(req, res) {
+    try {
+        const myKey = "UserVerify:" + req.user._id;
+        const value = await Redis.getJson(myKey);
+        if (!value || value !== req.body.token) {
+            return response.error(res, req, `Links are no longer available or expired.`, 403);
+        }
+        let data = await UserService.verifyEmail(req.user);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
+
+
+export async function forgotPassword(req, res) {
+    try {
+        let data = await UserService.forgotPassword(req.body);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
     }
 }

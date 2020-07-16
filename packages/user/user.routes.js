@@ -49,4 +49,24 @@ router.route("/upload-avatar")
         UserController.uploadAvatar
     )
 
+router.route("/reset-password")
+    .post(
+        Authentication,
+        UserController.resetPassword
+    )
+
+
+router.route("/verify-email")
+    .post(
+        Authentication,
+        UserController.verifyEmail
+    )
+
+
+router.route("/forgot-password")
+    .post(
+        UserController.forgotPassword
+    )
+
+
 export default router;

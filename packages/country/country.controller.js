@@ -10,4 +10,11 @@ export async function addAllCountry(req, res) {
     }
 }
 
-
+export async function find(req, res) {
+    try {
+        let data = await CountryService.find(req.query)
+        return response.success(res, data, 200)
+    } catch (error) {
+        return response.error(res, req, error)
+    }
+}

@@ -8,3 +8,18 @@ export async function create(CountryInfo) {
 export async function findById(id) {
     return CountryModel.findById(id)
 }
+
+export async function findForChapter(id) {
+    return CountryModel.findOne({
+        _id: id
+    }, {
+        language: 1,
+        alpha2Code: 1,
+        nativeName: 1,
+        flag: 1,
+    })
+}
+
+export async function find(filters) {
+    return CountryModel.find(filters.length > 0 ? { $and: filters } : {});
+}

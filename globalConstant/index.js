@@ -86,17 +86,6 @@ export const USER_ERROR = {
 
 
 
-/**
- * 
- * @param {*} Manga
- * @param {*} callback 
- */
-export const MANGA = {
-  MANGA_SAVED_EXIST: "MANGA SAVED EXIST",
-  MANGA_NOT_EXISTS: "MANGA NOT EXISTS",
-  MANGA_NOT_FOUND: "MANGA NOT FOUND",
-  MANGA_MISSING_ID: "MISSING ID MANGA"
-}
 
 
 /**
@@ -105,7 +94,8 @@ export const MANGA = {
 export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || `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`;
 export const SENDER_EMAIL = process.env.SENDER_EMAIL || 'MangaTea <no-reply@mangatea.xyz>';
 export const TEMPLATE = {
-  REG: process.env.T_REG_MAIL || `d-89c3e2fe02774250b6579037b4c0a7ee`
+  REG: process.env.T_REG_MAIL || `d-89c3e2fe02774250b6579037b4c0a7ee`,
+  FORGOT_PASSWORD: process.env.T_FORGOT_PASSWORD || `d-4a0a33b56a7e4a00926ff55c7c6cd685`
 }
 export const FOOTER_EMAIL = {
   nameCompany: process.env.NAME_COMPANY || `MangaTea Inc.`,
@@ -141,6 +131,38 @@ export const AUTHOR = {
   AUTHOR_IS_EXIST: "Author is exist."
 }
 
+
+export const GROUP_TRANSLATION = {
+  GROUP_TRANSLATION_IS_NOT_FOUND: "Group translation is not found.",
+  GROUP_TRANSLATION_IS_EXIST: "Group translation is exist.",
+  GROUP_TRANSLATION_IS_NOT_EXIST: "Group translation is not exist.",
+  GROUP_TRANSLATION_permission_denied: "You do not have permission to update.",
+}
+
+/**
+ * 
+ * @param {*} Manga
+ * @param {*} callback 
+ */
+export const MANGA = {
+  MANGA_SAVED_EXIST: "MANGA SAVED EXIST",
+  MANGA_NOT_EXISTS: "MANGA IS NOT EXISTS",
+  MANGA_IS_EXISTS: "MANGA IS EXISTS",
+  MANGA_NOT_FOUND: "MANGA IS NOT FOUND",
+  MANGA_MISSING_ID: "MISSING ID MANGA",
+  MANGA_permission_denied: "Permission denied"
+}
+
+export const CHAPTER = {
+  CHAPTER_IS_NOT_FOUND: "Chapter is not found.",
+  CHAPTER_IS_EXIST: "Chapter is exist.",
+  CHAPTER_IS_NOT_EXIST: "Chapter is not exist.",
+  CHAPTER_permission_denied: "You do not have permission to update.",
+}
+
+
+
+export const URL_FE = process.env.URL_FE || `https://mangatea.live/`
 /**
  * CORS
  */

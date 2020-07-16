@@ -1,6 +1,10 @@
-import * as  CountryRepository from "../repository/country.repository";
-import * as  logger from "../../util/logger";
 import axios from "axios";
+
+import * as  logger from "../../util/logger";
+import * as Redis from "../../database/redis/client";
+
+import * as  CountryRepository from "../repository/country.repository";
+
 export async function addAllCountry() {
     try {
         let data = await axios({
@@ -24,6 +28,39 @@ export async function addAllCountry() {
             })
         }
         return true
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function find(keyword) {
+    try {
+        const {
+            domain,
+            name,
+            id
+        } = keyword;
+        if (id) {
+            let myKey = `CountryInfo:${id}`;
+            let value = await Redis.getJson(myKey);
+            if (value) {
+                return value;
+            }
+            let data = await CountryRepository.findById(id);
+            await Redis.setJson(myKey, data, 300);
+            return data;
+        }
+        let filters = [];
+        if (name) {
+            filters.push({ name: new RegExp(name, "i") });
+        }
+        if (domain) {
+            filters.push({ domain: new RegExp(domain, "i") });
+        }
+        let data = await CountryRepository.find(filters);
+        return data;
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);

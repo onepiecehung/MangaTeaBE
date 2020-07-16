@@ -44,7 +44,12 @@ async function getJson(key) {
     return data;
 }
 
+async function deleteKey(key) {
+    return await client.del(key)
+}
+
 module.exports = {
     setJson,
-    getJson
+    getJson,
+    deleteKey
 };

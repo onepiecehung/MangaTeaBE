@@ -40,7 +40,11 @@ const MangaSchema = new Schema({
         type: mongoose.Schema.Types.Number,
         ref: "GroupTranslation"
     }],
-    createByUserID: {
+    createBy: {
+        type: mongoose.Schema.Types.Number,
+        ref: "Users"
+    },
+    updateBy: {
         type: mongoose.Schema.Types.Number,
         ref: "Users"
     },
@@ -50,7 +54,9 @@ const MangaSchema = new Schema({
     }],
     coverImage: {
         large: { type: String },
-        medium: { type: String }
+        medium: { type: String },
+        drive: { type: String },
+        imgur: { type: String },
     },
     bannerImage: {
         type: String
@@ -122,13 +128,16 @@ const MangaSchema = new Schema({
     }],
     chapter: [{
         type: mongoose.Schema.Types.Number,
-        ref: "Chapter"
+        ref: "Chapter",
+        default: []
     }],
-    lastReadAt: {
-        type: Date,
-        default: Date.now()
-    },
-    totalChapter: { type: Number, default: 0 }
+    totalChapter: { type: Number, default: 0 },
+    view: { type: Number, default: 0 },
+    lastUpdatedChapter: { type: Date, default: Date.now() },
+    uploadAt: { type: Date, default: Date.now() },
+    suggestionGenres: { type: Array },
+    suggestionDescription: { type: Array },
+    suggestionTags: { type: Array },
 }, {
     timestamps: true,
 })
