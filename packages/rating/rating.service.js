@@ -27,7 +27,7 @@ export async function create(ratingInfo) {
             await RatingRepository.save(checkUpdate)
             return true;
         }
-        if (ratingInfo.rateNumber < 6) {
+        if (ratingInfo.rateNumber < 6 && ratingInfo.typeRating == "MANGA") {
             await raccoon.disliked(ratingInfo.userID, ratingInfo.mangaID)
         } else {
             await raccoon.liked(ratingInfo.userID, ratingInfo.mangaID)

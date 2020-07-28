@@ -19,7 +19,7 @@ export async function create(req, res) {
         }
         req.body.userID = req.user._id
         let data = await RatingService.create(req.body)
-        return response.success(res, data, 201)
+        return response.success(res, data, 200)
     } catch (error) {
         return response.error(res, req, error)
     }

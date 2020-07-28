@@ -1209,7 +1209,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5Njg3MjY5LCJleHAiOjE1OTAyOTIwNjl9.e7A0_QO7E3Wa1_QYM19iHVA_yDNDtzPBOA5ndkTHHDg"
+								"value": "{{TOKEN_ADMIN}}"
 							}
 						],
 						"body": {
@@ -1217,7 +1217,7 @@
 							"urlencoded": [
 								{
 									"key": "mangaID",
-									"value": "2",
+									"value": "8",
 									"description": "1 trong 2 (manga hoặc group)",
 									"type": "text"
 								},
@@ -1230,7 +1230,7 @@
 								},
 								{
 									"key": "rateNumber",
-									"value": "6",
+									"value": "9",
 									"type": "text"
 								},
 								{
@@ -1242,7 +1242,8 @@
 								{
 									"key": "status",
 									"value": "false",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							],
 							"options": {
@@ -2024,6 +2025,43 @@
 									"key": "status",
 									"value": "RELEASE",
 									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_ADMIN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/admin/dashboard?mostViewGenre=1",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"admin",
+								"dashboard"
+							],
+							"query": [
+								{
+									"key": "mostViewGenre",
+									"value": "1",
+									"description": "muon lay thi truyen 1"
 								}
 							]
 						}

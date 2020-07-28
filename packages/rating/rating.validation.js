@@ -24,7 +24,7 @@ const createAndUpdate = schema.keys({
     groupTranslationID: Joi.string()
         .allow(""),
     userID: Joi.number()
-        .required()
+        .allow("")
         .error(() => { throw new Error("Invalid user") }),
     rateNumber: Joi.number()
         .required()
