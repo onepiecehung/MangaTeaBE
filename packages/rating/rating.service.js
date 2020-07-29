@@ -93,10 +93,12 @@ async function chartsRating(object) {
             "9": 0,
             "10": 0
         }
+        let ava_rating = 0;
         for (let i = 0; i < object.length; i++) {
-            rating[object[i].rateNumber] += 1
+            rating[object[i].rateNumber] += 1;
+            ava_rating += object[i].rateNumber;
         }
-        return { rating, total: object.length }
+        return { rating, total: object.length, rating_avg: ava_rating / object.length }
     } catch (error) {
         logger.error(error);
         return object;
