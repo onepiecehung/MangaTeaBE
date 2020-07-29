@@ -11,7 +11,6 @@ router.route("/")
         RatingController.create
     )
     .get(
-        Authentication,
         RatingController.find
     )
 
