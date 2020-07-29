@@ -62,9 +62,9 @@ export async function find(keyword, user) {
                 let chapter = await ChapterRepository.findByIdMangaSelect(manga._id);
                 let tempChapter = chapter;
                 let chapterMeta = await getMetaDataChapter(tempChapter);
-                let rating = await RatingRepository.findRatingByMangaId(manga._id);
+                // let rating = await RatingRepository.findRatingByMangaId(manga._id);
                 let comment = await CommentRepository.findByMangaId(manga._id);
-                let data = { manga, chapter: chapterMeta, rating, comment };
+                let data = { manga, chapter: chapterMeta, comment };
                 await Redis.setJson(myKey, data, 300)
                 return data;
             }

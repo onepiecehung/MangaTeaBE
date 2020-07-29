@@ -1262,6 +1262,54 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "finding rating",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_ADMIN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/rating?idManga=2",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"rating"
+							],
+							"query": [
+								{
+									"key": "idManga",
+									"value": "2",
+									"description": "truyền cái này vào để lấy biểu đồ show rating manga, truyền id manga"
+								},
+								{
+									"key": "id",
+									"value": "5",
+									"description": "get rating theo id của rating ",
+									"disabled": true
+								},
+								{
+									"key": "idUser",
+									"value": "781",
+									"description": "tìm những rating của user đã rating (cai này có skip vs limit mặc định lần lượt là 0 và 20)",
+									"disabled": true
+								},
+								{
+									"key": "rateNumber",
+									"value": "7",
+									"description": "tim theo diem so rating 1-10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -2038,7 +2086,7 @@
 			"name": "Admin",
 			"item": [
 				{
-					"name": "dashboard",
+					"name": "dashboard - show bieu do",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -2049,7 +2097,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/admin/dashboard?mostViewGenre=1",
+							"raw": "{{API_HOST}}/admin/dashboard?total=1",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -2061,7 +2109,31 @@
 								{
 									"key": "mostViewGenre",
 									"value": "1",
-									"description": "muon lay thi truyen 1"
+									"description": "muon lay thi truyen 1 (lay so luong view theo user)",
+									"disabled": true
+								},
+								{
+									"key": "percentMaleAndFemale",
+									"value": "1",
+									"description": "tỉ lệ nam và nữ trong trang web",
+									"disabled": true
+								},
+								{
+									"key": "gender",
+									"value": "MALE",
+									"description": "FEMALE or MALE , xem giới tính gì xem thể loại nào nhiều nhất ",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "15",
+									"description": "14-25 độ tuổi của người dùng (xem thể lọa nào được xem nhiều nhất)",
+									"disabled": true
+								},
+								{
+									"key": "total",
+									"value": "1",
+									"description": "truyen 1"
 								}
 							]
 						}

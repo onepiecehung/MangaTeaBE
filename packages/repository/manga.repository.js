@@ -39,7 +39,7 @@ export async function findByName(name) {
  * @param {Json} sort 
  */
 export async function find(filters, limit, skip, sort) {
-    return MangaModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort)
+    return MangaModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort);
 }
 
 /**

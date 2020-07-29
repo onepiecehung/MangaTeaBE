@@ -1,25 +1,62 @@
 import * as logger from "../../util/logger";
 
+import * as ChapterRepository from "../repository/chapter.repository";
+import * as CommentRepository from "../repository/comment.repository";
+import * as GroupTranslationRepository from "../repository/groupTranslation.repository";
+import * as MangaRepository from "../repository/manga.repository";
+import * as RatingRepository from "../repository/rating.repository";
 import * as UserAnalyzeRepository from "../repository/userAnalyze.repository";
-import { update } from "../../database/mongo/model/manga.model";
+import * as UserRepository from "../repository/user.repository";
 
 export async function dashboard(query) {
     try {
         const {
-            mostViewGenre
+            mostViewGenre,
+            percentMaleAndFemale,
+            age,
+            gender,
+            total
         } = query;
+        if (total == 1) {
+            let totalUser = await UserRepository.countDocuments({});
+            let totalChapter = await ChapterRepository.countDocuments({});
+            let totalManga = await MangaRepository.countDocuments({});
+            let totalRating = await RatingRepository.countDocuments({});
+            let totalComment = await CommentRepository.countDocuments({});
+            let totalGroup = await GroupTranslationRepository.countDocuments({});
+            return { totalUser, totalChapter, totalManga, totalRating, totalComment, totalGroup }
+        }
         if (mostViewGenre == 1) {
             let data = await UserAnalyzeRepository.find();
-            return data;
+            let metaData = await mostViewGenres(data);
+            return metaData;
         }
-        return Promise.reject("Param not null or error");
+        if (percentMaleAndFemale == 1) {
+            let dataMale = await UserAnalyzeRepository.countDocuments({ gender: "MALE" });
+            let dataFemale = await UserAnalyzeRepository.countDocuments({ gender: "FEMALE" });
+            return {
+                male: dataMale,
+                female: dataFemale,
+                total: dataFemale + dataMale
+            }
+        }
+        let filters = [];
+        if (age) {
+            filters.push({ age: parseInt(age) });
+        }
+        if (gender) {
+            filters.push({ gender });
+        }
+        let data = await UserAnalyzeRepository.findAdv(filters);
+        let metaData = await mostViewGenres(data);
+        return metaData;
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);
     }
 }
 
-async function mostViewGenre(dataIn) {
+async function mostViewGenres(dataIn) {
     try {
         const arrayData = ["Action", "Adventure", "Cars", "Comedy", "Dementia", "Demons", "Drama", "Ecchi", "Fantasy", "Game", "Harem", "Hentai", "Historical", "Horror", "Josei", "Kids", "Magic", "MartialArts", "Mecha", "Military", "Music", "Mystery", "Parody", "Police", "Psychological", "Romance", "Samurai", "School", "SciFi", "Seinen", "Shoujo", "ShoujoAi", "Shounen", "ShounenAi", "SliceOfLife", "Space", "Sports", "SuperPower", "Supernatural", "Thriller", "Vampire", "Yaoi", "Yuri", "Travel"];
         let update = {
@@ -68,21 +105,32 @@ async function mostViewGenre(dataIn) {
             Yuri: 0,
             Travel: 0
         }
-        let isArray = Array.isArray(dataIn);
-        if (!isArray) {
-            dataIn = [dataIn]
-        }
-        let promise = dataIn.map(async e => {
-            for (let key in e) {
-                if (arrayData.includes(e[key]) === true) {
-                    
-                }
+
+        for (let i = 0; i < dataIn.length; i++) {
+            for (let j = 0; j < arrayData.length; j++) {
+                update[arrayData[j]] += dataIn[i][arrayData[j]]
             }
-        })
-        let data = await Promise.all(promise);
-        return isArray ? data : data[0];
+        }
+        let dataHentai = update.Hentai;
+        update.Hentai = update.Harem;
+        update.Harem = dataHentai;
+        let total = await sumValueObject(update);
+        return { genres: update, total };
     } catch (error) {
         logger.error(error);
-        return dataIn;
+        return error;
+    }
+}
+
+async function sumValueObject(object) {
+    try {
+        let total = 0;
+        for (let i in object) {
+            total += object[i]
+        }
+        return total;
+    } catch (error) {
+        logger.error(error);
+        return 0;
     }
 }

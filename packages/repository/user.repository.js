@@ -41,3 +41,7 @@ export async function getUsernameAndId(id) {
         _id: 1
     })
 }
+
+export async function countDocuments(filters) {
+    return UserModel.countDocuments(filters);
+}

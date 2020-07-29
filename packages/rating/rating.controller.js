@@ -21,6 +21,15 @@ export async function create(req, res) {
         let data = await RatingService.create(req.body)
         return response.success(res, data, 200)
     } catch (error) {
-        return response.error(res, req, error)
+        return response.error(res, req, error);
+    }
+}
+
+export async function find(req, res) {
+    try {
+        let data = await RatingService.find(req.query);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
     }
 }
