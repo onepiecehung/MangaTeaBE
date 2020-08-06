@@ -384,6 +384,140 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "find user for admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk2NzIyNzAwLCJleHAiOjE1OTczMjc1MDB9.Ln1PmvNGOcOB2vxqjsLvsPpUeGJy61lZt6TBBxquVP8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/user/find?email&fromCountry&role&status&phoneNumber&fullname&username&gender=MALE",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"find"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": null
+								},
+								{
+									"key": "fromCountry",
+									"value": null
+								},
+								{
+									"key": "role",
+									"value": null,
+									"description": "ROOT, ADMIN, MEMBER"
+								},
+								{
+									"key": "status",
+									"value": null,
+									"description": "có 3 status chính\nINACTIVE: mặc định\nREMOVED: user đã bị xóa\nBLOCKED: user đã bị block"
+								},
+								{
+									"key": "phoneNumber",
+									"value": null
+								},
+								{
+									"key": "fullname",
+									"value": null
+								},
+								{
+									"key": "username",
+									"value": null
+								},
+								{
+									"key": "gender",
+									"value": "MALE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user for admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk2NzIyNzAwLCJleHAiOjE1OTczMjc1MDB9.Ln1PmvNGOcOB2vxqjsLvsPpUeGJy61lZt6TBBxquVP8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "31003",
+									"description": "id của user cần sửa",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "INACTIVE",
+									"description": "có 3 status chính\nINACTIVE: mặc định\nREMOVED: user đã bị xóa\nBLOCKED: user đã bị block",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/update-profile-admin",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"update-profile-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk2NzIyNzAwLCJleHAiOjE1OTczMjc1MDB9.Ln1PmvNGOcOB2vxqjsLvsPpUeGJy61lZt6TBBxquVP8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"status\": \"INACTIVE\",\r\n        \"role\": \"MEMBER\",\r\n        \"gender\": \"MALE\",\r\n        \"address\": \"\",\r\n        \"point\": 0,\r\n        \"verifyPhone\": false,\r\n        \"verifyEmail\": false,\r\n        \"online\": false,\r\n        \"loginCount\": 0,\r\n        \"permission\": [],\r\n        \"appellation\": [],\r\n        \"about\": \"Unknown\",\r\n        \"linkSocial\": [],\r\n        \"_id\": 11,\r\n        \"email\": \"dmsdvsn1@gmail.com\",\r\n        \"fullName\": \"Bear Dim\",\r\n        \"username\": \"BearDimCI\",\r\n        \"createdAt\": \"2020-06-01T08:15:00.663Z\",\r\n        \"updatedAt\": \"2020-07-27T09:21:16.978Z\",\r\n        \"__v\": 0,\r\n        \"birthday\": \"2006-01-31T13:24:34.514Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/update-profile",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"update-profile"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -2097,7 +2231,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/admin/dashboard?total=1",
+							"raw": "{{API_HOST}}/admin/dashboard?gender=MALE&age=15",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -2121,19 +2255,17 @@
 								{
 									"key": "gender",
 									"value": "MALE",
-									"description": "FEMALE or MALE , xem giới tính gì xem thể loại nào nhiều nhất ",
-									"disabled": true
+									"description": "FEMALE or MALE , xem giới tính gì xem thể loại nào nhiều nhất "
 								},
 								{
 									"key": "age",
 									"value": "15",
-									"description": "14-25 độ tuổi của người dùng (xem thể lọa nào được xem nhiều nhất)",
-									"disabled": true
+									"description": "14-25 độ tuổi của người dùng (xem thể lọa nào được xem nhiều nhất)"
 								},
 								{
 									"key": "total",
 									"value": "1",
-									"description": "truyen 1"
+									"disabled": true
 								}
 							]
 						}

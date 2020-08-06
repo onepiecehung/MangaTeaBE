@@ -45,3 +45,11 @@ export async function getUsernameAndId(id) {
 export async function countDocuments(filters) {
     return UserModel.countDocuments(filters);
 }
+
+export async function find(filters, limit, skip, sort) {
+    return UserModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort);
+}
+
+export async function countDocuments2(filters) {
+    return UserModel.countDocuments(filters.length ? { $and: filters } : {});
+}

@@ -235,3 +235,73 @@ export async function forgotPassword(userAuth) {
         return Promise.reject(error);
     }
 }
+
+
+export async function find(query) {
+    try {
+        const {
+            email,
+            fromCountry,
+            role,
+            status,
+            phoneNumber,
+            fullName,
+            username,
+            gender
+        } = query;
+        let filters = [];
+        if (email) {
+            filters.push({ email: new RegExp(email, "i") });
+        }
+        if (fromCountry) {
+            filters.push({ fromCountry: parseInt(fromCountry) });
+        }
+        if (role) {
+            filters.push({ role })
+        }
+        if (status) {
+            filters.push({ status })
+        }
+        if (phoneNumber) {
+            filters.push({ phoneNumber: parseInt(phoneNumber) })
+        }
+        if (fullName) {
+            filters.push({ fullName: RegExp(fullName, "i") });
+        }
+        if (username) {
+            filters.push({ username: RegExp(username, "i") })
+        }
+        if (gender) {
+            filters.push({ gender })
+        }
+        const sort = query.sort ? { _id: query.sort } : { _id: -1 }
+        const limit = parseInt(query.limit) || 20
+        const skip = parseInt(query.skip) || 0
+        let [user, total] = await Promise.all([
+            UserRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
+            UserRepository.countDocuments2(filters)
+        ])
+        return { user, total }
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function updateProfileAdmin(body) {
+    try {
+        const userInfo = await UserRepository.findById(body.id);
+        if (!userInfo) {
+            return Promise.reject(USER_ERROR.USER_NOT_FOUND);
+        }
+        let id = body.id;
+        let update = body;
+        delete update.id;
+        await UserRepository.findByIdAndUpdate(id, update)
+        return true
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}

@@ -90,12 +90,12 @@ export async function uploadAvatar(req, res) {
 
 export async function updateProfile(req, res) {
     try {
-        let validateResult = UserValidator.validateUpdateProfile(req.body);
-        if (validateResult.error) {
-            return response.error(res, req, {
-                message: validateResult.error.details[0].message
-            });
-        }
+        // let validateResult = UserValidator.validateUpdateProfile(req.body);
+        // if (validateResult.error) {
+        //     return response.error(res, req, {
+        //         message: validateResult.error.details[0].message
+        //     });
+        // }
         let data = await UserService.updateProfile(req.user, req.body)
         return response.success(res, data, 200);
     } catch (error) {
@@ -139,5 +139,31 @@ export async function forgotPassword(req, res) {
         return response.success(res, data, 200);
     } catch (error) {
         return response.error(res, req, error);
+    }
+}
+
+
+export async function find(req, res) {
+    try {
+        let data = await UserService.find(req.query);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
+
+
+export async function updateProfileAdmin(req, res) {
+    try {
+        // let validateResult = UserValidator.validateUpdateProfile(req.body);
+        // if (validateResult.error) {
+        //     return response.error(res, req, {
+        //         message: validateResult.error.details[0].message
+        //     });
+        // }
+        let data = await UserService.updateProfileAdmin(req.body)
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error)
     }
 }
