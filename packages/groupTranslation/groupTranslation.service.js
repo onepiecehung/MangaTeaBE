@@ -40,13 +40,13 @@ export async function find(query) {
             if (query.populate) {
                 let data = await GroupTranslationRepository.findByIdAndPopulate(parseInt(query.id), true);
                 data.chapterID = data.chapterID.length || 0
-                data.userOwnerID = data.userOwnerID.length || 0
+                data.userMemberID = data.userMemberID.length || 0
                 data.mangaID = data.mangaID.length || 0
                 return data;
             }
             let data = await GroupTranslationRepository.findByIdAndPopulate(parseInt(query.id), false);
             data.chapterID = data.chapterID.length || 0
-            data.userOwnerID = data.userOwnerID.length || 0
+            data.userMemberID = data.userMemberID.length || 0
             data.mangaID = data.mangaID.length || 0
             return data;
         }
@@ -88,7 +88,7 @@ export async function find(query) {
         ])
         for (let i = 0; i < groupTranslation.length; i++) {
             groupTranslation[i].chapterID = groupTranslation[i].chapterID.length || 0
-            groupTranslation[i].userOwnerID = groupTranslation[i].userOwnerID.length || 0
+            groupTranslation[i].userMemberID = groupTranslation[i].userMemberID.length || 0
             groupTranslation[i].mangaID = groupTranslation[i].mangaID.length || 0
         }
         return { groupTranslation, totals };
