@@ -39,9 +39,11 @@ export async function find(query) {
         if (query.id) {
             if (query.populate) {
                 let data = await GroupTranslationRepository.findByIdAndPopulate(parseInt(query.id), true);
+                data.chapterID = data.chapterID.length || 0
                 return data;
             }
             let data = await GroupTranslationRepository.findByIdAndPopulate(parseInt(query.id), false);
+            data.chapterID = data.chapterID.length || 0
             return data;
         }
         let filters = [];
@@ -80,6 +82,9 @@ export async function find(query) {
             GroupTranslationRepository.find(filters, skip, limit, sort, populate),
             GroupTranslationRepository.countDocuments(filters)
         ])
+        for (let i = 0; i < groupTranslation.length; i++) {
+            groupTranslation[i].chapterID = groupTranslation[i].chapterID.length || 0
+        }
         return { groupTranslation, totals };
     } catch (error) {
         logger.error(error);
