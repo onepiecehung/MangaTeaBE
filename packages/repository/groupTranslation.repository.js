@@ -44,7 +44,7 @@ export async function findOne(filters) {
 }
 
 export async function find(filters, skip, limit, sort, populate) {
-    return (populate === false ? GroupTranslationModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort) : GroupTranslationModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort).populate([{path:'userOwnerID', select:'username'}, {path:'language', select:'language'},{path:'updateBy', select:'username'},{path:'createBy', select:'username'}]).lean())
+    return (populate === false ? GroupTranslationModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort) : GroupTranslationModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort).populate([{path:'userOwnerID', select:'username'}, {path:'language', select:'alpha2Code'},{path:'updateBy', select:'username'},{path:'createBy', select:'username'}]).lean())
 }
 
 export async function countDocuments(filters) {
@@ -52,7 +52,7 @@ export async function countDocuments(filters) {
 }
 
 export async function findByIdAndPopulate(id, populate) {
-    return (populate === false ? GroupTranslationModel.findById(id) : GroupTranslationModel.findById(id).populate([{path:'userOwnerID', select:'username'}, {path:'language', select:'language'},{path:'updateBy', select:'username'},{path:'createBy', select:'username'}]).lean());
+    return (populate === false ? GroupTranslationModel.findById(id) : GroupTranslationModel.findById(id).populate([{path:'userOwnerID', select:'username'}, {path:'language', select:'alpha2Code'},{path:'updateBy', select:'username'},{path:'createBy', select:'username'}]).lean());
 }
 
 export async function addChapter(idGroup, idChapter) {
