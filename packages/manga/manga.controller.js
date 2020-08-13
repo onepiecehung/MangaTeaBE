@@ -35,6 +35,7 @@ export async function findAtHome(req, res) {
 
 export async function createAndUpdate(req, res) {
     try {
+        // return response.success(res, req.body, 200);
         let validateResult = MangaValidator.validateCreateAndUpdate(req.body);
         if (validateResult.error) {
             return response.error(res, req, {

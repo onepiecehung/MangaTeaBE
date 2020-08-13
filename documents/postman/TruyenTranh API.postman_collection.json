@@ -1171,7 +1171,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{TOKEN_MEMBER}}",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk3MzM3NzgwLCJleHAiOjE1OTc5NDI1ODB9.cchesQi-SPIrxVtK0FRigTrhv0ib1QYTeGRsSdHToOg",
 								"type": "text"
 							},
 							{
@@ -1199,22 +1199,30 @@
 								{
 									"key": "banner",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 6 [Prophets Release]/Meshi-12.png"
 								},
 								{
 									"key": "cover",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 6 [Prophets Release]/Meshi-13.png"
 								},
 								{
-									"key": "title",
-									"value": "",
+									"key": "id",
+									"value": "60012",
+									"description": "truyền id vào nếu muốn chỉnh sửa manga",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "tets fix",
 									"description": "string",
 									"type": "text"
 								},
 								{
 									"key": "format",
-									"value": "",
+									"value": "MANGA",
+									"description": "MANGA",
 									"type": "text"
 								},
 								{
@@ -1224,29 +1232,93 @@
 									"type": "text"
 								},
 								{
-									"key": "genres",
-									"value": "",
+									"key": "genres[0]",
+									"value": "Action",
 									"description": "cái này truyền Array, thể loại lên, postman k test đc kiểu này. nếu angular khong được thì, khi tạo mới manga bỏ qua thể loại, tạo xong truyền lại genre bằng json raw với id manga mới được tạo",
 									"type": "text"
 								},
 								{
+									"key": "genres[1]",
+									"value": "Harem",
+									"type": "text"
+								},
+								{
+									"key": "genres[2]",
+									"value": "Drama",
+									"type": "text"
+								},
+								{
 									"key": "status",
-									"value": "",
+									"value": "RELEASING",
 									"description": "FINISHED, RELEASING",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "",
+									"value": "This is description",
 									"description": "string, bắt buộc phải truyền lên",
 									"type": "text"
 								},
 								{
-									"key": "id",
-									"value": "",
-									"description": "truyền id vào nếu muốn chỉnh sửa manga",
-									"type": "text",
-									"disabled": true
+									"key": "externalLinks[0]",
+									"value": "https://www.viz.com/monster",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "source[0]",
+									"value": "https://www.viz.com/monster",
+									"type": "text"
+								},
+								{
+									"key": "otherName[romaji]",
+									"value": "Monster",
+									"type": "text"
+								},
+								{
+									"key": "otherName[english]",
+									"value": "Monster",
+									"type": "text"
+								},
+								{
+									"key": "otherName[native]",
+									"value": "Monster",
+									"type": "text"
+								},
+								{
+									"key": "otherName[userPreferred]",
+									"value": "Monster",
+									"type": "text"
+								},
+								{
+									"key": "startDate[year]",
+									"value": "2010",
+									"type": "text"
+								},
+								{
+									"key": "startDate[month]",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "startDate[day]",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "endDate[year]",
+									"value": "2019",
+									"type": "text"
+								},
+								{
+									"key": "endDate[month]",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "endDate[day]",
+									"value": "1",
+									"type": "text"
 								}
 							],
 							"options": {
