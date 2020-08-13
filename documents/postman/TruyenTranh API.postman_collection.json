@@ -1205,6 +1205,48 @@
 									"key": "cover",
 									"type": "file",
 									"src": []
+								},
+								{
+									"key": "title",
+									"value": "",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "format",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "countryOfOrigin",
+									"value": "JP",
+									"description": "JP,KR, CN, tên nước phát hành, chỉ có 3 nước này thôi",
+									"type": "text"
+								},
+								{
+									"key": "genres",
+									"value": "",
+									"description": "cái này truyền Array, thể loại lên, postman k test đc kiểu này. nếu angular khong được thì, khi tạo mới manga bỏ qua thể loại, tạo xong truyền lại genre bằng json raw với id manga mới được tạo",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"description": "FINISHED, RELEASING",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"description": "string, bắt buộc phải truyền lên",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "truyền id vào nếu muốn chỉnh sửa manga",
+									"type": "text",
+									"disabled": true
 								}
 							],
 							"options": {
@@ -1789,7 +1831,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_HOST}}/group/?id=1&populate=true&name=Group 2&userOwnerID&web&discord&email&about&isUploadMember&updateBy&createBy",
+							"raw": "{{API_HOST}}/group/?populate=true&userOwnerID&web&discord&email&about&isUploadMember&updateBy&createBy",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -1801,7 +1843,8 @@
 								{
 									"key": "id",
 									"value": "1",
-									"description": "get gr by id"
+									"description": "get gr by id",
+									"disabled": true
 								},
 								{
 									"key": "populate",
@@ -1811,7 +1854,8 @@
 								{
 									"key": "name",
 									"value": "Group 2",
-									"description": "tên gr cần tìm"
+									"description": "tên gr cần tìm",
+									"disabled": true
 								},
 								{
 									"key": "userOwnerID",

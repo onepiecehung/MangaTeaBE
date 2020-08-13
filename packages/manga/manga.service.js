@@ -264,9 +264,11 @@ export async function findAtHome(keyword, user) {
         if (slide) {
             if (user !== false) {
                 let arraySlide = await raccoon.recommendFor(user._id, limit);
+                console.log(arraySlide);
                 if (arraySlide.length != 0) {
                     let manga = await MangaRepository.findArrayMangaMin(arraySlide, limit, skip > 0 ? (skip - 1) * limit : skip, {});
-                    let data = { manga: manga, total: arraySlide.length }
+                    let temp = await getMetaDataManga(manga);
+                    let data = { manga: temp, total: arraySlide.length }
                     return data;
                 }
                 let member = await MemberRepository.findByUserID(user._id);
@@ -275,7 +277,8 @@ export async function findAtHome(keyword, user) {
                 }
                 if (member.mangaSuggested.length !== 0) {
                     let manga = await MangaRepository.findArrayMangaMin(member.mangaSuggested, limit, skip > 0 ? (skip - 1) * limit : skip, {});
-                    let data = { manga: manga, total: member.mangaSuggested.length }
+                    let temp = await getMetaDataManga(manga);
+                    let data = { manga: temp, total: member.mangaSuggested.length }
                     return data;
                 }
                 let [mangaMeta, total] = await Promise.all([

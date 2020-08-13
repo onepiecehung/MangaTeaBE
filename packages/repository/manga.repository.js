@@ -74,7 +74,8 @@ export async function findArrayMangaMin(ArrayId, limit, skip, sort) {
         name: 1,
         genres: 1,
         coverImage: 1,
-        bannerImage: 1
+        bannerImage: 1,
+        chapter: 1
     }).limit(limit).skip(skip).sort(sort)
 }
 
