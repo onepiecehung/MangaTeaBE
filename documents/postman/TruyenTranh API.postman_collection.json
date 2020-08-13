@@ -1194,13 +1194,63 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"author\" : [],\r\n    \"artist\" : [],\r\n    \"groupTranslationID\" : [],\r\n    \"userFollowedID\" : [],\r\n    \"externalLinks\" : [ \r\n        \"https://www.viz.com/monster\"\r\n    ],\r\n    \"isAdult\" : null,\r\n    \"genres\" : [ \r\n        \"Drama\", \r\n        \"Mystery\", \r\n        \"Psychological\", \r\n        \"Thriller\"\r\n    ],\r\n    \"rate\" : [],\r\n    \"description\" : \"Everyone faces uncertainty at some point in their lives. Even a brilliant surgeon like Kenzo Tenma is no exception. But there’s no way he could have known that his decision to stop chasing professional success and instead concentrate on his oath to save peoples’ lives would result in the birth of an abomination.\",\r\n    \"source\" : [ \r\n        \"https://www.viz.com/monster\"\r\n    ],\r\n    \"chapter\" : [],\r\n    \"totalChapter\" : 0,\r\n    \"name\" : \"Monster\",\r\n    \"otherName\" : {\r\n        \"romaji\" : \"Monster\",\r\n        \"english\" : \"Monster\",\r\n        \"native\" : \"MONSTER\",\r\n        \"userPreferred\" : \"Monster\"\r\n    },\r\n    \"format\" : \"MANGA\",\r\n    \"status\" : \"FINISHED\",\r\n    \"startDate\" : {\r\n        \"year\" : 1994,\r\n        \"month\" : 12,\r\n        \"day\" : 5\r\n    },\r\n    \"endDate\" : {\r\n        \"year\" : 2001,\r\n        \"month\" : 12,\r\n        \"day\" : 20\r\n    },\r\n    \"countryOfOrigin\" : \"JP\",\r\n    \"averageScore\" : 88,\r\n    \"meanScore\" : 88,\r\n    \"popularity\" : 11933,\r\n    \"trending\" : 2,\r\n    \"tags\" : [],\r\n    \"characters\" : [],\r\n    \"staff\" : [],\r\n    \"view\" : 21\r\n}",
-							"options": {
-								"formdata": {},
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "banner",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "cover",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "format",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "countryOfOrigin",
+									"value": "JP",
+									"description": "JP,KR, CN, tên nước phát hành, chỉ có 3 nước này thôi",
+									"type": "text"
+								},
+								{
+									"key": "genres",
+									"value": "",
+									"description": "cái này truyền Array, thể loại lên, postman k test đc kiểu này. nếu angular khong được thì, khi tạo mới manga bỏ qua thể loại, tạo xong truyền lại genre bằng json raw với id manga mới được tạo",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"description": "FINISHED, RELEASING",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"description": "string, bắt buộc phải truyền lên",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "truyền id vào nếu muốn chỉnh sửa manga",
+									"type": "text",
+									"disabled": true
 								}
+							],
+							"options": {
+								"formdata": {}
 							}
 						},
 						"url": {
