@@ -52,7 +52,7 @@ export async function createAndUpdate(req, res) {
                 let tempJson = {};
                 tempJson.large = urlCover.data.link;
                 tempJson.medium = urlCover.data.link;
-                tempJson.imgur = urlCover.data.link;
+                // tempJson.imgur = urlCover.data.link;
                 req.body.coverImage = tempJson;
             }
         }

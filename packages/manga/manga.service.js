@@ -216,13 +216,6 @@ export async function createAndUpdate(data) {
             }
             return Promise.reject(new Error(MANGA.MANGA_permission_denied))
         }
-        let tempBody = mangaInfo;
-        delete tempBody.coverImage;
-        delete tempBody.bannerImage;
-        let checkExist = await MangaRepository.findOne(tempBody);
-        if (checkExist) {
-            return Promise.reject(new Error(MANGA.MANGA_IS_EXISTS))
-        }
         mangaInfo.updateBy = userInfo._id;
         mangaInfo.createBy = userInfo._id;
         let dataManga = await MangaRepository.create(mangaInfo);
