@@ -92,7 +92,12 @@ export async function Login(loginInfo, ip) {
         if (!userInfo) {
             return Promise.reject(USER_ERROR.EMAIL_NOT_EXISTS);
         }
-
+        if (userInfo.status === "BLOCKED") {
+            return Promise.reject(USER_ERROR.USER_HAS_BLOCKED);
+        }
+        if (userInfo.status === "REMOVED") {
+            return Promise.reject(USER_ERROR.USER_HAS_REMOVED);
+        }
         const passwordCorrect = await bcrypt.compareSync(loginInfo.password, userInfo.password);
         if (!passwordCorrect) {
             return Promise.reject(USER_ERROR.PASSWORD_INVALID);

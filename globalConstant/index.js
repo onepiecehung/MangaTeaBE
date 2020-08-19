@@ -72,7 +72,7 @@ export const JOB_NAME = {
  */
 export const CONFIG = {
   jwt_expiration: 60 * 60 * 24 * 7,
-  jwt_encryption: `hkashd3478asfju4t9349934fnsf98@434543sdfslf`
+  jwt_encryption: `hkashd3478asfju4t9349934fnsf98@434543sdfslfK`
 }
 
 
@@ -81,7 +81,9 @@ export const USER_ERROR = {
   EMAIL_NOT_EXISTS: "EMAIL NOT EXISTS",
   USERNAME_HAS_EXISTS: "USERNAME HAS EXISTS",
   PASSWORD_INVALID: "PASSWORD INVALID",
-  USER_NOT_FOUND: "USER NOT FOUND"
+  USER_NOT_FOUND: "USER NOT FOUND",
+  USER_HAS_BLOCKED:"USER HAS BLOCKED",
+  USER_HAS_REMOVED:"USER HAS REMOVED"
 }
 
 
