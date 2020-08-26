@@ -167,3 +167,22 @@ export async function updateProfileAdmin(req, res) {
         return response.error(res, req, error)
     }
 }
+
+
+export async function mangaUpload(req, res) {
+    try {
+        let data = await UserService.mangaUpload(req);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error)
+    }
+}
+
+export async function mangaRating(req, res) {
+    try {
+        let data = await UserService.mangaRating(req);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error)
+    }
+}

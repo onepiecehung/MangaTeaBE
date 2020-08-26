@@ -6,7 +6,9 @@ import * as logger from "../../util/logger";
 import RABBIT from "../../server/connector/rabbitmq/init/index"
 import Redis from "../../database/redis/client";
 
+import * as MangaRepository from "../repository/manga.repository";
 import * as MemberRepository from "../repository/member.repository";
+import * as RatingRepository from "../repository/rating.repository";
 import * as UserRepository from "../repository/user.repository";
 
 /**
@@ -305,6 +307,50 @@ export async function updateProfileAdmin(body) {
         delete update.id;
         await UserRepository.findByIdAndUpdate(id, update)
         return true
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+
+
+export async function mangaUpload(data) {
+    try {
+        const sort = data.query.sort ? { lastUpdatedChapter: data.query.sort } : { lastUpdatedChapter: -1 }
+        const limit = parseInt(data.query.limit) || 20
+        const skip = parseInt(data.query.skip) || 0
+        let filters = [];
+        if (data.user._id) {
+            filters.push({ createBy: parseInt(data.user._id) });
+        }
+        let [manga, total] = await Promise.all([
+            MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
+            MangaRepository.countDocuments(filters)
+        ])
+        return { manga, total }
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function mangaRating(data) {
+    try {
+        const sort = data.query.sort ? { _id: data.query.sort } : { _id: -1 }
+        const limit = parseInt(data.query.limit) || 20
+        const skip = parseInt(data.query.skip) || 0
+        let filters = [];
+        if (data.user._id) {
+            filters.push({ userID: parseInt(data.user._id) });
+        }
+        let [rating, total] = await Promise.all([
+            RatingRepository.findAdv(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
+            RatingRepository.countDocuments(filters)
+        ])
+        return { rating, total };
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);

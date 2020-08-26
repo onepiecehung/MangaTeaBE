@@ -7,6 +7,17 @@ import { upload } from "../middleware/upload.multer";
 // multer
 // validation
 // service
+router.route("/manga-upload")
+    .get(
+        Authentication,
+        UserController.mangaUpload
+    )
+
+router.route("/manga-rating")
+    .get(
+        Authentication,
+        UserController.mangaRating
+    )
 router.route("/find")
     .get(
         AuthenticationPermission,
@@ -76,6 +87,9 @@ router.route("/forgot-password")
     .post(
         UserController.forgotPassword
     )
+
+
+
 
 
 

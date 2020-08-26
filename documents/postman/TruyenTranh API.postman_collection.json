@@ -1442,6 +1442,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Lấy manga đã upload",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk4NDQ2Nzc0LCJleHAiOjE1OTkwNTE1NzR9.Fy8_ypWtXiS6z7RwXE-5BVFKPAm7WDx58U6ooxySX_o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/user/manga-upload/?skip&limit",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"manga-upload",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1553,6 +1588,41 @@
 									"value": "7",
 									"description": "tim theo diem so rating 1-10",
 									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tìm rating của người dùng đã rating",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk4NDQ2Nzc0LCJleHAiOjE1OTkwNTE1NzR9.Fy8_ypWtXiS6z7RwXE-5BVFKPAm7WDx58U6ooxySX_o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/user/manga-rating/?skip&limit",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"manga-rating",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
 								}
 							]
 						}

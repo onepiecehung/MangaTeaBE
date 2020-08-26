@@ -70,7 +70,8 @@ export async function find(keyword, user) {
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
-        const sort = keyword.sort ? { lastUpdatedChapter: keyword.sort } : { lastUpdatedChapter: -1 }
+        // const sort = keyword.sort ? { lastUpdatedChapter: keyword.sort } : { lastUpdatedChapter: -1 }
+        const sort = { _id: 1 }
         const limit = parseInt(keyword.limit) || 20
         const skip = parseInt(keyword.skip) || 0
         let filters = [];
@@ -339,7 +340,9 @@ export async function findSuggestion(keyword) {
         if (description) {
             let data = await MangaRepository.findById(id);
             let result = await MangaRepository.findArrayMangaMinUser(data.suggestionDescription, limit, skip);
-            return result;
+            let result1 = result.reverse()
+            console.log(result1)
+            return result1;
         }
         if (genre) {
             let data = await MangaRepository.findById(id);
