@@ -16,7 +16,8 @@
     "workerCrawlAniList": "nodemon ./server/workers/crawlMangaAniList.worker.js",
     "createUser": "nodemon ./server/workers/users/createUser.worker.js",
     "createSampleData": "nodemon ./server/workers/users/createDataSample.js",
-    "createSampleDataChapter": "nodemon ./server/workers/createChapter.worker.js"
+    "createSampleDataChapter": "nodemon ./server/workers/createChapter.worker.js",
+    "removeHTMLtag": "node ./server/workers/removeHTMLtag.js"
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",
