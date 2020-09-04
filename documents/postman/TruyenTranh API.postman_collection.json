@@ -499,7 +499,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"status\": \"INACTIVE\",\r\n        \"role\": \"MEMBER\",\r\n        \"gender\": \"MALE\",\r\n        \"address\": \"\",\r\n        \"point\": 0,\r\n        \"verifyPhone\": false,\r\n        \"verifyEmail\": false,\r\n        \"online\": false,\r\n        \"loginCount\": 0,\r\n        \"permission\": [],\r\n        \"appellation\": [],\r\n        \"about\": \"Unknown\",\r\n        \"linkSocial\": [],\r\n        \"_id\": 11,\r\n        \"email\": \"dmsdvsn1@gmail.com\",\r\n        \"fullName\": \"Bear Dim\",\r\n        \"username\": \"BearDimCI\",\r\n        \"createdAt\": \"2020-06-01T08:15:00.663Z\",\r\n        \"updatedAt\": \"2020-07-27T09:21:16.978Z\",\r\n        \"__v\": 0,\r\n        \"birthday\": \"2006-01-31T13:24:34.514Z\"\r\n}",
+							"raw": "{\r\n        \"gender\": \"MALE\",\r\n        \"address\": \"\",\r\n        \"about\": \"Unknown\",\r\n        \"linkSocial\": [],\r\n        \"fullName\": \"Bear Dim\",\r\n        \"username\": \"BearDimCI\",\r\n        \"birthday\": \"2006-01-31T13:24:34.514Z\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -754,12 +754,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjc4MSwicm9sZSI6Ik1FTUJFUiIsInBvaW50IjoxMDAwMCwicGVybWlzc2lvbiI6W10sImlhdCI6MTU5NDM3MDE4OCwiZXhwIjoxNTk0OTc0OTg4fQ.jCSxVNVjJnjl4Xj-bUutr5TAwWVYsCH2LkdGbspLMzg",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk5MjMzNzQ2LCJleHAiOjE1OTk4Mzg1NDZ9.4VJKJiBGemduHrAJpLjQ9g-CrhPqk1urdsNlW5nMDXo",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/member/user?mangaFavorite=1&skip=1&limit=1",
+							"raw": "{{API_HOST}}/member/user?mangaFavorite=1",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -806,12 +806,14 @@
 								{
 									"key": "skip",
 									"value": "1",
-									"description": "default: 0"
+									"description": "default: 0",
+									"disabled": true
 								},
 								{
 									"key": "limit",
 									"value": "1",
-									"description": "default: 20"
+									"description": "default: 20",
+									"disabled": true
 								}
 							]
 						},
@@ -1043,7 +1045,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/manga?fromYearEnd=2010&toYearEnd=2013",
+							"raw": "{{API_HOST}}/manga?id=21059&fromYearEnd=2010&toYearEnd=2013",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -1128,8 +1130,7 @@
 								},
 								{
 									"key": "id",
-									"value": "21059",
-									"disabled": true
+									"value": "21059"
 								},
 								{
 									"key": "year",
