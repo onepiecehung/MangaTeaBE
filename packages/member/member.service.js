@@ -30,35 +30,46 @@ export async function findByIdUserAndPopulate(id, query) {
         const limit = parseInt(query.limit) || 20
         const skip = parseInt(query.skip) || 0
         let data = await MemberRepository.findByUserID(id);
+        let filters = [];
         if (mangaFavorite == 1 && data.mangaFavorite.length > 0) {
-            let result = await MangaRepository.findArrayMangaMin(data.mangaFavorite, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 });
-            let tempManga = result;
-            let manga = await getMetaDataManga2(tempManga);
-            return { manga, total: data.mangaFavorite.length }
+            filters.push({ _id: { $in: data.mangaFavorite } })
+            let [manga, total] = await Promise.all([
+                MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 }),
+                MangaRepository.countDocuments(filters)
+            ])
+            return { manga, total }
         }
         if (mangaSaved == 1 && data.mangaSaved.length > 0) {
-            let result = await MangaRepository.findArrayMangaMin(data.mangaSaved, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 });
-            let tempManga = result;
-            let manga = await getMetaDataManga2(tempManga);
-            return { manga, total: data.mangaSaved.length }
+            filters.push({ _id: { $in: data.mangaSaved } })
+            let [manga, total] = await Promise.all([
+                MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 }),
+                MangaRepository.countDocuments(filters)
+            ])
+            return { manga, total }
         }
         if (chapterUpload == 1 && data.chapterUpload.length > 0) {
-            let result = await MangaRepository.findArrayMangaMin(data.chapterUpload, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 });
-            let tempManga = result;
-            let manga = await getMetaDataManga2(tempManga);
-            return { manga, total: data.chapterUpload.length }
+            filters.push({ _id: { $in: data.chapterUpload } })
+            let [manga, total] = await Promise.all([
+                MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 }),
+                MangaRepository.countDocuments(filters)
+            ])
+            return { manga, total }
         }
         if (historyReading == 1 && data.historyReading.length > 0) {
-            let result = await MangaRepository.findArrayMangaMin(data.historyReading, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 });
-            let tempManga = result;
-            let manga = await getMetaDataManga2(tempManga);
-            return { manga, total: data.historyReading.length }
+            filters.push({ _id: { $in: data.historyReading } })
+            let [manga, total] = await Promise.all([
+                MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 }),
+                MangaRepository.countDocuments(filters)
+            ])
+            return { manga, total }
         }
         if (mangaUpload == 1 && data.mangaUpload.length > 0) {
-            let result = await MangaRepository.findArrayMangaMin(data.mangaUpload, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 });
-            let tempManga = result;
-            let manga = await getMetaDataManga2(tempManga);
-            return { manga, total: data.mangaUpload.length }
+            filters.push({ _id: { $in: data.mangaUpload } })
+            let [manga, total] = await Promise.all([
+                MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, { _id: -1 }),
+                MangaRepository.countDocuments(filters)
+            ])
+            return { manga, total }
         }
         if (historyReadingChapter == 1 && data.historyReadingChapter.length > 0) {
             // let result = await getMetaDataManga(data.historyReadingChapter, limit, skip);
