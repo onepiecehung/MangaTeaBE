@@ -99,3 +99,7 @@ export async function findArrayMangaMinUser(ArrayId, limit, skip) {
         bannerImage: 1
     }).limit(limit).skip(skip)
 }
+
+export async function deleteManga(id) {
+    return MangaModel.deleteOne({ _id: id })
+}

@@ -1478,6 +1478,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Xóa manga",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk5MjgxODg2LCJleHAiOjE1OTk4ODY2ODZ9.ikGjbK2h5mLb2GX7ZL0DpOHJRh5fN1aST5dMOHFiAvA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/manga/delete?id=52031",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"manga",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "52031"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

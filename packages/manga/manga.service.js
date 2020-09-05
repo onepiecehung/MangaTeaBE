@@ -360,3 +360,20 @@ export async function findSuggestion(keyword) {
         return Promise.reject(error);
     }
 }
+
+
+export async function deleteOne(query, user) {
+    try {
+        let id = parseInt(query.id);
+        let data = await MangaRepository.findById(id);
+        // return { 1: data.createBy, 2: user._id };
+        if (data.createBy == user._id || user.role === "ROOT" || user.role === "ADMIN") {
+            await MangaRepository.deleteManga(id);
+            return true;
+        }
+        return "You are not admin or do not create this manga!"
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}   

@@ -62,3 +62,13 @@ export async function createAndUpdate(req, res) {
         return response.error(res, req, error);
     }
 }
+
+
+export async function deleteOne(req, res) {
+    try {
+        let data = await MangaService.deleteOne(req.query, req.user);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
