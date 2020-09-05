@@ -1,6 +1,7 @@
 import { CHAPTER } from "../../globalConstant";
 import { findAndMoveElementToLastArray } from "../../util/help";
 import * as logger from "../../util/logger";
+import * as Redis from "../../database/redis/client";
 
 import * as ChapterRepository from "../repository/chapter.repository";
 import * as CommentRepository from "../repository/comment.repository";
@@ -114,6 +115,8 @@ export async function createAndUpdate(data) {
         chapterInfo.createBy = userInfo._id;
         let dataChapter = await ChapterRepository.create(chapterInfo);
         await MangaRepository.addChapter(chapterInfo.mangaID, dataChapter._id);
+        let myKey = `MangaInfo:${chapterInfo.mangaID}`;
+        await Redis.deleteKey(myKey);
         await MemberRepository.addChapterUpload(userInfo._id, dataChapter._id);
         if (chapterInfo.groupTranslation) {
             let dataGroup = await GroupTranslationRepository.findById(chapterInfo.groupTranslation);
