@@ -384,6 +384,140 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "find user for admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk2NzIyNzAwLCJleHAiOjE1OTczMjc1MDB9.Ln1PmvNGOcOB2vxqjsLvsPpUeGJy61lZt6TBBxquVP8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/user/find?email&fromCountry&role&status&phoneNumber&fullname&username&gender=MALE",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"find"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": null
+								},
+								{
+									"key": "fromCountry",
+									"value": null
+								},
+								{
+									"key": "role",
+									"value": null,
+									"description": "ROOT, ADMIN, MEMBER"
+								},
+								{
+									"key": "status",
+									"value": null,
+									"description": "có 3 status chính\nINACTIVE: mặc định\nREMOVED: user đã bị xóa\nBLOCKED: user đã bị block"
+								},
+								{
+									"key": "phoneNumber",
+									"value": null
+								},
+								{
+									"key": "fullname",
+									"value": null
+								},
+								{
+									"key": "username",
+									"value": null
+								},
+								{
+									"key": "gender",
+									"value": "MALE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user for admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk2NzIyNzAwLCJleHAiOjE1OTczMjc1MDB9.Ln1PmvNGOcOB2vxqjsLvsPpUeGJy61lZt6TBBxquVP8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "31003",
+									"description": "id của user cần sửa",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "INACTIVE",
+									"description": "có 3 status chính\nINACTIVE: mặc định\nREMOVED: user đã bị xóa\nBLOCKED: user đã bị block",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/update-profile-admin",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"update-profile-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk2NzIyNzAwLCJleHAiOjE1OTczMjc1MDB9.Ln1PmvNGOcOB2vxqjsLvsPpUeGJy61lZt6TBBxquVP8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"gender\": \"MALE\",\r\n        \"address\": \"\",\r\n        \"about\": \"Unknown\",\r\n        \"linkSocial\": [],\r\n        \"fullName\": \"Bear Dim\",\r\n        \"username\": \"BearDimCI\",\r\n        \"birthday\": \"2006-01-31T13:24:34.514Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_HOST}}/user/update-profile",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"update-profile"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -620,12 +754,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjc4MSwicm9sZSI6Ik1FTUJFUiIsInBvaW50IjoxMDAwMCwicGVybWlzc2lvbiI6W10sImlhdCI6MTU5NDM3MDE4OCwiZXhwIjoxNTk0OTc0OTg4fQ.jCSxVNVjJnjl4Xj-bUutr5TAwWVYsCH2LkdGbspLMzg",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk5MjMzNzQ2LCJleHAiOjE1OTk4Mzg1NDZ9.4VJKJiBGemduHrAJpLjQ9g-CrhPqk1urdsNlW5nMDXo",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/member/user?mangaFavorite=1&skip=1&limit=1",
+							"raw": "{{API_HOST}}/member/user?mangaFavorite=1",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -672,12 +806,14 @@
 								{
 									"key": "skip",
 									"value": "1",
-									"description": "default: 0"
+									"description": "default: 0",
+									"disabled": true
 								},
 								{
 									"key": "limit",
 									"value": "1",
-									"description": "default: 20"
+									"description": "default: 20",
+									"disabled": true
 								}
 							]
 						},
@@ -909,7 +1045,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{API_HOST}}/manga?fromYearEnd=2010&toYearEnd=2013",
+							"raw": "{{API_HOST}}/manga?id=21059&fromYearEnd=2010&toYearEnd=2013",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -994,8 +1130,7 @@
 								},
 								{
 									"key": "id",
-									"value": "21059",
-									"disabled": true
+									"value": "21059"
 								},
 								{
 									"key": "year",
@@ -1037,7 +1172,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{TOKEN_MEMBER}}",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk3MzM3NzgwLCJleHAiOjE1OTc5NDI1ODB9.cchesQi-SPIrxVtK0FRigTrhv0ib1QYTeGRsSdHToOg",
 								"type": "text"
 							},
 							{
@@ -1065,12 +1200,126 @@
 								{
 									"key": "banner",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 6 [Prophets Release]/Meshi-12.png"
 								},
 								{
 									"key": "cover",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/NguyenHuuHung/Desktop/ChapterImage/Isekai Cheat Survival Meshi chapter 6 [Prophets Release]/Meshi-13.png"
+								},
+								{
+									"key": "id",
+									"value": "60012",
+									"description": "truyền id vào nếu muốn chỉnh sửa manga",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "tets fix",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "format",
+									"value": "MANGA",
+									"description": "MANGA",
+									"type": "text"
+								},
+								{
+									"key": "countryOfOrigin",
+									"value": "JP",
+									"description": "JP,KR, CN, tên nước phát hành, chỉ có 3 nước này thôi",
+									"type": "text"
+								},
+								{
+									"key": "genres[0]",
+									"value": "Action",
+									"description": "cái này truyền Array, thể loại lên, postman k test đc kiểu này. nếu angular khong được thì, khi tạo mới manga bỏ qua thể loại, tạo xong truyền lại genre bằng json raw với id manga mới được tạo",
+									"type": "text"
+								},
+								{
+									"key": "genres[1]",
+									"value": "Harem",
+									"type": "text"
+								},
+								{
+									"key": "genres[2]",
+									"value": "Drama",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "RELEASING",
+									"description": "FINISHED, RELEASING",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is description",
+									"description": "string, bắt buộc phải truyền lên",
+									"type": "text"
+								},
+								{
+									"key": "externalLinks[0]",
+									"value": "https://www.viz.com/monster",
+									"description": "string",
+									"type": "text"
+								},
+								{
+									"key": "source[0]",
+									"value": "https://www.viz.com/monster",
+									"type": "text"
+								},
+								{
+									"key": "otherName[romaji]",
+									"value": "Monster",
+									"type": "text"
+								},
+								{
+									"key": "otherName[english]",
+									"value": "Monster",
+									"type": "text"
+								},
+								{
+									"key": "otherName[native]",
+									"value": "Monster",
+									"type": "text"
+								},
+								{
+									"key": "otherName[userPreferred]",
+									"value": "Monster",
+									"type": "text"
+								},
+								{
+									"key": "startDate[year]",
+									"value": "2010",
+									"type": "text"
+								},
+								{
+									"key": "startDate[month]",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "startDate[day]",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "endDate[year]",
+									"value": "2019",
+									"type": "text"
+								},
+								{
+									"key": "endDate[month]",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "endDate[day]",
+									"value": "1",
+									"type": "text"
 								}
 							],
 							"options": {
@@ -1194,6 +1443,71 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Lấy manga đã upload",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk4NDQ2Nzc0LCJleHAiOjE1OTkwNTE1NzR9.Fy8_ypWtXiS6z7RwXE-5BVFKPAm7WDx58U6ooxySX_o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/user/manga-upload/?skip&limit",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"manga-upload",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa manga",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk5MjgxODg2LCJleHAiOjE1OTk4ODY2ODZ9.ikGjbK2h5mLb2GX7ZL0DpOHJRh5fN1aST5dMOHFiAvA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/manga/delete?id=52031",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"manga",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "52031"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1209,7 +1523,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjE1LCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNTg5Njg3MjY5LCJleHAiOjE1OTAyOTIwNjl9.e7A0_QO7E3Wa1_QYM19iHVA_yDNDtzPBOA5ndkTHHDg"
+								"value": "{{TOKEN_ADMIN}}"
 							}
 						],
 						"body": {
@@ -1217,7 +1531,7 @@
 							"urlencoded": [
 								{
 									"key": "mangaID",
-									"value": "2",
+									"value": "8",
 									"description": "1 trong 2 (manga hoặc group)",
 									"type": "text"
 								},
@@ -1230,7 +1544,7 @@
 								},
 								{
 									"key": "rateNumber",
-									"value": "6",
+									"value": "9",
 									"type": "text"
 								},
 								{
@@ -1242,7 +1556,8 @@
 								{
 									"key": "status",
 									"value": "false",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							],
 							"options": {
@@ -1257,6 +1572,89 @@
 							"path": [
 								"rating",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "finding rating",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_ADMIN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/rating?idManga=2",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"rating"
+							],
+							"query": [
+								{
+									"key": "idManga",
+									"value": "2",
+									"description": "truyền cái này vào để lấy biểu đồ show rating manga, truyền id manga"
+								},
+								{
+									"key": "id",
+									"value": "5",
+									"description": "get rating theo id của rating ",
+									"disabled": true
+								},
+								{
+									"key": "idUser",
+									"value": "781",
+									"description": "tìm những rating của user đã rating (cai này có skip vs limit mặc định lần lượt là 0 và 20)",
+									"disabled": true
+								},
+								{
+									"key": "rateNumber",
+									"value": "7",
+									"description": "tim theo diem so rating 1-10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tìm rating của người dùng đã rating",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMxMDAxLCJyb2xlIjoiUk9PVCIsInBvaW50IjowLCJwZXJtaXNzaW9uIjpbXSwiaWF0IjoxNTk4NDQ2Nzc0LCJleHAiOjE1OTkwNTE1NzR9.Fy8_ypWtXiS6z7RwXE-5BVFKPAm7WDx58U6ooxySX_o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/user/manga-rating/?skip&limit",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"user",
+								"manga-rating",
+								""
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								}
 							]
 						}
 					},
@@ -1606,7 +2004,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_HOST}}/group/?id=1&populate=true&name=Group 2&userOwnerID&web&discord&email&about&isUploadMember&updateBy&createBy",
+							"raw": "{{API_HOST}}/group/?populate=true&userOwnerID&web&discord&email&about&isUploadMember&updateBy&createBy",
 							"host": [
 								"{{API_HOST}}"
 							],
@@ -1618,7 +2016,8 @@
 								{
 									"key": "id",
 									"value": "1",
-									"description": "get gr by id"
+									"description": "get gr by id",
+									"disabled": true
 								},
 								{
 									"key": "populate",
@@ -1628,7 +2027,8 @@
 								{
 									"key": "name",
 									"value": "Group 2",
-									"description": "tên gr cần tìm"
+									"description": "tên gr cần tìm",
+									"disabled": true
 								},
 								{
 									"key": "userOwnerID",
@@ -2023,6 +2423,65 @@
 								{
 									"key": "status",
 									"value": "RELEASE",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "dashboard - show bieu do",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN_ADMIN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_HOST}}/admin/dashboard?gender=MALE&age=15",
+							"host": [
+								"{{API_HOST}}"
+							],
+							"path": [
+								"admin",
+								"dashboard"
+							],
+							"query": [
+								{
+									"key": "mostViewGenre",
+									"value": "1",
+									"description": "muon lay thi truyen 1 (lay so luong view theo user)",
+									"disabled": true
+								},
+								{
+									"key": "percentMaleAndFemale",
+									"value": "1",
+									"description": "tỉ lệ nam và nữ trong trang web",
+									"disabled": true
+								},
+								{
+									"key": "gender",
+									"value": "MALE",
+									"description": "FEMALE or MALE , xem giới tính gì xem thể loại nào nhiều nhất "
+								},
+								{
+									"key": "age",
+									"value": "15",
+									"description": "14-25 độ tuổi của người dùng (xem thể lọa nào được xem nhiều nhất)"
+								},
+								{
+									"key": "total",
+									"value": "1",
 									"disabled": true
 								}
 							]

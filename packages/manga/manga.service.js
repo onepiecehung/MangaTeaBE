@@ -62,15 +62,16 @@ export async function find(keyword, user) {
                 let chapter = await ChapterRepository.findByIdMangaSelect(manga._id);
                 let tempChapter = chapter;
                 let chapterMeta = await getMetaDataChapter(tempChapter);
-                let rating = await RatingRepository.findRatingByMangaId(manga._id);
+                // let rating = await RatingRepository.findRatingByMangaId(manga._id);
                 let comment = await CommentRepository.findByMangaId(manga._id);
-                let data = { manga, chapter: chapterMeta, rating, comment };
+                let data = { manga, chapter: chapterMeta, comment };
                 await Redis.setJson(myKey, data, 300)
                 return data;
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
         }
-        const sort = keyword.sort ? { lastUpdatedChapter: keyword.sort } : { lastUpdatedChapter: -1 }
+        // const sort = keyword.sort ? { lastUpdatedChapter: keyword.sort } : { lastUpdatedChapter: -1 }
+        const sort = { _id: -1 }
         const limit = parseInt(keyword.limit) || 20
         const skip = parseInt(keyword.skip) || 0
         let filters = [];
@@ -216,13 +217,6 @@ export async function createAndUpdate(data) {
             }
             return Promise.reject(new Error(MANGA.MANGA_permission_denied))
         }
-        let tempBody = mangaInfo;
-        delete tempBody.coverImage;
-        delete tempBody.bannerImage;
-        let checkExist = await MangaRepository.findOne(tempBody);
-        if (checkExist) {
-            return Promise.reject(new Error(MANGA.MANGA_IS_EXISTS))
-        }
         mangaInfo.updateBy = userInfo._id;
         mangaInfo.createBy = userInfo._id;
         let dataManga = await MangaRepository.create(mangaInfo);
@@ -264,9 +258,11 @@ export async function findAtHome(keyword, user) {
         if (slide) {
             if (user !== false) {
                 let arraySlide = await raccoon.recommendFor(user._id, limit);
+                console.log(arraySlide);
                 if (arraySlide.length != 0) {
                     let manga = await MangaRepository.findArrayMangaMin(arraySlide, limit, skip > 0 ? (skip - 1) * limit : skip, {});
-                    let data = { manga: manga, total: arraySlide.length }
+                    let temp = await getMetaDataManga(manga);
+                    let data = { manga: temp, total: arraySlide.length }
                     return data;
                 }
                 let member = await MemberRepository.findByUserID(user._id);
@@ -275,7 +271,8 @@ export async function findAtHome(keyword, user) {
                 }
                 if (member.mangaSuggested.length !== 0) {
                     let manga = await MangaRepository.findArrayMangaMin(member.mangaSuggested, limit, skip > 0 ? (skip - 1) * limit : skip, {});
-                    let data = { manga: manga, total: member.mangaSuggested.length }
+                    let temp = await getMetaDataManga(manga);
+                    let data = { manga: temp, total: member.mangaSuggested.length }
                     return data;
                 }
                 let [mangaMeta, total] = await Promise.all([
@@ -343,7 +340,9 @@ export async function findSuggestion(keyword) {
         if (description) {
             let data = await MangaRepository.findById(id);
             let result = await MangaRepository.findArrayMangaMinUser(data.suggestionDescription, limit, skip);
-            return result;
+            let result1 = result.reverse()
+            console.log(result1)
+            return result1;
         }
         if (genre) {
             let data = await MangaRepository.findById(id);
@@ -361,3 +360,20 @@ export async function findSuggestion(keyword) {
         return Promise.reject(error);
     }
 }
+
+
+export async function deleteOne(query, user) {
+    try {
+        let id = parseInt(query.id);
+        let data = await MangaRepository.findById(id);
+        // return { 1: data.createBy, 2: user._id };
+        if (data.createBy == user._id || user.role === "ROOT" || user.role === "ADMIN") {
+            await MangaRepository.deleteManga(id);
+            return true;
+        }
+        return "You are not admin or do not create this manga!"
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}   

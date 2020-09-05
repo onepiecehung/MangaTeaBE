@@ -6,7 +6,9 @@ import * as logger from "../../util/logger";
 import RABBIT from "../../server/connector/rabbitmq/init/index"
 import Redis from "../../database/redis/client";
 
+import * as MangaRepository from "../repository/manga.repository";
 import * as MemberRepository from "../repository/member.repository";
+import * as RatingRepository from "../repository/rating.repository";
 import * as UserRepository from "../repository/user.repository";
 
 /**
@@ -92,7 +94,12 @@ export async function Login(loginInfo, ip) {
         if (!userInfo) {
             return Promise.reject(USER_ERROR.EMAIL_NOT_EXISTS);
         }
-
+        if (userInfo.status === "BLOCKED") {
+            return Promise.reject(USER_ERROR.USER_HAS_BLOCKED);
+        }
+        if (userInfo.status === "REMOVED") {
+            return Promise.reject(USER_ERROR.USER_HAS_REMOVED);
+        }
         const passwordCorrect = await bcrypt.compareSync(loginInfo.password, userInfo.password);
         if (!passwordCorrect) {
             return Promise.reject(USER_ERROR.PASSWORD_INVALID);
@@ -230,6 +237,120 @@ export async function forgotPassword(userAuth) {
             urlActive: `${URL_FE}resetPassword?token=${token}`
         })
         return { message: `We have just sent you an email to confirm.` }
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function find(query) {
+    try {
+        const {
+            email,
+            fromCountry,
+            role,
+            status,
+            phoneNumber,
+            fullName,
+            username,
+            gender
+        } = query;
+        let filters = [];
+        if (email) {
+            filters.push({ email: new RegExp(email, "i") });
+        }
+        if (fromCountry) {
+            filters.push({ fromCountry: parseInt(fromCountry) });
+        }
+        if (role) {
+            filters.push({ role })
+        }
+        if (status) {
+            filters.push({ status })
+        }
+        if (phoneNumber) {
+            filters.push({ phoneNumber: parseInt(phoneNumber) })
+        }
+        if (fullName) {
+            filters.push({ fullName: RegExp(fullName, "i") });
+        }
+        if (username) {
+            filters.push({ username: RegExp(username, "i") })
+        }
+        if (gender) {
+            filters.push({ gender })
+        }
+        const sort = query.sort ? { _id: query.sort } : { _id: -1 }
+        const limit = parseInt(query.limit) || 20
+        const skip = parseInt(query.skip) || 0
+        let [user, total] = await Promise.all([
+            UserRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
+            UserRepository.countDocuments2(filters)
+        ])
+        return { user, total }
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function updateProfileAdmin(body) {
+    try {
+        const userInfo = await UserRepository.findById(body.id);
+        if (!userInfo) {
+            return Promise.reject(USER_ERROR.USER_NOT_FOUND);
+        }
+        let id = body.id;
+        let update = body;
+        delete update.id;
+        await UserRepository.findByIdAndUpdate(id, update)
+        return true
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+
+
+export async function mangaUpload(data) {
+    try {
+        const sort = data.query.sort ? { lastUpdatedChapter: data.query.sort } : { lastUpdatedChapter: -1 }
+        const limit = parseInt(data.query.limit) || 20
+        const skip = parseInt(data.query.skip) || 0
+        let filters = [];
+        if (data.user._id) {
+            filters.push({ createBy: parseInt(data.user._id) });
+        }
+        let [manga, total] = await Promise.all([
+            MangaRepository.find(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
+            MangaRepository.countDocuments(filters)
+        ])
+        return { manga, total }
+    } catch (error) {
+        logger.error(error);
+        return Promise.reject(error);
+    }
+}
+
+
+export async function mangaRating(data) {
+    try {
+        const sort = data.query.sort ? { _id: data.query.sort } : { _id: -1 }
+        const limit = parseInt(data.query.limit) || 20
+        const skip = parseInt(data.query.skip) || 0
+        let filters = [];
+        if (data.user._id) {
+            filters.push({ userID: parseInt(data.user._id) });
+        }
+        let [rating, total] = await Promise.all([
+            RatingRepository.findAdv(filters, limit, skip > 0 ? (skip - 1) * limit : skip, sort),
+            RatingRepository.countDocuments(filters)
+        ])
+        return { rating, total };
     } catch (error) {
         logger.error(error);
         return Promise.reject(error);

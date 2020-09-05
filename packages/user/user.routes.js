@@ -1,14 +1,34 @@
 import { Router } from 'express';
 const router = new Router();
 import * as UserController from "./user.controller";
-import { Authentication } from "../../util/JWT/jwt";
+import { Authentication, AuthenticationPermission } from "../../util/JWT/jwt";
 import { upload } from "../middleware/upload.multer";
 // authen
 // multer
 // validation
 // service
+router.route("/manga-upload")
+    .get(
+        Authentication,
+        UserController.mangaUpload
+    )
 
+router.route("/manga-rating")
+    .get(
+        Authentication,
+        UserController.mangaRating
+    )
+router.route("/find")
+    .get(
+        AuthenticationPermission,
+        UserController.find
+    )
 
+router.route("/update-profile-admin")
+    .put(
+        AuthenticationPermission,
+        UserController.updateProfileAdmin
+    )
 router.route('/register')
     .post(
         UserController.Register
@@ -67,6 +87,10 @@ router.route("/forgot-password")
     .post(
         UserController.forgotPassword
     )
+
+
+
+
 
 
 export default router;

@@ -4,7 +4,7 @@ const router = new Router();
 
 import { upload } from "../middleware/upload.multer";
 import * as MangaController from './manga.controller';
-import { AuthenticationChecking, AuthenticationCheckPoint } from "../../util/JWT/jwt";
+import { AuthenticationChecking, AuthenticationCheckPoint, Authentication } from "../../util/JWT/jwt";
 
 
 router.route('/')
@@ -34,5 +34,11 @@ router.route("/suggestion")
         MangaController.findSuggestion
     )
 
+
+router.route("/delete")
+    .post(
+        Authentication,
+        MangaController.deleteOne
+    )
 
 export default router;

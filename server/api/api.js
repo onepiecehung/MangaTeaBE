@@ -18,6 +18,7 @@ import AppellationRouter from "../../packages/appellation/appellation.routes";
 import AuthorRouter from "../../packages/author/author.routes";
 import GroupTranslationRouter from "../../packages/groupTranslation/groupTranslation.routes";
 import ChapterRouter from "../../packages/chapter/chapter.routes";
+import AdminRouter from "../../packages/admin/admin.routes";
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {
@@ -47,7 +48,7 @@ router.use("/appellation", AppellationRouter);
 router.use("/author", AuthorRouter);
 router.use("/group", GroupTranslationRouter);
 router.use("/chapter", ChapterRouter);
-
+router.use("/admin", AdminRouter);
 
 router.get('/', function (req, res) {
     res.send('Welcome to our API!');

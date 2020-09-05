@@ -35,6 +35,7 @@ export async function findAtHome(req, res) {
 
 export async function createAndUpdate(req, res) {
     try {
+        // return response.success(res, req.body, 200);
         let validateResult = MangaValidator.validateCreateAndUpdate(req.body);
         if (validateResult.error) {
             return response.error(res, req, {
@@ -51,11 +52,21 @@ export async function createAndUpdate(req, res) {
                 let tempJson = {};
                 tempJson.large = urlCover.data.link;
                 tempJson.medium = urlCover.data.link;
-                tempJson.imgur = urlCover.data.link;
+                // tempJson.imgur = urlCover.data.link;
                 req.body.coverImage = tempJson;
             }
         }
         let data = await MangaService.createAndUpdate(req);
+        return response.success(res, data, 200);
+    } catch (error) {
+        return response.error(res, req, error);
+    }
+}
+
+
+export async function deleteOne(req, res) {
+    try {
+        let data = await MangaService.deleteOne(req.query, req.user);
         return response.success(res, data, 200);
     } catch (error) {
         return response.error(res, req, error);

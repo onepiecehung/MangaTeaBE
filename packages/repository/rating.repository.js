@@ -48,15 +48,28 @@ export async function save(ratingInfo) {
 }
 
 export async function update(id, ratingInfo) {
-    return RatingModel.findByIdAndUpdate(id, ratingInfo)
+    return RatingModel.findByIdAndUpdate(id, ratingInfo);
 }
 
 
 export async function find(filter) {
-    return RatingModel.find(filter.length > 0 ? { $and: filter } : {})
+    return RatingModel.find(filter.length > 0 ? { $and: filter } : {});
 }
 
 
 export async function findOne(filter) {
-    return RatingModel.findOne(filter.length > 0 ? { $and: filter } : {})
+    return RatingModel.findOne(filter.length > 0 ? { $and: filter } : {});
+}
+
+export async function countDocuments(filters) {
+    return RatingModel.countDocuments(filters.length > 0 ? { $and: filters } : {});
+}
+
+export async function findAdv(filters, limit, skip, sort) {
+    return RatingModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort);
+}
+
+
+export async function findById(id) {
+    return RatingModel.findById(id);
 }

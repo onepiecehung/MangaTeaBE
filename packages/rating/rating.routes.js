@@ -10,6 +10,9 @@ router.route("/")
         Authentication,
         RatingController.create
     )
+    .get(
+        RatingController.find
+    )
 
 
 export default router;

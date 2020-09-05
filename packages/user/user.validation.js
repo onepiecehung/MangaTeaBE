@@ -48,6 +48,10 @@ const registerSchema = schema.keys({
         .required()
         .min(6)
         .max(30),
+    gender: Joi.string().allow("")
+        .valid(...["MALE", "FEMALE", "OTHER"]),
+    birthday: Joi.string().allow(""),
+
 });
 
 const loginSchema = Joi.object({

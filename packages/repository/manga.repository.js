@@ -39,7 +39,7 @@ export async function findByName(name) {
  * @param {Json} sort 
  */
 export async function find(filters, limit, skip, sort) {
-    return MangaModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort)
+    return MangaModel.find(filters.length > 0 ? { $and: filters } : {}).limit(limit).skip(skip).sort(sort);
 }
 
 /**
@@ -74,7 +74,8 @@ export async function findArrayMangaMin(ArrayId, limit, skip, sort) {
         name: 1,
         genres: 1,
         coverImage: 1,
-        bannerImage: 1
+        bannerImage: 1,
+        chapter: 1
     }).limit(limit).skip(skip).sort(sort)
 }
 
@@ -97,4 +98,8 @@ export async function findArrayMangaMinUser(ArrayId, limit, skip) {
         coverImage: 1,
         bannerImage: 1
     }).limit(limit).skip(skip)
+}
+
+export async function deleteManga(id) {
+    return MangaModel.deleteOne({ _id: id })
 }

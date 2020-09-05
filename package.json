@@ -6,14 +6,18 @@
     "start": "nodemon ./server/bin/www.js",
     "start-all": "concurrently \"node ./server/workers/start.worker.js\" \"nodemon ./server/bin/www.js\"",
     "start-pm2": "pm2 startOrReload process.deploy.json",
+    "Content-Based": "node ./database/mongo/data/Content-based/index.js",
     "RS-Content-Based": "node ./server/workers/RecommenderSystem/ContentBased.js",
     "RS-CollaborativeFilteringBased": "node ./server/workers/RecommenderSystem/CollaborativeFilteringBased.js",
+    "AutoCreateBirthday": "node ./server/workers/autoCreateBirthday.js",
+    "UserAnalyze": "node ./server/workers/userAnalyze.js",
     "worker-rabbitmq": "node ./server/workers/start.worker.js",
     "worker-crawl-mangadex": "node ./server/workers/crawlManga.worker.js",
     "workerCrawlAniList": "nodemon ./server/workers/crawlMangaAniList.worker.js",
     "createUser": "nodemon ./server/workers/users/createUser.worker.js",
     "createSampleData": "nodemon ./server/workers/users/createDataSample.js",
-    "createSampleDataChapter": "nodemon ./server/workers/createChapter.worker.js"
+    "createSampleDataChapter": "nodemon ./server/workers/createChapter.worker.js",
+    "removeHTMLtag": "node ./server/workers/removeHTMLtag.js"
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",
