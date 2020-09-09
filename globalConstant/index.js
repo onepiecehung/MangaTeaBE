@@ -94,7 +94,7 @@ export const USER_ERROR = {
  * SendGird Config
  * */
 export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || `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`;
-export const SENDER_EMAIL = process.env.SENDER_EMAIL || 'MangaTea <16520479@gm.uit.edu.vn';
+export const SENDER_EMAIL = process.env.SENDER_EMAIL || 'MangaTea <16520479@gm.uit.edu.vn>';
 export const TEMPLATE = {
   REG: process.env.T_REG_MAIL || `d-20a0f633e2d84428bc550e25545c33bb`,
   FORGOT_PASSWORD: process.env.T_FORGOT_PASSWORD || `d-8b122d7297cb4039b9215225c3740bfc`
