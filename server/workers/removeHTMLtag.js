@@ -11,7 +11,9 @@ require("../../database/mongo/init/index")
 
 const MangaModel = require("../../database/mongo/model/manga.model")
 
-
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 async function run() {
     try {
@@ -34,4 +36,24 @@ async function run() {
     }
 }
 
-run()
+// run()
+
+async function removeImgHentai() {
+    try {
+        let data1 = await MangaModel.find({ genres: { $nin: ["Hentai"] } });
+        let data2 = await MangaModel.find({ genres: /Hentai/i });
+        for (let i = 0; i < data2.length; i++) {
+            console.log("Process: " + i + data2.length);
+            if (data2[i].coverImage) {
+                await MangaModel.updateOne({ _id: data2[i]._id }, { coverImage: data1[getRndInteger(0, data1.length)].coverImage })
+            }
+        }
+        // console.log(data1[1]);
+        // console.log(data2[1]);
+        console.log("DONE");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+removeImgHentai()
