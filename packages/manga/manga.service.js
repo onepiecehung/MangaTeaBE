@@ -65,7 +65,7 @@ export async function find(keyword, user) {
                 // let rating = await RatingRepository.findRatingByMangaId(manga._id);
                 let comment = await CommentRepository.findByMangaId(manga._id);
                 let data = { manga, chapter: chapterMeta, comment };
-                await Redis.setJson(myKey, data, 300)
+                await Redis.setJson(myKey, data, 30)
                 return data;
             }
             return Promise.reject(new Error(MANGA.MANGA_NOT_FOUND))
